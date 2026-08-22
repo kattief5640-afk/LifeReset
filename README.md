@@ -1,2 +1,2 @@
 # LifeReset
-LifeReset-a modern app designed to help people reflect, reset, rebuild, and move forward in life.
+LifeReset-A supportive digital companion designed to help people reflect, understand what they're going through, find support, and move forward.
