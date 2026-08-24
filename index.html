@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeReset</title>
-    <link rel="stylesheet" href="Style.Css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeReset</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>LifeReset</h1>
-        <p>A modern app designed to help people reflect, reset, rebuild, and move forward in life.</p>
-        
-        <div class="form-section">
-            <input type="text" id="goalInput" placeholder="Enter your goal or reflection...">
-            <button id="submitBtn">Submit</button>
-        </div>
-        
-        <div id="goalsContainer" class="goals-container"></div>
-    </div>
-    
-    <script src="app.js"></script>
+  <header>
+    <div class="logo">LifeReset</div>
+    <div class="tagline">You don't have to figure everything out alone.</div>
+  </header>
+
+  <main>
+    <section class="welcome-card">
+      <h1>Welcome to LifeReset</h1>
+
+      <p>
+        Whatever you're carrying today, you don't have to hide it here.
+        Take a breath. Tell us what's on your mind.
+      </p>
+
+      <button id="beginButton">Let's begin</button>
+    </section>
+    <section id="checkin" style="display: none;">
+      <h2>I'm glad you're here.</h2>
+      <p>You can take your time. Tell me how you're really doing today.</p>
+
+      <textarea id="feelingInput" placeholder="Write what's on your mind..."></textarea>
+
+      <button id="continueButton">Continue</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
 </body>
 </html>
