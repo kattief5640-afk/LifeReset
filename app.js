@@ -26,6 +26,7 @@ if (continueButton) {
     // Reset the form
     feelingInput.value = "";
     checkin.style.display = "none";
+    document.getElementById("reset").style.display = "block";
   });
 }
 
