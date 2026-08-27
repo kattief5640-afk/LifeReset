@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeReset</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">LifeReset</div>
+    <div class="tagline">You don't have to figure everything out alone.</div>
+  </header>
+
+  <main>
+    <section class="welcome-card">
+      <h1>Thank you for sharing. 💙</h1>
+
+      <p>
+        I'm listening. You don't have to have all the answers right now.
+      </p>
+
+      <h2>What feels most important to you right now?</h2>
+
+      <button>I'm feeling overwhelmed</button>
+      <button>I feel alone</button>
+      <button>I'm having a difficult day</button>
+      <button>I just need someone to listen</button>
+    </section>
+  </main>
+
+</body>
+</html>
