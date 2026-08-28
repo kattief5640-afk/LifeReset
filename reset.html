@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Your Reset</title>
-  <link rel="stylesheet" href="Style.Css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -19,9 +19,9 @@
 
       <h1>Let's take your next step.</h1>
 
-      <p>
+      <p id="resetIntro">
         You don't have to fix everything today.
-        Let's choose one small thing that can help you feel a little better.
+        Let's focus on one small step that can help you feel a little better.
       </p>
 
       <button id="resetButton">Show Me My Reset</button>
@@ -36,20 +36,70 @@
     const resetMessage = document.getElementById("resetMessage");
 
     resetButton.addEventListener("click", function () {
-      const feeling = localStorage.getItem("lifeResetFeeling");
 
-      if (feeling) {
-        resetMessage.innerHTML =
-          "<h2>Here's your reset.</h2>" +
-          "<p>Take a slow breath. You don't have to solve everything right now.</p>" +
-          "<p><strong>One small step:</strong> Give yourself 10 quiet minutes today. Put your phone down, breathe, and focus only on what you need right now.</p>";
+      const feeling = localStorage.getItem("lifeResetFeeling");
+      const text = feeling ? feeling.toLowerCase() : "";
+
+      let message = "";
+
+      if (text.includes("tired") || text.includes("exhausted")) {
+
+        message = `
+          <h2>Rest & Recharge</h2>
+          <p>It sounds like your energy is low today.</p>
+          <p><strong>Your small reset:</strong> Give yourself 10 quiet minutes. Sit somewhere comfortable, breathe slowly, and allow yourself to pause without feeling guilty.</p>
+        `;
+
+      } else if (text.includes("overwhelmed") || text.includes("too much")) {
+
+        message = `
+          <h2>Pause & Simplify</h2>
+          <p>You don't have to handle everything at once.</p>
+          <p><strong>Your small reset:</strong> Choose just one thing that needs your attention right now. Everything else can wait.</p>
+        `;
+
+      } else if (text.includes("sad") || text.includes("lonely")) {
+
+        message = `
+          <h2>Be Gentle With Yourself</h2>
+          <p>You don't have to pretend you're okay when you're having a hard day.</p>
+          <p><strong>Your small reset:</strong> Take a few slow breaths and do one comforting thing for yourself today.</p>
+        `;
+
+      } else if (text.includes("angry") || text.includes("mad")) {
+
+        message = `
+          <h2>Pause & Release</h2>
+          <p>You don't have to react while everything still feels intense.</p>
+          <p><strong>Your small reset:</strong> Step away for a few minutes, breathe deeply, and give yourself space before deciding what to do next.</p>
+        `;
+
+      } else if (text.includes("stress") || text.includes("stressed")) {
+
+        message = `
+          <h2>Ground Yourself</h2>
+          <p>Let's bring your attention back to this moment.</p>
+          <p><strong>Your small reset:</strong> Take five slow breaths. Notice where you are, what you can see, and what you can hear.</p>
+        `;
+
       } else {
-        resetMessage.innerHTML =
-          "<h2>Let's start fresh.</h2>" +
-          "<p>Take one slow breath and choose one small thing you can do for yourself today.</p>";
+
+        message = `
+          <h2>Here's Your Reset</h2>
+          <p>Whatever you're carrying today, you don't have to solve everything right now.</p>
+          <p><strong>Your small reset:</strong> Take one slow breath and choose one small thing you can do for yourself today.</p>
+        `;
       }
+
+      resetMessage.innerHTML = message;
+      resetButton.style.display = "none";
     });
   </script>
 
 </body>
 </html>
+
+
+      
+
+     
