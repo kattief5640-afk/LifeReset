@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeReset - Your Reset</title>
+  <link rel="stylesheet" href="Style.Css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">LifeReset</div>
+    <div class="tagline">You don't have to figure everything out alone.</div>
+  </header>
+
+  <main>
+    <section class="welcome-card">
+
+      <h1>Let's take your next step.</h1>
+
+      <p>
+        You don't have to fix everything today.
+        Let's choose one small thing that can help you feel a little better.
+      </p>
+
+      <button id="resetButton">Show Me My Reset</button>
+
+      <div id="resetMessage"></div>
+
+    </section>
+  </main>
+
+  <script>
+    const resetButton = document.getElementById("resetButton");
+    const resetMessage = document.getElementById("resetMessage");
+
+    resetButton.addEventListener("click", function () {
+      const feeling = localStorage.getItem("lifeResetFeeling");
+
+      if (feeling) {
+        resetMessage.innerHTML =
+          "<h2>Here's your reset.</h2>" +
+          "<p>Take a slow breath. You don't have to solve everything right now.</p>" +
+          "<p><strong>One small step:</strong> Give yourself 10 quiet minutes today. Put your phone down, breathe, and focus only on what you need right now.</p>";
+      } else {
+        resetMessage.innerHTML =
+          "<h2>Let's start fresh.</h2>" +
+          "<p>Take one slow breath and choose one small thing you can do for yourself today.</p>";
+      }
+    });
+  </script>
+
+</body>
+</html>
