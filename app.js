@@ -1,27 +1,27 @@
-const beginButton = document.querySelector("#beginButton");
-const checkinSection = document.querySelector("#checkin");
-const continueButton = document.querySelector("#continueButton");
-const feelingInput = document.querySelector("#feelingInput");
+const beginButton = document.getElementById("beginButton");
+const checkinSection = document.getElementById("checkin");
+const welcomeSection = document.querySelector(".welcome-card");
+const continueButton = document.getElementById("continueButton");
+const feelingInput = document.getElementById("feelingInput");
 
-// Let's Begin
-beginButton.addEventListener("click", function () {
-  checkinSection.style.display = "block";
-  beginButton.parentElement.style.display = "none";
-});
+if (beginButton) {
+  beginButton.addEventListener("click", function () {
+    welcomeSection.style.display = "none";
+    checkinSection.style.display = "block";
+  });
+}
 
-// Continue
-continueButton.addEventListener("click", function () {
-  const feeling = feelingInput.value.trim();
+if (continueButton) {
+  continueButton.addEventListener("click", function () {
+    const feeling = feelingInput.value.trim();
 
-  if (feeling === "") {
-    alert("You can take your time. Share something when you're ready.");
-    return;
-  }
+    if (feeling === "") {
+      alert("You can take your time. Share something when you're ready.");
+      return;
+    }
 
-  localStorage.setItem("lifeResetFeeling", feeling);
+    localStorage.setItem("lifeResetFeeling", feeling);
 
-  window.location.href = "reset.html";
-});
-
-  
-   
+    window.location.href = "reset.html";
+  });
+}
