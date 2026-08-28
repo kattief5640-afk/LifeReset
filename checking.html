@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeReset - Check In</title>
+  <link rel="stylesheet" href="Style.Css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">LifeReset</div>
+    <div class="tagline">You don't have to figure everything out alone.</div>
+  </header>
+
+  <main>
+    <section class="welcome-card">
+      <h1>I'm glad you're here.</h1>
+
+      <p>
+        You can take your time. Tell me how you're really doing today.
+      </p>
+
+      <textarea
+        id="feelingInput"
+        placeholder="Write what's on your mind..."
+        rows="6"
+      ></textarea>
+
+      <button id="continueButton">Continue</button>
+    </section>
+  </main>
+
+  <script>
+    const continueButton = document.getElementById("continueButton");
+    const feelingInput = document.getElementById("feelingInput");
+
+    continueButton.addEventListener("click", function () {
+      const feeling = feelingInput.value.trim();
+
+      if (feeling === "") {
+        alert("You can take your time. Share something when you're ready.");
+        return;
+      }
+
+      localStorage.setItem("lifeResetFeeling", feeling);
+
+      window.location.href = "next.html";
+    });
+  </script>
+
+</body>
+</html>
