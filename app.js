@@ -1,3 +1,30 @@
+const setupSection = document.getElementById("setupSection");
+const nameInput = document.getElementById("nameInput");
+const languageSelect = document.getElementById("languageSelect");
+const saveSetupButton = document.getElementById("saveSetupButton");
+const welcomeSection = document.getElementById("welcomeSection");
+
+if (saveSetupButton) {
+
+  saveSetupButton.addEventListener("click", function () {
+
+    const name = nameInput.value.trim();
+    const language = languageSelect.value;
+
+    if (name === "") {
+      alert("Please enter a name or nickname.");
+      return;
+    }
+
+    localStorage.setItem("lifeResetName", name);
+    localStorage.setItem("lifeResetLanguage", language);
+
+    setupSection.style.display = "none";
+    welcomeSection.style.display = "block";
+
+  });
+
+}
 
 const beginButton = document.getElementById("beginButton");
 const checkinSection = document.getElementById("checkin");
