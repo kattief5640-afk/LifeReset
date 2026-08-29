@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeReset - Support</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">LifeReset</div>
+    <div class="tagline">
+      You don't have to figure everything out alone.
+    </div>
+  </header>
+
+  <main>
+
+    <section class="welcome-card">
+
+      <h1>I'm glad you told me.</h1>
+
+      <p>
+        You don't have to figure everything out right now.
+        Let's slow down and focus on what you need in this moment.
+      </p>
+
+      <h3>What would feel most helpful?</h3>
+
+      <button class="supportButton" id="pauseButton">
+        I need a moment
+      </button>
+
+      <button class="supportButton" id="talkButton">
+        I want to talk to someone
+      </button>
+
+      <button class="supportButton" id="adultButton">
+        I need a trusted adult
+      </button>
+
+      <button class="supportButton" id="unsafeButton">
+        I don't feel safe
+      </button>
+
+      <div id="supportMessage"></div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+    const supportMessage =
+      document.getElementById("supportMessage");
+
+    document
+      .getElementById("pauseButton")
+      .addEventListener("click", function () {
+
+        supportMessage.innerHTML = `
+          <h3>It's okay to pause. 🌱</h3>
+
+          <p>
+            Put everything else down for a moment.
+          </p>
+
+          <p>
+            Take one slow breath and notice where you are.
+            You don't have to solve the whole situation right now.
+          </p>
+        `;
+
+      });
+
+
+    document
+      .getElementById("talkButton")
+      .addEventListener("click", function () {
+
+        supportMessage.innerHTML = `
+          <h3>You don't have to carry it alone.</h3>
+
+          <p>
+            Think of one person you feel comfortable talking to.
+          </p>
+
+          <p>
+            You can keep the message simple:
+          </p>
+
+          <p>
+            <strong>
+              "I'm having a hard time right now. Can you talk with me?"
+            </strong>
+          </p>
+        `;
+
+      });
+
+
+    document
+      .getElementById("adultButton")
+      .addEventListener("click", function () {
+
+        supportMessage.innerHTML = `
+          <h3>Find someone safe to tell.</h3>
+
+          <p>
+            If you're a teenager or young person,
+            think about a trusted adult you feel safe with.
+          </p>
+
+          <p>
+            This could be a parent or guardian, teacher,
+            counselor, coach, relative, or another trusted adult.
+          </p>
+
+          <p>
+            You don't have to explain everything at once.
+            You can simply say:
+          </p>
+
+          <p>
+            <strong>
+              "I don't feel okay and I need someone to stay with me."
+            </strong>
+          </p>
+        `;
+
+      });
+
+
+    document
+      .getElementById("unsafeButton")
+      .addEventListener("click", function () {
+
+        window.location.href = "safety.html";
+
+      });
+
+  </script>
+
+</body>
+</html>
