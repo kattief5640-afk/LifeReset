@@ -105,6 +105,52 @@
       resetButton.style.display = "none";
       document.getElementById("nextChoices").style.display = "block";
     });
+
+    const choiceButtons = document.querySelectorAll(".choiceButton");
+
+choiceButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+
+    const choice = button.textContent;
+    const nextChoices = document.getElementById("nextChoices");
+
+    if (choice === "Calm me down") {
+      nextChoices.innerHTML = `
+        <h3>Let's slow things down.</h3>
+        <p>Take a slow breath in for 4 seconds.</p>
+        <p>Hold for 2 seconds.</p>
+        <p>Then breathe out slowly for 6 seconds.</p>
+        <p>Repeat this three times.</p>
+      `;
+    }
+
+    if (choice === "Give me motivation") {
+      nextChoices.innerHTML = `
+        <h3>One small step is enough.</h3>
+        <p>You don't have to finish everything today.</p>
+        <p>Choose one thing you can start in the next 10 minutes.</p>
+      `;
+    }
+
+    if (choice === "I need support") {
+      nextChoices.innerHTML = `
+        <h3>You don't have to carry everything alone.</h3>
+        <p>Take a moment to think about someone you trust.</p>
+        <p>If you're comfortable, reach out and simply say, “I could use someone to talk to.”</p>
+      `;
+    }
+
+    if (choice === "Help me make a plan") {
+      nextChoices.innerHTML = `
+        <h3>Let's make it simple.</h3>
+        <p><strong>Step 1:</strong> Choose one thing that needs your attention.</p>
+        <p><strong>Step 2:</strong> Decide the smallest action you can take.</p>
+        <p><strong>Step 3:</strong> Give yourself permission to stop after that step.</p>
+      `;
+    }
+
+  });
+});
   </script>
 
 </body>
