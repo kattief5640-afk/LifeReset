@@ -27,6 +27,16 @@
       <button id="resetButton">Show Me My Reset</button>
 
       <div id="resetMessage"></div>
+      <div id="nextChoices" style="display: none;">
+
+  <h3>What would help you right now?</h3>
+
+  <button class="choiceButton">Calm me down</button>
+  <button class="choiceButton">Give me motivation</button>
+  <button class="choiceButton">I need support</button>
+  <button class="choiceButton">Help me make a plan</button>
+
+</div>
 
     </section>
   </main>
@@ -93,6 +103,7 @@
 
       resetMessage.innerHTML = message;
       resetButton.style.display = "none";
+      document.getElementById("nextChoices").style.display = "block";
     });
   </script>
 
