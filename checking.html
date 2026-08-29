@@ -1,38 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Check In</title>
   <link rel="stylesheet" href="Style.Css">
-</head>
-
-<body>
-
-  <header>
+</head><body> <header>
     <div class="logo">LifeReset</div>
     <div class="tagline">You don't have to figure everything out alone.</div>
-  </header>
-
-  <main>
+  </header> <main>
     <section class="welcome-card">
-      <h1>I'm glad you're here.</h1>
+      <h1>I'm glad you're here.</h1> <p>
+    You can take your time. Tell me how you're really doing today.
+  </p>
 
-      <p>
-        You can take your time. Tell me how you're really doing today.
-      </p>
+  <textarea
+    id="feelingInput"
+    placeholder="Write what's on your mind..."
+    rows="6"
+  ></textarea>
 
-      <textarea
-        id="feelingInput"
-        placeholder="Write what's on your mind..."
-        rows="6"
-      ></textarea>
+  <button id="continueButton">Continue</button>
+</section>
 
-      <button id="continueButton">Continue</button>
-    </section>
-  </main>
-
-  <script>
+  </main> <script>
     const continueButton = document.getElementById("continueButton");
     const feelingInput = document.getElementById("feelingInput");
 
@@ -40,64 +29,63 @@
       const feeling = feelingInput.value.trim();
 
       if (feeling === "") {
-  alert("You can take your time. Share something when you're ready.");
-  return;
-}
+        alert("You can take your time. Share something when you're ready.");
+        return;
+      }
 
-localStorage.setItem("lifeResetFeeling", feeling);
+      localStorage.setItem("lifeResetFeeling", feeling);
 
-const text = feeling.toLowerCase();
+      const text = feeling.toLowerCase();
 
-const urgentWords = [
-  "kill myself",
-  "suicide",
-  "suicidal",
-  "hurt myself",
-  "harm myself",
-  "end my life",
-  "want to die",
-  "don't want to live",
-  "hurt someone",
-  "kill someone",
-  "harm someone",
-  "going to hurt myself",
-  "going to hurt someone"
-];
+      const urgentWords = [
+        "kill myself",
+        "suicide",
+        "suicidal",
+        "hurt myself",
+        "harm myself",
+        "end my life",
+        "want to die",
+        "don't want to live",
+        "hurt someone",
+        "kill someone",
+        "harm someone",
+        "going to hurt myself",
+        "going to hurt someone"
+      ];
 
-const distressWords = [
-  "feeling down",
-  "really down",
-  "hopeless",
-  "can't cope",
-  "cannot cope",
-  "can't handle this",
-  "can't take this",
-  "feel alone",
-  "so alone",
-  "feel worthless",
-  "feel trapped",
-  "running away",
-  "want to run away",
-  "need to escape"
-];
+      const distressWords = [
+        "feeling down",
+        "really down",
+        "hopeless",
+        "can't cope",
+        "cannot cope",
+        "can't handle this",
+        "can't take this",
+        "feel alone",
+        "so alone",
+        "feel worthless",
+        "feel trapped",
+        "running away",
+        "want to run away",
+        "need to escape"
+      ];
 
-const isUrgent = urgentWords.some(function (word) {
-  return text.includes(word);
-});
+      const isUrgent = urgentWords.some(function (word) {
+        return text.includes(word);
+      });
 
-const isDistressed = distressWords.some(function (word) {
-  return text.includes(word);
-});
+      const isDistressed = distressWords.some(function (word) {
+        return text.includes(word);
+      });
 
-if (isUrgent) {
-  window.location.href = "safety.html";
-} else if (isDistressed) {
-  window.location.href = "support.html";
-} else {
-  window.location.href = "reset.html";
-}
-
-  </script>
-
-</body>
+      if (isUrgent) {
+        window.location.href = "safety.html";
+      } else if (isDistressed) {
+        window.location.href = "support.html";
+      } else {
+        window.location.href = "reset.html";
+      }
+    });
+  </script></body>
 </html>
+
