@@ -14,7 +14,33 @@
   </header>
 
   <main>
-    <section class="welcome-card">
+    <section id="setupSection" class="welcome-card">
+
+  <h1>Welcome to LifeReset 🌱</h1>
+
+  <p>What would you like me to call you?</p>
+
+  <input
+    id="nameInput"
+    type="text"
+    placeholder="Your name or nickname"
+    autocomplete="given-name"
+  >
+
+  <p>Choose your language:</p>
+
+  <select id="languageSelect">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="ht">Kreyòl Ayisyen</option>
+  </select>
+
+  <button id="saveSetupButton">Continue</button>
+
+</section>
+
+    <section id="welcomeSection class="welcome-card" style="display: none;">
       <h1>Welcome to LifeReset</h1>
 
       <p>
