@@ -28,7 +28,6 @@ if (saveSetupButton) {
 
 const beginButton = document.getElementById("beginButton");
 const checkinSection = document.getElementById("checkin");
-const welcomeSection = document.querySelector(".welcome-card");
 const continueButton = document.getElementById("continueButton");
 const feelingInput = document.getElementById("feelingInput");
 
