@@ -43,177 +43,174 @@
   </main>
 
   <script>
-    const resetButton = document.getElementById("resetButton");
-    const resetMessage = document.getElementById("resetMessage");
-    const nextChoices = document.getElementById("nextChoices");
+   const resetButton = document.getElementById("resetButton");
+const resetMessage = document.getElementById("resetMessage");
+const nextChoices = document.getElementById("nextChoices");
 
-    resetButton.addEventListener("click", function () {
+resetButton.addEventListener("click", function () {
 
-      const feeling = localStorage.getItem("lifeResetFeeling");
-      const text = feeling ? feeling.toLowerCase() : "";
+  const feeling = localStorage.getItem("lifeResetFeeling");
+  const text = feeling ? feeling.toLowerCase() : "";
 
-      let message = "";
+  let message = "";
 
-      if (text.includes("tired") || text.includes("exhausted")) {
+  if (text.includes("tired") || text.includes("exhausted")) {
 
-        message = `
-          <h2>Rest & Recharge</h2>
-          <p>It sounds like your energy is low today.</p>
-          <p><strong>Your small reset:</strong> Give yourself 10 quiet minutes. Sit somewhere comfortable, breathe slowly, and allow yourself to pause without feeling guilty.</p>
-        `;
+    message = `
+      <h2>Rest & Recharge</h2>
+      <p>It sounds like your energy is low today.</p>
+      <p><strong>Your small reset:</strong> Give yourself 10 quiet minutes. Sit somewhere comfortable, breathe slowly, and allow yourself to pause without feeling guilty.</p>
+    `;
 
-      } else if (text.includes("overwhelmed") || text.includes("too much")) {
+  } else if (text.includes("overwhelmed") || text.includes("too much")) {
 
-        message = `
-          <h2>Pause & Simplify</h2>
-          <p>You don't have to handle everything at once.</p>
-          <p><strong>Your small reset:</strong> Choose just one thing that needs your attention right now. Everything else can wait.</p>
-        `;
+    message = `
+      <h2>Pause & Simplify</h2>
+      <p>You don't have to handle everything at once.</p>
+      <p><strong>Your small reset:</strong> Choose just one thing that needs your attention right now. Everything else can wait.</p>
+    `;
 
-      } else if (text.includes("sad") || text.includes("lonely")) {
+  } else if (text.includes("sad") || text.includes("lonely")) {
 
-        message = `
-          <h2>Be Gentle With Yourself</h2>
-          <p>You don't have to pretend you're okay when you're having a hard day.</p>
-          <p><strong>Your small reset:</strong> Take a few slow breaths and do one comforting thing for yourself today.</p>
-        `;
+    message = `
+      <h2>Be Gentle With Yourself</h2>
+      <p>You don't have to pretend you're okay when you're having a hard day.</p>
+      <p><strong>Your small reset:</strong> Take a few slow breaths and do one comforting thing for yourself today.</p>
+    `;
 
-      } else if (text.includes("angry") || text.includes("mad")) {
+  } else if (text.includes("angry") || text.includes("mad")) {
 
-        message = `
-          <h2>Pause & Release</h2>
-          <p>You don't have to react while everything still feels intense.</p>
-          <p><strong>Your small reset:</strong> Step away for a few minutes, breathe deeply, and give yourself space before deciding what to do next.</p>
-        `;
+    message = `
+      <h2>Pause & Release</h2>
+      <p>You don't have to react while everything still feels intense.</p>
+      <p><strong>Your small reset:</strong> Step away for a few minutes, breathe deeply, and give yourself space before deciding what to do next.</p>
+    `;
 
-      } else if (text.includes("stress") || text.includes("stressed")) {
+  } else if (text.includes("stress") || text.includes("stressed")) {
 
-        message = `
-          <h2>Ground Yourself</h2>
-          <p>Let's bring your attention back to this moment.</p>
-          <p><strong>Your small reset:</strong> Take five slow breaths. Notice where you are, what you can see, and what you can hear.</p>
-        `;
+    message = `
+      <h2>Ground Yourself</h2>
+      <p>Let's bring your attention back to this moment.</p>
+      <p><strong>Your small reset:</strong> Take five slow breaths and notice what you can see and hear around you.</p>
+    `;
 
-      } else {
+  } else {
 
-        message = `
-          <h2>Here's Your Reset</h2>
-          <p>Whatever you're carrying today, you don't have to solve everything right now.</p>
-          <p><strong>Your small reset:</strong> Take one slow breath and choose one small thing you can do for yourself today.</p>
-        `;
-      }
+    message = `
+      <h2>Here's Your Reset</h2>
+      <p>Whatever you're carrying today, you don't have to solve everything right now.</p>
+      <p><strong>Your small reset:</strong> Take one slow breath and choose one small thing you can do for yourself today.</p>
+    `;
+  }
 
-      resetMessage.innerHTML = message;
-      resetButton.style.display = "none";
-      nextChoices.style.display = "block";
-    });
+  resetMessage.innerHTML = message;
+  resetButton.style.display = "none";
+  nextChoices.style.display = "block";
+});
 
 
-    const choiceButtons = document.querySelectorAll(".choiceButton");
+const choiceButtons = document.querySelectorAll(".choiceButton");
 
-    choiceButtons.forEach(function (button) {
+choiceButtons.forEach(function (button) {
 
-      button.addEventListener("click", function () {
+  button.addEventListener("click", function () {
 
-        const choice = button.textContent;
+    const choice = button.textContent;
 
-        if (choice === "Calm me down") {
+    if (choice === "Calm me down") {
 
-    nextChoices.innerHTML = `
-    <h3>Let's slow things down.</h3>
+      nextChoices.innerHTML = `
+        <h3>Let's slow things down.</h3>
 
-    <p id="breathingInstruction">
-      When you're ready, we'll take three slow breaths together.
-    </p>
+        <p>When you're ready, we'll take three slow breaths together.</p>
 
-    <div id="breathingTimer" style="font-size: 40px; margin: 20px 0;">
-      Ready
-    </div>
+        <div id="breathingTimer" style="font-size: 40px; margin: 20px 0;">
+          Ready
+        </div>
 
-    <button id="startBreathing">Start Breathing Exercise</button>
-  `;
+        <button id="startBreathing">Start Breathing Exercise</button>
+      `;
 
-  const startBreathing = document.getElementById("startBreathing");
-  const breathingInstruction = document.getElementById("breathingInstruction");
-  const breathingTimer = document.getElementById("breathingTimer");
+      const startBreathing = document.getElementById("startBreathing");
+      const breathingTimer = document.getElementById("breathingTimer");
 
-  startBreathing.addEventListener("click", function () {
+      startBreathing.addEventListener("click", function () {
 
-    startBreathing.style.display = "none";
+        startBreathing.style.display = "none";
 
-    let step = 0;
-    let seconds = 4;
+        let step = 0;
+        let seconds = 0;
 
-    const breathingSteps = [
-      { text: "Breathe in slowly...", time: 4 },
-      { text: "Hold...", time: 2 },
-      { text: "Breathe out slowly...", time: 6 }
-    ];
+        const breathingSteps = [
+          { text: "Breathe in slowly...", time: 4 },
+          { text: "Hold...", time: 2 },
+          { text: "Breathe out slowly...", time: 6 }
+        ];
 
-    function runBreathingStep() {
+        function runBreathingStep() {
 
-      if (step >= breathingSteps.length) {
-        breathingInstruction.innerHTML =
-          "You did it. Take one more comfortable breath.";
-        breathingTimer.innerHTML = "✓";
-        return;
-      }
+          if (step >= breathingSteps.length) {
+            nextChoices.innerHTML = `
+              <h3>You did it. 🌱</h3>
+              <p>Take one more comfortable breath.</p>
+            `;
+            return;
+          }
 
-      const currentStep = breathingSteps[step];
-      seconds = currentStep.time;
+          const currentStep = breathingSteps[step];
+          seconds = currentStep.time;
 
-      breathingInstruction.innerHTML = currentStep.text;
-      breathingTimer.innerHTML = seconds;
+          breathingTimer.innerHTML =
+            currentStep.text + "<br>" + seconds;
 
-      const timer = setInterval(function () {
+          const timer = setInterval(function () {
 
-        seconds--;
+            seconds--;
 
-        if (seconds > 0) {
-          breathingTimer.innerHTML = seconds;
-        } else {
-          clearInterval(timer);
-          step++;
-          runBreathingStep();
+            if (seconds > 0) {
+              breathingTimer.innerHTML =
+                currentStep.text + "<br>" + seconds;
+            } else {
+              clearInterval(timer);
+              step++;
+              runBreathingStep();
+            }
+
+          }, 1000);
         }
 
-      }, 1000);
-    }
-
-    runBreathingStep();
-  });
-}
-
-
-        } else if (choice === "Give me motivation") {
-
-          nextChoices.innerHTML = `
-            <h3>One small step is enough.</h3>
-            <p>You don't have to finish everything today.</p>
-            <p>Choose one thing you can start in the next 10 minutes.</p>
-          `;
-
-        } else if (choice === "I need support") {
-
-          nextChoices.innerHTML = `
-            <h3>You don't have to carry everything alone.</h3>
-            <p>Think about someone you trust.</p>
-            <p>If you're comfortable, reach out and simply say, “I could use someone to talk to.”</p>
-          `;
-
-        } else if (choice === "Help me make a plan") {
-
-          nextChoices.innerHTML = `
-            <h3>Let's make it simple.</h3>
-            <p><strong>Step 1:</strong> Choose one thing that needs your attention.</p>
-            <p><strong>Step 2:</strong> Decide the smallest action you can take.</p>
-            <p><strong>Step 3:</strong> Give yourself permission to stop after that step.</p>
-          `;
-        }
-
+        runBreathingStep();
       });
 
-    });
+    } else if (choice === "Give me motivation") {
+
+      nextChoices.innerHTML = `
+        <h3>One small step is enough.</h3>
+        <p>You don't have to finish everything today.</p>
+        <p>Choose one thing you can start in the next 10 minutes.</p>
+      `;
+
+    } else if (choice === "I need support") {
+
+      nextChoices.innerHTML = `
+        <h3>You don't have to carry everything alone.</h3>
+        <p>Think about someone you trust.</p>
+        <p>If you're comfortable, reach out and simply say, "I could use someone to talk to."</p>
+      `;
+
+    } else if (choice === "Help me make a plan") {
+
+      nextChoices.innerHTML = `
+        <h3>Let's make it simple.</h3>
+        <p><strong>Step 1:</strong> Choose one thing that needs your attention.</p>
+        <p><strong>Step 2:</strong> Decide the smallest action you can take.</p>
+        <p><strong>Step 3:</strong> Give yourself permission to stop after that step.</p>
+      `;
+    }
+
+  });
+
+}); 
   </script>
 
 </body>
