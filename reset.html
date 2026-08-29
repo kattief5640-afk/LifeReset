@@ -44,8 +44,8 @@
 
   <script>
    const resetButton = document.getElementById("resetButton");
-const resetMessage = document.getElementById("resetMessage");
-const nextChoices = document.getElementById("nextChoices");
+   const resetMessage = document.getElementById("resetMessage");
+   const nextChoices = document.getElementById("nextChoices");
 
 resetButton.addEventListener("click", function () {
 
@@ -139,6 +139,7 @@ choiceButtons.forEach(function (button) {
         startBreathing.style.display = "none";
 
         let step = 0;
+        let round = 1;
         let seconds = 0;
 
         const breathingSteps = [
@@ -150,12 +151,23 @@ choiceButtons.forEach(function (button) {
         function runBreathingStep() {
 
           if (step >= breathingSteps.length) {
-            nextChoices.innerHTML = `
-              <h3>You did it. 🌱</h3>
-              <p>Take one more comfortable breath.</p>
-            `;
-            return;
-          }
+
+  if (round < 3) {
+    round++;
+    step = 0;
+    runBreathingStep();
+    return;
+  }
+
+  nextChoices.innerHTML = `
+    <h3>You did it. 🌱</h3>
+    <p>You just completed three slow breaths.</p>
+    <p>Take a moment and notice how you feel.</p>
+  `;
+
+  return;
+}
+
 
           const currentStep = breathingSteps[step];
           seconds = currentStep.time;
