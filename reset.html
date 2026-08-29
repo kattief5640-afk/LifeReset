@@ -119,13 +119,71 @@
 
         if (choice === "Calm me down") {
 
-          nextChoices.innerHTML = `
-            <h3>Let's slow things down.</h3>
-            <p>Take a slow breath in for 4 seconds.</p>
-            <p>Hold for 2 seconds.</p>
-            <p>Then breathe out slowly for 6 seconds.</p>
-            <p>Repeat this three times.</p>
-          `;
+  nextChoices.innerHTML = `
+    <h3>Let's slow things down.</h3>
+
+    <p id="breathingInstruction">
+      When you're ready, we'll take three slow breaths together.
+    </p>
+
+    <div id="breathingTimer" style="font-size: 40px; margin: 20px 0;">
+      Ready
+    </div>
+
+    <button id="startBreathing">Start Breathing Exercise</button>
+  `;
+
+  const startBreathing = document.getElementById("startBreathing");
+  const breathingInstruction = document.getElementById("breathingInstruction");
+  const breathingTimer = document.getElementById("breathingTimer");
+
+  startBreathing.addEventListener("click", function () {
+
+    startBreathing.style.display = "none";
+
+    let step = 0;
+    let seconds = 4;
+
+    const breathingSteps = [
+      { text: "Breathe in slowly...", time: 4 },
+      { text: "Hold...", time: 2 },
+      { text: "Breathe out slowly...", time: 6 }
+    ];
+
+    function runBreathingStep() {
+
+      if (step >= breathingSteps.length) {
+        breathingInstruction.innerHTML =
+          "You did it. Take one more comfortable breath.";
+        breathingTimer.innerHTML = "✓";
+        return;
+      }
+
+      const currentStep = breathingSteps[step];
+      seconds = currentStep.time;
+
+      breathingInstruction.innerHTML = currentStep.text;
+      breathingTimer.innerHTML = seconds;
+
+      const timer = setInterval(function () {
+
+        seconds--;
+
+        if (seconds > 0) {
+          breathingTimer.innerHTML = seconds;
+        } else {
+          clearInterval(timer);
+          step++;
+          runBreathingStep();
+        }
+
+      }, 1000);
+    }
+
+    runBreathingStep();
+  });
+}
+
 
         } else if (choice === "Give me motivation") {
 
