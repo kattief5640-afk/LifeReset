@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeReset - Safety</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">LifeReset</div>
+    <div class="tagline">
+      You don't have to figure everything out alone.
+    </div>
+  </header>
+
+  <main>
+
+    <section class="welcome-card">
+
+      <h1>I'm glad you told me.</h1>
+
+      <p>
+        What you're feeling matters, and you don't have to handle
+        this moment by yourself.
+      </p>
+
+      <div id="safetyMessage">
+
+        <h3>If you may hurt yourself or someone else</h3>
+
+        <p>
+          Please move away from anything you could use to hurt yourself
+          or another person, and get near someone you trust if you can.
+        </p>
+
+        <p>
+          If you are in immediate danger, call <strong>911</strong>
+          or go to the nearest emergency department.
+        </p>
+
+        <p>
+          In the United States, you can also call or text
+          <strong>988</strong> to reach the Suicide & Crisis Lifeline.
+        </p>
+
+        <a href="tel:988">
+          <button type="button">Call 988</button>
+        </a>
+
+        <a href="sms:988">
+          <button type="button">Text 988</button>
+        </a>
+
+        <button type="button" id="trustedPersonButton">
+          Reach Someone I Trust
+        </button>
+
+        <div id="trustedPersonMessage"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+    const trustedPersonButton =
+      document.getElementById("trustedPersonButton");
+
+    const trustedPersonMessage =
+      document.getElementById("trustedPersonMessage");
+
+    trustedPersonButton.addEventListener("click", function () {
+
+      trustedPersonMessage.innerHTML = `
+        <h3>You don't have to explain everything.</h3>
+
+        <p>
+          Think of one person you feel safe with.
+        </p>
+
+        <p>
+          You can simply tell them:
+        </p>
+
+        <p>
+          <strong>
+            "I'm having a really hard time. Can you stay with me?"
+          </strong>
+        </p>
+      `;
+
+    });
+
+  </script>
+
+</body>
+</html>
