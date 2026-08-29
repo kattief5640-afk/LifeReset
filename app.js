@@ -52,50 +52,88 @@ if (continueButton) {
   const text = feeling.toLowerCase();
 
   const urgentWords = [
-    "kill myself",
-    "suicide",
-    "suicidal",
-    "hurt myself",
-    "harm myself",
-    "end my life",
-    "want to die",
-    "don't want to live",
-    "hurt someone",
-    "kill someone",
-    "harm someone"
-  ];
+  "kill myself",
+  "suicide",
+  "suicidal",
+  "hurt myself",
+  "harm myself",
+  "end my life",
+  "want to die",
+  "don't want to live",
+  "hurt someone",
+  "kill someone",
+  "harm someone",
+  "going to hurt myself",
+  "going to hurt someone"
+];
 
-  const distressWords = [
-    "feeling down",
-    "really down",
-    "hopeless",
-    "can't cope",
-    "cannot cope",
-    "can't handle this",
-    "can't take this",
-    "feel alone",
-    "so alone",
-    "feel worthless",
-    "feel trapped",
-    "running away",
-    "want to run away",
-    "need to escape"
-  ];
+const downWords = [
+  "feeling down",
+  "really down",
+  "hopeless",
+  "can't cope",
+  "cannot cope",
+  "can't handle this",
+  "can't take this",
+  "feel alone",
+  "so alone",
+  "feel worthless",
+  "feel trapped",
+  "running away",
+  "want to run away",
+  "need to escape",
+  "sad",
+  "stressed",
+  "overwhelmed",
+  "anxious",
+  "worried",
+  "exhausted",
+  "lonely",
+  "frustrated",
+  "angry"
+];
 
-  const isUrgent = urgentWords.some(function (word) {
-    return text.includes(word);
-  });
+const happyWords = [
+  "happy",
+  "content",
+  "peaceful",
+  "calm",
+  "grateful",
+  "thankful",
+  "good",
+  "great",
+  "excited",
+  "joyful",
+  "positive",
+  "hopeful",
+  "relaxed",
+  "proud",
+  "blessed"
+];
 
-  const isDistressed = distressWords.some(function (word) {
-    return text.includes(word);
-  });
-
-  if (isUrgent) {
-    window.location.href = "safety.html";
-  } else if (isDistressed) {
-    window.location.href = "support.html";
-  } else {
-    window.location.href = "reset.html";
-  }
+const isUrgent = urgentWords.some(function (word) {
+  return text.includes(word);
 });
+
+const isDown = downWords.some(function (word) {
+  return text.includes(word);
+});
+
+const isHappy = happyWords.some(function (word) {
+  return text.includes(word);
+});
+
+if (isUrgent) {
+  window.location.href = "safety.html";
+} else if (isDown) {
+  window.location.href = "support.html";
+} else if (isHappy) {
+  window.location.href = "happy-reset.html";
+} else {
+  window.location.href = "reset.html";
 }
+
+  
+  
+
+  
