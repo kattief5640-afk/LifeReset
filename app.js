@@ -1,4 +1,3 @@
-console.log("NEW LIFERESET APP.JS");
 
 const beginButton = document.getElementById("beginButton");
 const checkinSection = document.getElementById("checkin");
