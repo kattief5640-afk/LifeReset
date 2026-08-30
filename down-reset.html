@@ -63,321 +63,307 @@
 
 </section>
 
-  </main> <script>
+  </main>
+  <script>
+const breathingButton = document.getElementById("breathingButton");
+const journalButton = document.getElementById("journalButton");
+const smallThingButton = document.getElementById("smallThingButton");
+const movementButton = document.getElementById("movementButton");
+const reachOutButton = document.getElementById("reachOutButton");
+const restButton = document.getElementById("restButton");
 
-    const breathingButton = document.getElementById("breathingButton");
-    const journalButton = document.getElementById("journalButton");
-    const smallThingButton = document.getElementById("smallThingButton");
-    const movementButton = document.getElementById("movementButton");
-    const reachOutButton = document.getElementById("reachOutButton");
-    const restButton = document.getElementById("restButton");
-
-    const resetOptions = document.querySelector(".reset-options");
-    const resetContent = document.getElementById("resetContent");
-    const contentTitle = document.getElementById("contentTitle");
-    const contentText = document.getElementById("contentText");
-    const contentArea = document.getElementById("contentArea");
-    const closeContentButton = document.getElementById("closeContentButton");
-
-
-    function showContent(title, text, content) {
-
-      resetOptions.style.display = "none";
-
-      resetContent.style.display = "block";
-
-      contentTitle.textContent = title;
-
-      contentText.textContent = text;
-
-      contentArea.innerHTML = content;
-
-    }
+const resetOptions = document.querySelector(".reset-options");
+const resetContent = document.getElementById("resetContent");
+const contentTitle = document.getElementById("contentTitle");
+const contentText = document.getElementById("contentText");
+const contentArea = document.getElementById("contentArea");
+const closeContentButton = document.getElementById("closeContentButton");
 
 
-    breathingButton.addEventListener("click", function () {
+function showContent(title, text, content) {
 
-      showContent(
-        "🌬️ Take a Breathing Break",
-        "Let's slow things down for a moment. Follow the rhythm below.",
-        `
-          <div>
-            <h2 id="breathingTimer">Ready</h2>
+  resetOptions.style.display = "none";
+  resetContent.style.display = "block";
 
-            <p id="breathingInstruction">
-              When you're ready, begin with a slow breath.
-            </p>
-
-            <button id="startBreathingButton">
-              Start Breathing
-            </button>
-          </div>
-        `
-      );
-
-      document.getElementById("startBreathingButton")
-        .addEventListener("click", startBreathing);
-
-    });
-
-
-    function startBreathing() {
-
-      const timer = document.getElementById("breathingTimer");
-      const instruction = document.getElementById("breathingInstruction");
-      const button = document.getElementById("startBreathingButton");
-
-      button.style.display = "none";
-
-      let step = 0;
-
-      const breathingSteps = [
-        ["Breathe in", 4],
-        ["Hold", 4],
-        ["Breathe out", 6]
-      ];
-
-      function nextStep() {
-
-        if (step >= breathingSteps.length) {
-
-          timer.textContent = "Done 🌱";
-
-          instruction.textContent =
-            "Take a moment to notice how you feel. You can repeat this exercise if you'd like.";
-
-          return;
-        }
-
-        const currentStep = breathingSteps[step];
-
-        instruction.textContent = currentStep[0];
-
-        let seconds = currentStep[1];
-
-        timer.textContent = seconds;
-
-        const countdown = setInterval(function () {
-
-          seconds--;
-
-          timer.textContent = seconds;
-
-          if (seconds <= 0) {
-
-            clearInterval(countdown);
-
-            step++;
-
-            nextStep();
-
-          }
-
-        }, 1000);
-
-      }
-
-      nextStep();
-
-    }
-
-
-    journalButton.addEventListener("click", function () {
-
-      showContent(
-        "📝 Get It Off My Mind",
-        "Put whatever is on your mind here. You don't have to make it perfect.",
-        `
-          <textarea
-            id="journalInput"
-            rows="8"
-            placeholder="Write what's on your mind..."
-          ></textarea> <button id="saveJournalButton">
-        Save Entry
-      </button>
-
-      <p id="journalMessage"></p>
-    `
-  );
-
-  const saveJournalButton = document.getElementById("saveJournalButton");
-
-if (saveJournalButton) {
-  saveJournalButton.addEventListener("click", function () {
-
-    const journalInput = document.getElementById("journalInput");
-    const journalMessage = document.getElementById("journalMessage");
-
-    if (!journalInput || !journalMessage) {
-      return;
-    }
-
-    const entry = journalInput.value.trim();
-
-    if (entry === "") {
-      journalMessage.textContent =
-        "Write something first, even if it's just a few words.";
-      return;
-    }
-
-    localStorage.setItem("lifeResetJournal", entry);
-
-    journalMessage.textContent =
-      "Your entry has been saved on this device. 🌱";
-
-  });
+  contentTitle.textContent = title;
+  contentText.textContent = text;
+  contentArea.innerHTML = content;
 }
 
 
-smallThingButton.addEventListener("click", function () {
+/* BREATHING */
+
+breathingButton.addEventListener("click", function () {
 
   showContent(
-    "🌱 One Small Thing",
-    "You don't have to do everything. Choose just one.",
+    "🌬️ Take a Breathing Break",
+    "Let's slow things down for a moment. Follow the rhythm below.",
     `
-      <ul>
-        <li>Drink a glass of water</li>
-        <li>Take a shower</li>
-        <li>Step outside for a few minutes</li>
-        <li>Eat something nourishing</li>
-        <li>Tidy one small area</li>
-        <li>Put your phone down and take a quiet moment</li>
-      </ul>
+      <div>
+        <h2 id="breathingTimer">Ready</h2>
+
+        <p id="breathingInstruction">
+          When you're ready, begin with a slow breath.
+        </p>
+
+        <button id="startBreathingButton">
+          Start Breathing
+        </button>
+      </div>
     `
   );
 
+  document.getElementById("startBreathingButton")
+    .addEventListener("click", startBreathing);
+
 });
 
+
+function startBreathing() {
+
+  const timer = document.getElementById("breathingTimer");
+  const instruction = document.getElementById("breathingInstruction");
+  const button = document.getElementById("startBreathingButton");
+
+  button.style.display = "none";
+
+  let step = 0;
+
+  const breathingSteps = [
+    ["Breathe in", 4],
+    ["Hold", 4],
+    ["Breathe out", 6]
+  ];
+
+  function nextStep() {
+
+    if (step >= breathingSteps.length) {
+
+      timer.textContent = "Done 🌱";
+
+      instruction.textContent =
+        "Take a moment to notice how you feel. You can repeat this exercise if you'd like.";
+
+      return;
+    }
+
+    const currentStep = breathingSteps[step];
+
+    instruction.textContent = currentStep[0];
+
+    let seconds = currentStep[1];
+
+    timer.textContent = seconds;
+
+    const countdown = setInterval(function () {
+
+      seconds--;
+
+      timer.textContent = seconds;
+
+      if (seconds <= 0) {
+
+        clearInterval(countdown);
+
+        step++;
+
+        nextStep();
+
+      }
+
+    }, 1000);
+
+  }
+
+  nextStep();
+
+}
+
+
+/* JOURNAL */
+
+journalButton.addEventListener("click", function () {
+
+  showContent(
+    "📝 Get It Off My Mind",
+    "Put whatever is on your mind here. You don't have to make it perfect.",
+    `
+      <textarea
+        id="journalInput"
+        rows="8"
+        placeholder="Write what's on your mind..."
+      ></textarea> <button id="saveJournalButton">
+    Save Entry
+  </button>
+
+  <p id="journalMessage"></p>
+`
+
+);
+
+const saveJournalButton =
+document.getElementById("saveJournalButton");
+
+saveJournalButton.addEventListener("click", function () {
+
+const journalInput =
+  document.getElementById("journalInput");
+
+const journalMessage =
+  document.getElementById("journalMessage");
+
+const entry = journalInput.value.trim();
+
+if (entry === "") {
+
+  journalMessage.textContent =
+    "Write something first, even if it's just a few words.";
+
+  return;
+}
+
+localStorage.setItem("lifeResetJournal", entry);
+
+journalMessage.textContent =
+  "Your entry has been saved on this device. 🌱";
+
+});
+
+});
+
+/* ONE SMALL THING */
+
+smallThingButton.addEventListener("click", function () {
+
+showContent(
+"🌱 One Small Thing",
+"You don't have to do everything. Choose just one.",
+"<ul> <li>Drink a glass of water</li> <li>Take a shower</li> <li>Step outside for a few minutes</li> <li>Eat something nourishing</li> <li>Tidy one small area</li> <li>Put your phone down and take a quiet moment</li> </ul>"
+);
+
+});
+
+/* MOVE MY BODY */
 
 movementButton.addEventListener("click", function () {
 
-  showContent(
-    "🚶 Move My Body",
-    "You don't need a workout. A little movement is enough.",
-    `
-      <ul>
-        <li>Stretch your arms and shoulders</li>
-        <li>Take a short walk</li>
-        <li>Stretch your legs</li>
-        <li>Dance to one song</li>
-        <li>Take a few slow breaths while moving</li>
-      </ul>
-    `
-  );
+showContent(
+"🚶 Move My Body",
+"You don't need a workout. A little movement is enough.",
+"<ul> <li>Stretch your arms and shoulders</li> <li>Take a short walk</li> <li>Stretch your legs</li> <li>Dance to one song</li> <li>Take a few slow breaths while moving</li> </ul>"
+);
 
 });
 
+/* REACH OUT */
 
 reachOutButton.addEventListener("click", function () {
 
-  reachOutButton.addEventListener("click", function () {
+showContent(
+"❤️ Reach Out",
+"You don't have to handle everything alone. Choose what feels easiest.",
+`
+<div class="reach-out-options">
 
-  showContent(
-    "❤️ Reach Out",
-    "You don't have to handle everything alone. Choose what feels easiest.",
-    `
-      <div class="reach-out-options">
+    <button id="callSomeoneButton">
+      📞 Call Someone I Trust
+    </button>
 
-        <button id="callSomeoneButton">
-          📞 Call Someone I Trust
-        </button>
+    <button id="messageSomeoneButton">
+      💬 Send a Message
+    </button>
 
-        <button id="messageSomeoneButton">
-          💬 Send a Message
-        </button>
+    <button id="thinkSomeoneButton">
+      🤔 I Don't Know Who to Reach Out To
+    </button>
 
-        <button id="thinkSomeoneButton">
-          🤔 I Don't Know Who to Reach Out To
-        </button>
+  </div>
 
-      </div>
+  <div id="reachOutHelp" style="margin-top: 20px;"></div>
+`
 
-      <div id="reachOutHelp" style="margin-top: 20px;"></div>
-    `
-  );
+);
 
+document.getElementById("callSomeoneButton")
+.addEventListener("click", function () {
 
-  document.getElementById("callSomeoneButton")
-    .addEventListener("click", function () {
+  document.getElementById("reachOutHelp").innerHTML = `
+    <p><strong>Think of someone who makes you feel safe, supported, or understood.</strong></p>
 
-      document.getElementById("reachOutHelp").innerHTML = `
-        <p><strong>Think of someone who makes you feel safe, supported, or understood.</strong></p>
+    <p>You don't have to explain everything. A simple call can be enough.</p>
 
-        <p>You don't have to explain everything. A simple call can be enough.</p>
-
-        <p>“I'm having a hard day. Can we talk?”</p>
-      `;
-
-    });
-
-
-  document.getElementById("messageSomeoneButton")
-    .addEventListener("click", function () {
-
-      document.getElementById("reachOutHelp").innerHTML = `
-        <p><strong>You can keep the message simple.</strong></p>
-
-        <p>“Hey, I'm having a hard day. Do you have a few minutes to talk?”</p>
-
-        <p>“I could use some company right now.”</p>
-      `;
-
-    });
-
-
-  document.getElementById("thinkSomeoneButton")
-    .addEventListener("click", function () {
-
-      document.getElementById("reachOutHelp").innerHTML = `
-        <p><strong>Start with someone you feel comfortable around.</strong></p>
-
-        <ul>
-          <li>A family member</li>
-          <li>A close friend</li>
-          <li>A trusted coworker</li>
-          <li>A neighbor</li>
-          <li>Someone who has supported you before</li>
-        </ul>
-
-        <p>You don't need the perfect person. You just need someone safe enough to start with.</p>
-      `;
-
-    });
+    <p>“I'm having a hard day. Can we talk?”</p>
+  `;
 
 });
 
+document.getElementById("messageSomeoneButton")
+.addEventListener("click", function () {
 
+  document.getElementById("reachOutHelp").innerHTML = `
+    <p><strong>You can keep the message simple.</strong></p>
+
+    <p>“Hey, I'm having a hard day. Do you have a few minutes to talk?”</p>
+
+    <p>“I could use some company right now.”</p>
+  `;
+
+});
+
+document.getElementById("thinkSomeoneButton")
+.addEventListener("click", function () {
+
+  document.getElementById("reachOutHelp").innerHTML = `
+    <p><strong>Start with someone you feel comfortable around.</strong></p>
+
+    <ul>
+      <li>A family member</li>
+      <li>A close friend</li>
+      <li>A trusted coworker</li>
+      <li>A neighbor</li>
+      <li>Someone who has supported you before</li>
+    </ul>
+
+    <p>You don't need the perfect person. You just need someone safe enough to start with.</p>
+  `;
+
+});
+
+});
+
+/* REST */
 
 restButton.addEventListener("click", function () {
 
-  showContent(
-    "🛌 Give Myself Permission to Rest",
-    "Rest is allowed. You don't have to earn the right to take a break.",
-    `
-      <p>For the next few minutes, you don't have to accomplish anything.</p>
+showContent(
+"🛌 Give Myself Permission to Rest",
+"Rest is allowed. You don't have to earn the right to take a break.",
+`
+<p>For the next few minutes, you don't have to accomplish anything.</p>
 
-      <ul>
-        <li>Get somewhere comfortable</li>
-        <li>Put down anything that can wait</li>
-        <li>Take a few slow breaths</li>
-        <li>Close your eyes if that feels comfortable</li>
-        <li>Give yourself permission to simply be</li>
-      </ul>
+  <ul>
+    <li>Get somewhere comfortable</li>
+    <li>Put down anything that can wait</li>
+    <li>Take a few slow breaths</li>
+    <li>Close your eyes if that feels comfortable</li>
+    <li>Give yourself permission to simply be</li>
+  </ul>
 
-      <p><strong>Nothing needs to be solved right now.</strong></p>
-    `
-  );
+  <p><strong>Nothing needs to be solved right now.</strong></p>
+`
+
+);
 
 });
 
+/* BACK TO MY RESET */
 
 closeContentButton.addEventListener("click", function () {
 
-  resetContent.style.display = "none";
-
-  resetOptions.style.display = "block";
+resetContent.style.display = "none";
+resetOptions.style.display = "block";
 
 });
-
+  
   </script></body>
 </html>
