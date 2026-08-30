@@ -46,15 +46,25 @@
   const getItOffMyMindButton = document.getElementById("getItOffMyMindButton");
   const reachOutButton = document.getElementById("reachOutButton");
   const restButton = document.getElementById("restButton");
-  getItOffMyMindButton.addEventListener("click", function () {
-    alert("You can write whatever is on your mind. You don't have to make it perfect or explain everything.");
-  });
-restButton.addEventListener("click", function () {
-  alert("Rest is allowed. You don't have to earn the right to take a break.");
-});
-  reachOutButton.addEventListener("click", function () {
-    alert("You don't have to handle everything alone. Consider reaching out to someone you trust.");
-  });
+
+  if (getItOffMyMindButton) {
+    getItOffMyMindButton.addEventListener("click", function () {
+      alert("You can write whatever is on your mind. You don't have to make it perfect or explain everything.");
+    });
+  }
+
+  if (reachOutButton) {
+    reachOutButton.addEventListener("click", function () {
+      alert("You don't have to handle everything alone. Consider reaching out to someone you trust.");
+    });
+  }
+
+  if (restButton) {
+    restButton.addEventListener("click", function () {
+      alert("Rest is allowed. You don't have to earn the right to take a break.");
+    });
+  }
 </script>
+
   </body>
 </html>
