@@ -270,23 +270,82 @@ movementButton.addEventListener("click", function () {
 
 reachOutButton.addEventListener("click", function () {
 
+  reachOutButton.addEventListener("click", function () {
+
   showContent(
     "❤️ Reach Out",
-    "You don't have to handle everything alone.",
+    "You don't have to handle everything alone. Choose what feels easiest.",
     `
-      <p>Think of one person who makes you feel safe, supported, or understood.</p>
+      <div class="reach-out-options">
 
-      <p>You don't need a long explanation. You can simply say:</p>
+        <button id="callSomeoneButton">
+          📞 Call Someone I Trust
+        </button>
 
-      <p><strong>"I'm having a hard day. Can we talk?"</strong></p>
+        <button id="messageSomeoneButton">
+          💬 Send a Message
+        </button>
 
-      <p>Or:</p>
+        <button id="thinkSomeoneButton">
+          🤔 I Don't Know Who to Reach Out To
+        </button>
 
-      <p><strong>"I could use some company right now."</strong></p>
+      </div>
+
+      <div id="reachOutHelp" style="margin-top: 20px;"></div>
     `
   );
 
+
+  document.getElementById("callSomeoneButton")
+    .addEventListener("click", function () {
+
+      document.getElementById("reachOutHelp").innerHTML = `
+        <p><strong>Think of someone who makes you feel safe, supported, or understood.</strong></p>
+
+        <p>You don't have to explain everything. A simple call can be enough.</p>
+
+        <p>“I'm having a hard day. Can we talk?”</p>
+      `;
+
+    });
+
+
+  document.getElementById("messageSomeoneButton")
+    .addEventListener("click", function () {
+
+      document.getElementById("reachOutHelp").innerHTML = `
+        <p><strong>You can keep the message simple.</strong></p>
+
+        <p>“Hey, I'm having a hard day. Do you have a few minutes to talk?”</p>
+
+        <p>“I could use some company right now.”</p>
+      `;
+
+    });
+
+
+  document.getElementById("thinkSomeoneButton")
+    .addEventListener("click", function () {
+
+      document.getElementById("reachOutHelp").innerHTML = `
+        <p><strong>Start with someone you feel comfortable around.</strong></p>
+
+        <ul>
+          <li>A family member</li>
+          <li>A close friend</li>
+          <li>A trusted coworker</li>
+          <li>A neighbor</li>
+          <li>Someone who has supported you before</li>
+        </ul>
+
+        <p>You don't need the perfect person. You just need someone safe enough to start with.</p>
+      `;
+
+    });
+
 });
+
 
 
 restButton.addEventListener("click", function () {
