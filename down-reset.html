@@ -21,10 +21,9 @@
   <button onclick="alert('Take a slow breath in. Hold it gently. Then breathe out slowly. Give yourself a moment.')">
     🌬️ Take a Breathing Break
   </button>
-
-  <button onclick="alert('You can write whatever is on your mind. You don't have to make it perfect or explain everything.')">
-    📝 Get It Off My Mind
-  </button>
+<button id="getItOffMyMindButton">
+  📝 Get It Off My Mind
+</button>
 
   <button onclick="alert('Choose one tiny thing you can do right now. Drink some water, take a shower, step outside, or simply get comfortable.')">
     🌱 Do One Small Thing
@@ -34,15 +33,26 @@
     🚶 Move My Body
   </button>
 
-  <button onclick="alert('You don't have to handle everything alone. Consider reaching out to someone you trust.')">
-    ❤️ Reach Out
-  </button>
+  <button id="reachOutButton">
+  ❤️ Reach Out
+</button>
 
   <button onclick="alert('Rest is allowed. You don't have to earn the right to take a break.')">
     🛌 Give Myself Permission to Rest
   </button>
+    </section>  
+  </main>  
+  <script>
+  const getItOffMyMindButton = document.getElementById("getItOffMyMindButton");
+  const reachOutButton = document.getElementById("reachOutButton");
 
-</section>
+  getItOffMyMindButton.addEventListener("click", function () {
+    alert("You can write whatever is on your mind. You don't have to make it perfect or explain everything.");
+  });
 
-  </main></body>
+  reachOutButton.addEventListener("click", function () {
+    alert("You don't have to handle everything alone. Consider reaching out to someone you trust.");
+  });
+</script>
+  </body>
 </html>
