@@ -200,34 +200,33 @@
     `
   );
 
-  document.getElementById("saveJournalButton")
-    .addEventListener("click", function () {
+  const saveJournalButton = document.getElementById("saveJournalButton");
 
-      const journalInput =
-        document.getElementById("journalInput");
+if (saveJournalButton) {
+  saveJournalButton.addEventListener("click", function () {
 
-      const journalMessage =
-        document.getElementById("journalMessage");
+    const journalInput = document.getElementById("journalInput");
+    const journalMessage = document.getElementById("journalMessage");
 
-      if (journalInput.value.trim() === "") {
+    if (!journalInput || !journalMessage) {
+      return;
+    }
 
-        journalMessage.textContent =
-          "Write something first, even if it's just a few words.";
+    const entry = journalInput.value.trim();
 
-        return;
-      }
-
-      localStorage.setItem(
-        "lifeResetJournal",
-        journalInput.value.trim()
-      );
-
+    if (entry === "") {
       journalMessage.textContent =
-        "Your entry has been saved on this device. 🌱";
+        "Write something first, even if it's just a few words.";
+      return;
+    }
 
-    });
+    localStorage.setItem("lifeResetJournal", entry);
 
-});
+    journalMessage.textContent =
+      "Your entry has been saved on this device. 🌱";
+
+  });
+}
 
 
 smallThingButton.addEventListener("click", function () {
