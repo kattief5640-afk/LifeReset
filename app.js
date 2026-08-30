@@ -126,7 +126,7 @@ const isHappy = happyWords.some(function (word) {
 if (isUrgent) {
   window.location.href = "safety.html";
 } else if (isDown) {
-  window.location.href = "support.html";
+  window.location.href = "down-reset.html";
 } else if (isHappy) {
   window.location.href = "happy-reset.html";
 } else {
