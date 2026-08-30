@@ -7,8 +7,9 @@
 </head><body> <header>
     <div class="logo">LifeReset</div>
     <div class="tagline">You don't have to figure everything out alone.</div>
-  </header> <main>
-    <section class="welcome-card"> <h1>😊 Here's Your Reset</h1>
+  </header> <main><section class="welcome-card">
+
+  <h1>😊 Here's Your Reset</h1>
 
   <p>
     You're in a good place right now. Let's enjoy this moment
@@ -17,27 +18,316 @@
 
   <h2>What would feel good right now?</h2>
 
-  <button onclick="alert('Take a moment to celebrate what is going well. You deserve to enjoy this moment.')">
-    🎉 Celebrate This Moment
-  </button>
+  <div class="reset-options">
 
-  <button onclick="alert('Write down what is making you feel good today. You can come back to it whenever you need a reminder.')">
-    📝 Save This Feeling
-  </button>
+    <button id="celebrateButton">
+      🎉 Celebrate This Moment
+    </button>
 
-  <button onclick="alert('Choose one small thing you can do today that keeps your positive momentum going.')">
-    💪 Build On It
-  </button>
+    <button id="saveFeelingButton">
+      📝 Save This Feeling
+    </button>
 
-  <button onclick="alert('Reach out to someone you care about. Share the good energy.')">
-    ❤️ Connect With Someone
-  </button>
+    <button id="buildOnItButton">
+      💪 Build On It
+    </button>
 
-  <button onclick="alert('You don't have to accomplish anything right now. Sometimes the reset is simply enjoying the moment.')">
-    🌿 Just Enjoy It
-  </button>
+    <button id="connectButton">
+      ❤️ Connect With Someone
+    </button>
+
+    <button id="enjoyButton">
+      🌿 Just Enjoy It
+    </button>
+
+  </div>
+
+  <div id="happyContent" style="display: none;">
+
+    <h2 id="happyTitle"></h2>
+
+    <p id="happyText"></p>
+
+    <div id="happyArea"></div>
+
+    <button id="happyBackButton">
+      Back to My Reset
+    </button>
+
+  </div>
 
 </section>
 
-  </main></body>
+  </main> <script>
+
+    const celebrateButton =
+      document.getElementById("celebrateButton");
+
+    const saveFeelingButton =
+      document.getElementById("saveFeelingButton");
+
+    const buildOnItButton =
+      document.getElementById("buildOnItButton");
+
+    const connectButton =
+      document.getElementById("connectButton");
+
+    const enjoyButton =
+      document.getElementById("enjoyButton");
+
+    const resetOptions =
+      document.querySelector(".reset-options");
+
+    const happyContent =
+      document.getElementById("happyContent");
+
+    const happyTitle =
+      document.getElementById("happyTitle");
+
+    const happyText =
+      document.getElementById("happyText");
+
+    const happyArea =
+      document.getElementById("happyArea");
+
+    const happyBackButton =
+      document.getElementById("happyBackButton");
+
+
+    function showHappyContent(title, text, content) {
+
+      resetOptions.style.display = "none";
+
+      happyContent.style.display = "block";
+
+      happyTitle.textContent = title;
+
+      happyText.textContent = text;
+
+      happyArea.innerHTML = content;
+
+    }
+
+
+    /* CELEBRATE */
+
+    celebrateButton.addEventListener("click", function () {
+
+      showHappyContent(
+        "🎉 Celebrate This Moment",
+        "You don't need a reason to appreciate a good moment.",
+        `
+          <p>
+            Take a moment and notice what is going well.
+          </p>
+
+          <p>
+            What made today feel good?
+          </p>
+
+          <textarea
+            id="celebrationInput"
+            rows="6"
+            placeholder="I'm feeling good because..."
+          ></textarea> <button id="saveCelebrationButton">
+        Save My Reflection
+      </button>
+
+      <p id="celebrationMessage"></p>
+    `
+  );
+
+
+  document.getElementById("saveCelebrationButton")
+    .addEventListener("click", function () {
+
+      const input =
+        document.getElementById("celebrationInput");
+
+      const message =
+        document.getElementById("celebrationMessage");
+
+      const reflection =
+        input.value.trim();
+
+      if (reflection === "") {
+
+        message.textContent =
+          "Write a few words about what made this moment feel good.";
+
+        return;
+      }
+
+      localStorage.setItem(
+        "lifeResetCelebration",
+        reflection
+      );
+
+      message.textContent =
+        "Your reflection has been saved. 🌱";
+
+    });
+
+});
+
+
+/* SAVE THIS FEELING */
+
+saveFeelingButton.addEventListener("click", function () {
+
+  const feeling =
+    localStorage.getItem("lifeResetFeeling");
+
+  showHappyContent(
+    "📝 Save This Feeling",
+    "Keep a reminder of how you're feeling right now.",
+    `
+      <p>
+        ${feeling ? "You wrote: <strong>" + feeling + "</strong>" : "You can write down what feels good right now."}
+      </p>
+
+      <textarea
+        id="savedFeelingInput"
+        rows="6"
+        placeholder="What do you want to remember about today?"
+      ></textarea>
+
+      <button id="saveFeelingNoteButton">
+        Save This Feeling
+      </button>
+
+      <p id="savedFeelingMessage"></p>
+    `
+  );
+
+
+  document.getElementById("saveFeelingNoteButton")
+    .addEventListener("click", function () {
+
+      const input =
+        document.getElementById("savedFeelingInput");
+
+      const message =
+        document.getElementById("savedFeelingMessage");
+
+      const note =
+        input.value.trim();
+
+      if (note === "") {
+
+        message.textContent =
+          "Write something you'd like to remember.";
+
+        return;
+      }
+
+      localStorage.setItem(
+        "lifeResetHappyNote",
+        note
+      );
+
+      message.textContent =
+        "Saved. You can come back to this reminder later. 💛";
+
+    });
+
+});
+
+
+/* BUILD ON IT */
+
+buildOnItButton.addEventListener("click", function () {
+
+  showHappyContent(
+    "💪 Build On It",
+    "Choose one small thing that can keep the good energy going.",
+    `
+      <ul>
+        <li>Take a short walk</li>
+        <li>Do something creative</li>
+        <li>Listen to music you love</li>
+        <li>Work toward one small goal</li>
+        <li>Do something kind for yourself</li>
+      </ul>
+
+      <p>
+        You don't have to make the moment bigger. Just let it continue.
+      </p>
+    `
+  );
+
+});
+
+
+/* CONNECT */
+
+connectButton.addEventListener("click", function () {
+
+  showHappyContent(
+    "❤️ Connect With Someone",
+    "Good moments can feel even better when they're shared.",
+    `
+      <p>
+        Think of someone you'd enjoy connecting with today.
+      </p>
+
+      <p>
+        You could send:
+      </p>
+
+      <p>
+        <strong>
+          "I'm having a really good day. I wanted to share that with you."
+        </strong>
+      </p>
+
+      <p>
+        A simple message can brighten someone else's day too.
+      </p>
+    `
+  );
+
+});
+
+
+/* JUST ENJOY IT */
+
+enjoyButton.addEventListener("click", function () {
+
+  showHappyContent(
+    "🌿 Just Enjoy It",
+    "You don't have to accomplish anything right now.",
+    `
+      <p>
+        Take a slow breath and notice this moment.
+      </p>
+
+      <p>
+        Notice something you can see, something you can hear,
+        and something that makes you feel grateful.
+      </p>
+
+      <p>
+        <strong>
+          It's okay to simply enjoy feeling good.
+        </strong>
+      </p>
+    `
+  );
+
+});
+
+
+/* BACK */
+
+happyBackButton.addEventListener("click", function () {
+
+  happyContent.style.display = "none";
+
+  resetOptions.style.display = "block";
+
+});
+
+  </script></body>
 </html>
+
