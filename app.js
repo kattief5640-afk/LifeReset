@@ -133,6 +133,9 @@ if (isUrgent) {
   window.location.href = "reset.html";
 }
 
+  });
+}
+
   
   
 
