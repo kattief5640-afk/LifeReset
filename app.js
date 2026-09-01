@@ -47,6 +47,62 @@ return localStorage.getItem("lifeResetLanguage") || "en";
 }
 
 /* =========================
+CHECK-IN LANGUAGE
+========================= */
+
+function applyCheckinLanguage() {
+
+  const language = getLanguage();
+
+  const checkinTranslations = {
+
+    en: {
+      title: "I'm glad you're here.",
+      message: "You can take your time. Tell me how you're really doing today.",
+      placeholder: "Write what's on your mind..."
+    },
+
+    es: {
+      title: "Me alegra que estés aquí.",
+      message: "Tómate tu tiempo. Cuéntame cómo te sientes realmente hoy.",
+      placeholder: "Escribe lo que tienes en mente..."
+    },
+
+    fr: {
+      title: "Je suis heureux(se) que tu sois ici.",
+      message: "Prends ton temps. Dis-moi comment tu vas vraiment aujourd'hui.",
+      placeholder: "Écris ce que tu as en tête..."
+    },
+
+    ht: {
+      title: "Mwen kontan ou la.",
+      message: "Pran tan ou. Di mwen kijan ou santi w toutbon jodi a.",
+      placeholder: "Ekri sa ki nan tèt ou..."
+    }
+
+  };
+
+  const t = checkinTranslations[language] || checkinTranslations.en;
+
+  const title = document.getElementById("checkinTitle");
+  const message = document.getElementById("checkinMessage");
+  const input = document.getElementById("feelingInput");
+
+  if (title) {
+    title.textContent = t.title;
+  }
+
+  if (message) {
+    message.textContent = t.message;
+  }
+
+  if (input) {
+    input.placeholder = t.placeholder;
+  }
+
+}
+
+/* =========================
 SETUP
 ========================= */
 
@@ -119,8 +175,10 @@ if (beginButton) {
 
 beginButton.addEventListener("click", function () {
 
-welcomeSection.style.display = "none";
-checkinSection.style.display = "block";
+  welcomeSection.style.display = "none";
+  checkinSection.style.display = "block";
+
+  applyCheckinLanguage();
 
 });
 
