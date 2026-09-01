@@ -4,67 +4,411 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Down Reset</title>
   <link rel="stylesheet" href="style.css">
-</head><body> <header>
-    <div class="logo">LifeReset</div>
-    <div class="tagline">You don't have to figure everything out alone.</div>
-  </header> <main><section class="welcome-card">
-
-  <h1>🌧️ Here's Your Reset</h1>
-
-  <p>
+</head><body><header>
+  <div class="logo">LifeReset</div>
+  <div class="tagline" id="tagline">
+    You don't have to figure everything out alone.
+  </div>
+</header><main><section class="welcome-card"> <h1 id="resetHeading">🌧️ Here's Your Reset</h1> <p id="resetIntro">
     You don't have to fix everything right now.
     Let's focus on one small step that can make this moment
     a little easier.
-  </p>
+  </p> <h2 id="resetQuestion">What do you need right now?</h2> <div class="reset-options"><button id="breathingButton">🌬️ Take a Breathing Break</button>
 
-  <h2>What do you need right now?</h2>
+<button id="journalButton">📝 Get It Off My Mind</button>
 
-  <div class="reset-options">
+<button id="smallThingButton">🌱 Do One Small Thing</button>
 
-    <button id="breathingButton">
-      🌬️ Take a Breathing Break
-    </button>
+<button id="movementButton">🚶 Move My Body</button>
 
-    <button id="journalButton">
-      📝 Get It Off My Mind
-    </button>
+<button id="reachOutButton">❤️ Reach Out</button>
 
-    <button id="smallThingButton">
-      🌱 Do One Small Thing
-    </button>
+<button id="restButton">🛌 Give Myself Permission to Rest</button>
 
-    <button id="movementButton">
-      🚶 Move My Body
-    </button>
+  </div> <div id="resetContent" class="reset-content" style="display: none;"><h2 id="contentTitle"></h2>
 
-    <button id="reachOutButton">
-      ❤️ Reach Out
-    </button>
+<p id="contentText"></p>
 
-    <button id="restButton">
-      🛌 Give Myself Permission to Rest
-    </button>
+<div id="contentArea"></div>
 
-  </div>
+<button id="closeContentButton">
+  Back to My Reset
+</button>
 
-  <div id="resetContent" class="reset-content" style="display: none;">
+  </div></section></main><script>
 
-    <h2 id="contentTitle"></h2>
+/* =========================
+   TRANSLATIONS
+========================= */
 
-    <p id="contentText"></p>
+const translations = {
 
-    <div id="contentArea"></div>
+  en: {
+    tagline: "You don't have to figure everything out alone.",
+    heading: "🌧️ Here's Your Reset",
+    intro: "You don't have to fix everything right now. Let's focus on one small step that can make this moment a little easier.",
+    question: "What do you need right now?",
 
-    <button id="closeContentButton">
-      Back to My Reset
-    </button>
+    breathing: "🌬️ Take a Breathing Break",
+    journal: "📝 Get It Off My Mind",
+    smallThing: "🌱 Do One Small Thing",
+    movement: "🚶 Move My Body",
+    reachOut: "❤️ Reach Out",
+    rest: "🛌 Give Myself Permission to Rest",
+    back: "Back to My Reset",
 
-  </div>
+    breathingTitle: "🌬️ Take a Breathing Break",
+    breathingText: "Let's slow things down for a moment. Follow the rhythm below.",
+    breathingReady: "Ready",
+    breathingInstruction: "When you're ready, begin with a slow breath.",
+    startBreathing: "Start Breathing",
+    breatheIn: "Breathe in",
+    hold: "Hold",
+    breatheOut: "Breathe out",
+    done: "Done 🌱",
+    breathingDone: "Take a moment to notice how you feel. You can repeat this exercise if you'd like.",
 
-</section>
+    journalTitle: "📝 Get It Off My Mind",
+    journalText: "Put whatever is on your mind here. You don't have to make it perfect.",
+    journalPlaceholder: "Write what's on your mind...",
+    saveEntry: "Save Entry",
+    journalEmpty: "Write something first, even if it's just a few words.",
+    journalSaved: "Your entry has been saved on this device. 🌱",
 
-  </main>
-  <script>
+    smallTitle: "🌱 One Small Thing",
+    smallText: "You don't have to do everything. Choose just one.",
+    water: "Drink a glass of water",
+    shower: "Take a shower",
+    outside: "Step outside for a few minutes",
+    food: "Eat something nourishing",
+    tidy: "Tidy one small area",
+    phone: "Put your phone down and take a quiet moment",
+
+    movementTitle: "🚶 Move My Body",
+    movementText: "You don't need a workout. A little movement is enough.",
+    stretchArms: "Stretch your arms and shoulders",
+    walk: "Take a short walk",
+    stretchLegs: "Stretch your legs",
+    dance: "Dance to one song",
+    movingBreaths: "Take a few slow breaths while moving",
+
+    reachTitle: "❤️ Reach Out",
+    reachText: "You don't have to handle everything alone. Choose what feels easiest.",
+    call: "📞 Call Someone I Trust",
+    message: "💬 Send a Message",
+    don'tKnow: "🤔 I Don't Know Who to Reach Out To",
+
+    safePerson: "Think of someone who makes you feel safe, supported, or understood.",
+    simpleCall: "You don't have to explain everything. A simple call can be enough.",
+    callExample: "“I'm having a hard day. Can we talk?”",
+
+    simpleMessage: "You can keep the message simple.",
+    messageExample: "“Hey, I'm having a hard day. Do you have a few minutes to talk?”",
+    company: "“I could use some company right now.”",
+
+    comfortable: "Start with someone you feel comfortable around.",
+    family: "A family member",
+    friend: "A close friend",
+    coworker: "A trusted coworker",
+    neighbor: "A neighbor",
+    supporter: "Someone who has supported you before",
+    safeEnough: "You don't need the perfect person. You just need someone safe enough to start with.",
+
+    restTitle: "🛌 Give Myself Permission to Rest",
+    restText: "Rest is allowed. You don't have to earn the right to take a break.",
+    restIntro: "For the next few minutes, you don't have to accomplish anything.",
+    comfortablePlace: "Get somewhere comfortable",
+    wait: "Put down anything that can wait",
+    slowBreaths: "Take a few slow breaths",
+    closeEyes: "Close your eyes if that feels comfortable",
+    simplyBe: "Give yourself permission to simply be",
+    nothing: "Nothing needs to be solved right now."
+  },
+
+  es: {
+    tagline: "No tienes que resolverlo todo por tu cuenta.",
+    heading: "🌧️ Aquí está tu reinicio",
+    intro: "No tienes que arreglarlo todo ahora mismo. Enfoquémonos en un pequeño paso que pueda hacer este momento un poco más fácil.",
+    question: "¿Qué necesitas ahora?",
+
+    breathing: "🌬️ Tómate un descanso para respirar",
+    journal: "📝 Saca lo que tienes en la mente",
+    smallThing: "🌱 Haz una cosa pequeña",
+    movement: "🚶 Mueve tu cuerpo",
+    reachOut: "❤️ Comunícate con alguien",
+    rest: "🛌 Date permiso para descansar",
+    back: "Volver a mi reinicio",
+
+    breathingTitle: "🌬️ Tómate un descanso para respirar",
+    breathingText: "Vamos a bajar el ritmo por un momento. Sigue el ritmo de abajo.",
+    breathingReady: "Listo",
+    breathingInstruction: "Cuando estés listo, comienza con una respiración lenta.",
+    startBreathing: "Comenzar a respirar",
+    breatheIn: "Inhala",
+    hold: "Mantén",
+    breatheOut: "Exhala",
+    done: "Listo 🌱",
+    breathingDone: "Tómate un momento para notar cómo te sientes. Puedes repetir este ejercicio si quieres.",
+
+    journalTitle: "📝 Saca lo que tienes en la mente",
+    journalText: "Escribe aquí lo que tengas en mente. No tienes que hacerlo perfecto.",
+    journalPlaceholder: "Escribe lo que tienes en mente...",
+    saveEntry: "Guardar entrada",
+    journalEmpty: "Escribe algo primero, aunque sean solo unas palabras.",
+    journalSaved: "Tu entrada se ha guardado en este dispositivo. 🌱",
+
+    smallTitle: "🌱 Una cosa pequeña",
+    smallText: "No tienes que hacerlo todo. Elige solo una.",
+    water: "Toma un vaso de agua",
+    shower: "Date una ducha",
+    outside: "Sal afuera unos minutos",
+    food: "Come algo nutritivo",
+    tidy: "Ordena un área pequeña",
+    phone: "Deja el teléfono y tómate un momento tranquilo",
+
+    movementTitle: "🚶 Mueve tu cuerpo",
+    movementText: "No necesitas hacer ejercicio. Un poco de movimiento es suficiente.",
+    stretchArms: "Estira los brazos y los hombros",
+    walk: "Da una caminata corta",
+    stretchLegs: "Estira las piernas",
+    dance: "Baila una canción",
+    movingBreaths: "Respira lentamente mientras te mueves",
+
+    reachTitle: "❤️ Comunícate con alguien",
+    reachText: "No tienes que manejarlo todo a solas. Elige lo que te resulte más fácil.",
+    call: "📞 Llama a alguien en quien confíes",
+    message: "💬 Envía un mensaje",
+    don'tKnow: "🤔 No sé con quién comunicarme",
+
+    safePerson: "Piensa en alguien que te haga sentir seguro, apoyado o comprendido.",
+    simpleCall: "No tienes que explicar todo. Una llamada sencilla puede ser suficiente.",
+    callExample: "“Estoy teniendo un día difícil. ¿Podemos hablar?”",
+
+    simpleMessage: "Puedes mantener el mensaje sencillo.",
+    messageExample: "“Hola, estoy teniendo un día difícil. ¿Tienes unos minutos para hablar?”",
+    company: "“Me vendría bien tener compañía ahora mismo.”",
+
+    comfortable: "Empieza con alguien con quien te sientas cómodo.",
+    family: "Un familiar",
+    friend: "Un amigo cercano",
+    coworker: "Un compañero de trabajo de confianza",
+    neighbor: "Un vecino",
+    supporter: "Alguien que te haya apoyado antes",
+    safeEnough: "No necesitas encontrar a la persona perfecta. Solo necesitas alguien con quien te sientas lo suficientemente seguro para empezar.",
+
+    restTitle: "🛌 Date permiso para descansar",
+    restText: "Está bien descansar. No tienes que ganarte el derecho a tomar un descanso.",
+    restIntro: "Durante los próximos minutos, no tienes que lograr nada.",
+    comfortablePlace: "Busca un lugar cómodo",
+    wait: "Deja de lado cualquier cosa que pueda esperar",
+    slowBreaths: "Respira lentamente unas cuantas veces",
+    closeEyes: "Cierra los ojos si te resulta cómodo",
+    simplyBe: "Date permiso para simplemente estar",
+    nothing: "No tienes que resolver nada ahora mismo."
+  },
+
+  fr: {
+    tagline: "Tu n'as pas à tout comprendre seul(e).",
+    heading: "🌧️ Voici ton reset",
+    intro: "Tu n'as pas besoin de tout régler maintenant. Concentrons-nous sur une petite étape qui peut rendre ce moment un peu plus facile.",
+    question: "De quoi as-tu besoin maintenant ?",
+
+    breathing: "🌬️ Fais une pause pour respirer",
+    journal: "📝 Libère ce que tu as en tête",
+    smallThing: "🌱 Fais une petite chose",
+    movement: "🚶 Bouge ton corps",
+    reachOut: "❤️ Contacte quelqu'un",
+    rest: "🛌 Donne-toi la permission de te reposer",
+    back: "Retour à mon reset",
+
+    breathingTitle: "🌬️ Fais une pause pour respirer",
+    breathingText: "Ralentissons un instant. Suis le rythme ci-dessous.",
+    breathingReady: "Prêt",
+    breathingInstruction: "Quand tu es prêt(e), commence par respirer lentement.",
+    startBreathing: "Commencer à respirer",
+    breatheIn: "Inspire",
+    hold: "Retiens",
+    breatheOut: "Expire",
+    done: "Terminé 🌱",
+    breathingDone: "Prends un moment pour remarquer ce que tu ressens. Tu peux répéter cet exercice si tu le souhaites.",
+
+    journalTitle: "📝 Libère ce que tu as en tête",
+    journalText: "Écris ici ce que tu as en tête. Tu n'as pas besoin de faire les choses parfaitement.",
+    journalPlaceholder: "Écris ce que tu as en tête...",
+    saveEntry: "Enregistrer",
+    journalEmpty: "Écris quelque chose d'abord, même seulement quelques mots.",
+    journalSaved: "Ton entrée a été enregistrée sur cet appareil. 🌱",
+
+    smallTitle: "🌱 Une petite chose",
+    smallText: "Tu n'as pas besoin de tout faire. Choisis simplement une chose.",
+    water: "Bois un verre d'eau",
+    shower: "Prends une douche",
+    outside: "Sors quelques minutes",
+    food: "Mange quelque chose de nourrissant",
+    tidy: "Range un petit espace",
+    phone: "Pose ton téléphone et prends un moment tranquille",
+
+    movementTitle: "🚶 Bouge ton corps",
+    movementText: "Tu n'as pas besoin de faire une séance de sport. Un peu de mouvement suffit.",
+    stretchArms: "Étire tes bras et tes épaules",
+    walk: "Fais une petite promenade",
+    stretchLegs: "Étire tes jambes",
+    dance: "Danse sur une chanson",
+    movingBreaths: "Prends quelques respirations lentes en bougeant",
+
+    reachTitle: "❤️ Contacte quelqu'un",
+    reachText: "Tu n'as pas à tout gérer seul(e). Choisis ce qui te semble le plus facile.",
+    call: "📞 Appeler quelqu'un en qui j'ai confiance",
+    message: "💬 Envoyer un message",
+    don'tKnow: "🤔 Je ne sais pas qui contacter",
+
+    safePerson: "Pense à quelqu'un qui te fait te sentir en sécurité, soutenu(e) ou compris(e).",
+    simpleCall: "Tu n'as pas besoin de tout expliquer. Un simple appel peut suffire.",
+    callExample: "« Je passe une journée difficile. Est-ce qu'on peut parler ? »",
+
+    simpleMessage: "Tu peux garder le message simple.",
+    messageExample: "« Salut, je passe une journée difficile. Tu as quelques minutes pour parler ? »",
+    company: "« J'aurais besoin de compagnie en ce moment. »",
+
+    comfortable: "Commence avec quelqu'un avec qui tu te sens à l'aise.",
+    family: "Un membre de ta famille",
+    friend: "Un ami proche",
+    coworker: "Un collègue de confiance",
+    neighbor: "Un voisin",
+    supporter: "Quelqu'un qui t'a déjà soutenu(e)",
+    safeEnough: "Tu n'as pas besoin de trouver la personne parfaite. Tu as seulement besoin de quelqu'un avec qui tu te sens suffisamment en sécurité pour commencer.",
+
+    restTitle: "🛌 Donne-toi la permission de te reposer",
+    restText: "Tu as le droit de te reposer. Tu n'as pas besoin de mériter le droit de faire une pause.",
+    restIntro: "Pendant les prochaines minutes, tu n'as rien à accomplir.",
+    comfortablePlace: "Installe-toi dans un endroit confortable",
+    wait: "Mets de côté ce qui peut attendre",
+    slowBreaths: "Prends quelques respirations lentes",
+    closeEyes: "Ferme les yeux si tu es à l'aise",
+    simplyBe: "Donne-toi la permission d'être simplement là",
+    nothing: "Rien n'a besoin d'être résolu maintenant."
+  },
+
+  ht: {
+    tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+    heading: "🌧️ Men reset ou an",
+    intro: "Ou pa oblije ranje tout bagay kounye a. Ann konsantre sou yon ti etap ki ka fè moman sa a yon ti jan pi fasil.",
+    question: "Kisa ou bezwen kounye a?",
+
+    breathing: "🌬️ Pran yon ti poz pou respire",
+    journal: "📝 Lage sa ki nan tèt ou",
+    smallThing: "🌱 Fè yon ti bagay",
+    movement: "🚶 Bouje kò ou",
+    reachOut: "❤️ Kontakte yon moun",
+    rest: "🛌 Bay tèt ou pèmisyon pou repoze",
+    back: "Retounen nan reset mwen an",
+
+    breathingTitle: "🌬️ Pran yon ti poz pou respire",
+    breathingText: "Ann ralanti pou yon ti moman. Swiv ritm ki anba a.",
+    breathingReady: "Pare",
+    breathingInstruction: "Lè ou pare, kòmanse ak yon souf dousman.",
+    startBreathing: "Kòmanse respire",
+    breatheIn: "Respire antre",
+    hold: "Kenbe",
+    breatheOut: "Respire soti",
+    done: "Fini 🌱",
+    breathingDone: "Pran yon ti moman pou remake jan ou santi ou. Ou ka repete egzèsis sa a si ou vle.",
+
+    journalTitle: "📝 Lage sa ki nan tèt ou",
+    journalText: "Mete nenpòt bagay ki nan tèt ou isit la. Ou pa bezwen fè l pafè.",
+    journalPlaceholder: "Ekri sa ki nan tèt ou...",
+    saveEntry: "Sove sa ou ekri",
+    journalEmpty: "Ekri yon bagay anvan, menm si se sèlman kèk mo.",
+    journalSaved: "Sa ou ekri a sove sou aparèy sa a. 🌱",
+
+    smallTitle: "🌱 Yon ti bagay",
+    smallText: "Ou pa bezwen fè tout bagay. Chwazi yon sèl.",
+    water: "Bwè yon vè dlo",
+    shower: "Pran yon douch",
+    outside: "Soti deyò pou kèk minit",
+    food: "Manje yon bagay ki bon pou kò ou",
+    tidy: "Ranje yon ti zòn",
+    phone: "Mete telefòn ou atè epi pran yon ti moman trankil",
+
+    movementTitle: "🚶 Bouje kò ou",
+    movementText: "Ou pa bezwen fè egzèsis. Yon ti mouvman ase.",
+    stretchArms: "Lonje bra ak zepòl ou",
+    walk: "Fè yon ti mache",
+    stretchLegs: "Lonje janm ou",
+    dance: "Danse sou yon chante",
+    movingBreaths: "Pran kèk souf dousman pandan w ap bouje",
+
+    reachTitle: "❤️ Kontakte yon moun",
+    reachText: "Ou pa bezwen jere tout bagay poukont ou. Chwazi sa ki pi fasil pou ou.",
+    call: "📞 Rele yon moun mwen fè konfyans",
+    message: "💬 Voye yon mesaj",
+    don'tKnow: "🤔 Mwen pa konnen kiyès pou mwen kontakte",
+
+    safePerson: "Panse ak yon moun ki fè w santi w an sekirite, ki sipòte w oswa ki konprann ou.",
+    simpleCall: "Ou pa bezwen eksplike tout bagay. Yon ti apèl senp ka ase.",
+    callExample: "“Mwen pase yon jounen difisil. Èske nou ka pale?”",
+
+    simpleMessage: "Ou ka kenbe mesaj la senp.",
+    messageExample: "“Bonjou, mwen pase yon jounen difisil. Èske ou gen kèk minit pou pale?”",
+    company: "“Mwen ta renmen gen yon moun bò kote m kounye a.”",
+
+    comfortable: "Kòmanse ak yon moun ou santi w alèz bò kote li.",
+    family: "Yon moun nan fanmi ou",
+    friend: "Yon zanmi pwòch",
+    coworker: "Yon kòlèg travay ou fè konfyans",
+    neighbor: "Yon vwazen",
+    supporter: "Yon moun ki te sipòte w deja",
+    safeEnough: "Ou pa bezwen jwenn moun pafè a. Ou jis bezwen yon moun ou santi w ase an sekirite pou kòmanse avèk li.",
+
+    restTitle: "🛌 Bay tèt ou pèmisyon pou repoze",
+    restText: "Li nòmal pou repoze. Ou pa bezwen merite dwa pou pran yon poz.",
+    restIntro: "Pou kèk minit k ap vini yo, ou pa bezwen akonpli anyen.",
+    comfortablePlace: "Ale yon kote ki konfòtab",
+    wait: "Mete nenpòt bagay ki ka tann sou kote",
+    slowBreaths: "Pran kèk souf dousman",
+    closeEyes: "Fèmen je ou si sa fè w santi w alèz",
+    simplyBe: "Bay tèt ou pèmisyon pou jis rete la",
+    nothing: "Pa gen anyen ki bezwen rezoud kounye a."
+  }
+
+};
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+const language =
+  localStorage.getItem("lifeResetLanguage") || "en";
+
+const t =
+  translations[language] || translations.en;
+
+document.documentElement.lang = language;
+
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+document.getElementById("tagline").textContent = t.tagline;
+document.getElementById("resetHeading").textContent = t.heading;
+document.getElementById("resetIntro").textContent = t.intro;
+document.getElementById("resetQuestion").textContent = t.question;
+
+document.getElementById("breathingButton").textContent = t.breathing;
+document.getElementById("journalButton").textContent = t.journal;
+document.getElementById("smallThingButton").textContent = t.smallThing;
+document.getElementById("movementButton").textContent = t.movement;
+document.getElementById("reachOutButton").textContent = t.reachOut;
+document.getElementById("restButton").textContent = t.rest;
+document.getElementById("closeContentButton").textContent = t.back;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
 const breathingButton = document.getElementById("breathingButton");
 const journalButton = document.getElementById("journalButton");
 const smallThingButton = document.getElementById("smallThingButton");
@@ -88,26 +432,29 @@ function showContent(title, text, content) {
   contentTitle.textContent = title;
   contentText.textContent = text;
   contentArea.innerHTML = content;
+
 }
 
 
-/* BREATHING */
+/* =========================
+   BREATHING
+========================= */
 
 breathingButton.addEventListener("click", function () {
 
   showContent(
-    "🌬️ Take a Breathing Break",
-    "Let's slow things down for a moment. Follow the rhythm below.",
+    t.breathingTitle,
+    t.breathingText,
     `
       <div>
-        <h2 id="breathingTimer">Ready</h2>
+        <h2 id="breathingTimer">${t.breathingReady}</h2>
 
         <p id="breathingInstruction">
-          When you're ready, begin with a slow breath.
+          ${t.breathingInstruction}
         </p>
 
         <button id="startBreathingButton">
-          Start Breathing
+          ${t.startBreathing}
         </button>
       </div>
     `
@@ -121,28 +468,32 @@ breathingButton.addEventListener("click", function () {
 
 function startBreathing() {
 
-  const timer = document.getElementById("breathingTimer");
-  const instruction = document.getElementById("breathingInstruction");
-  const button = document.getElementById("startBreathingButton");
+  const timer =
+    document.getElementById("breathingTimer");
+
+  const instruction =
+    document.getElementById("breathingInstruction");
+
+  const button =
+    document.getElementById("startBreathingButton");
 
   button.style.display = "none";
 
   let step = 0;
 
   const breathingSteps = [
-    ["Breathe in", 4],
-    ["Hold", 4],
-    ["Breathe out", 6]
+    [t.breatheIn, 4],
+    [t.hold, 4],
+    [t.breatheOut, 6]
   ];
 
   function nextStep() {
 
     if (step >= breathingSteps.length) {
 
-      timer.textContent = "Done 🌱";
+      timer.textContent = t.done;
 
-      instruction.textContent =
-        "Take a moment to notice how you feel. You can repeat this exercise if you'd like.";
+      instruction.textContent = t.breathingDone;
 
       return;
     }
@@ -180,20 +531,22 @@ function startBreathing() {
 }
 
 
-/* JOURNAL */
+/* =========================
+   JOURNAL
+========================= */
 
 journalButton.addEventListener("click", function () {
 
   showContent(
-    "📝 Get It Off My Mind",
-    "Put whatever is on your mind here. You don't have to make it perfect.",
+    t.journalTitle,
+    t.journalText,
     `
       <textarea
         id="journalInput"
         rows="8"
-        placeholder="Write what's on your mind..."
+        placeholder="${t.journalPlaceholder}"
       ></textarea> <button id="saveJournalButton">
-    Save Entry
+    ${t.saveEntry}
   </button>
 
   <p id="journalMessage"></p>
@@ -212,69 +565,79 @@ const journalInput =
 const journalMessage =
   document.getElementById("journalMessage");
 
-const entry = journalInput.value.trim();
+const entry =
+  journalInput.value.trim();
 
 if (entry === "") {
 
   journalMessage.textContent =
-    "Write something first, even if it's just a few words.";
+    t.journalEmpty;
 
   return;
 }
 
-localStorage.setItem("lifeResetJournal", entry);
+localStorage.setItem(
+  "lifeResetJournal",
+  entry
+);
 
 journalMessage.textContent =
-  "Your entry has been saved on this device. 🌱";
+  t.journalSaved;
 
 });
 
 });
 
-/* ONE SMALL THING */
+/* =========================
+ONE SMALL THING
+========================= */
 
 smallThingButton.addEventListener("click", function () {
 
 showContent(
-"🌱 One Small Thing",
-"You don't have to do everything. Choose just one.",
-"<ul> <li>Drink a glass of water</li> <li>Take a shower</li> <li>Step outside for a few minutes</li> <li>Eat something nourishing</li> <li>Tidy one small area</li> <li>Put your phone down and take a quiet moment</li> </ul>"
+t.smallTitle,
+t.smallText,
+"<ul> <li>${t.water}</li> <li>${t.shower}</li> <li>${t.outside}</li> <li>${t.food}</li> <li>${t.tidy}</li> <li>${t.phone}</li> </ul>"
 );
 
 });
 
-/* MOVE MY BODY */
+/* =========================
+MOVE MY BODY
+========================= */
 
 movementButton.addEventListener("click", function () {
 
 showContent(
-"🚶 Move My Body",
-"You don't need a workout. A little movement is enough.",
-"<ul> <li>Stretch your arms and shoulders</li> <li>Take a short walk</li> <li>Stretch your legs</li> <li>Dance to one song</li> <li>Take a few slow breaths while moving</li> </ul>"
+t.movementTitle,
+t.movementText,
+"<ul> <li>${t.stretchArms}</li> <li>${t.walk}</li> <li>${t.stretchLegs}</li> <li>${t.dance}</li> <li>${t.movingBreaths}</li> </ul>"
 );
 
 });
 
-/* REACH OUT */
+/* =========================
+REACH OUT
+========================= */
 
 reachOutButton.addEventListener("click", function () {
 
 showContent(
-"❤️ Reach Out",
-"You don't have to handle everything alone. Choose what feels easiest.",
+t.reachTitle,
+t.reachText,
 `
 <div class="reach-out-options">
 
     <button id="callSomeoneButton">
-      📞 Call Someone I Trust
+      ${t.call}
     </button>
 
     <button id="messageSomeoneButton">
-      💬 Send a Message
+      ${t.message}
     </button>
 
     <button id="thinkSomeoneButton">
-      🤔 I Don't Know Who to Reach Out To
+      ${t.don'tKnow}
     </button>
 
   </div>
@@ -288,11 +651,9 @@ document.getElementById("callSomeoneButton")
 .addEventListener("click", function () {
 
   document.getElementById("reachOutHelp").innerHTML = `
-    <p><strong>Think of someone who makes you feel safe, supported, or understood.</strong></p>
-
-    <p>You don't have to explain everything. A simple call can be enough.</p>
-
-    <p>“I'm having a hard day. Can we talk?”</p>
+    <p><strong>${t.safePerson}</strong></p>
+    <p>${t.simpleCall}</p>
+    <p>${t.callExample}</p>
   `;
 
 });
@@ -301,11 +662,9 @@ document.getElementById("messageSomeoneButton")
 .addEventListener("click", function () {
 
   document.getElementById("reachOutHelp").innerHTML = `
-    <p><strong>You can keep the message simple.</strong></p>
-
-    <p>“Hey, I'm having a hard day. Do you have a few minutes to talk?”</p>
-
-    <p>“I could use some company right now.”</p>
+    <p><strong>${t.simpleMessage}</strong></p>
+    <p>${t.messageExample}</p>
+    <p>${t.company}</p>
   `;
 
 });
@@ -314,56 +673,61 @@ document.getElementById("thinkSomeoneButton")
 .addEventListener("click", function () {
 
   document.getElementById("reachOutHelp").innerHTML = `
-    <p><strong>Start with someone you feel comfortable around.</strong></p>
+    <p><strong>${t.comfortable}</strong></p>
 
     <ul>
-      <li>A family member</li>
-      <li>A close friend</li>
-      <li>A trusted coworker</li>
-      <li>A neighbor</li>
-      <li>Someone who has supported you before</li>
+      <li>${t.family}</li>
+      <li>${t.friend}</li>
+      <li>${t.coworker}</li>
+      <li>${t.neighbor}</li>
+      <li>${t.supporter}</li>
     </ul>
 
-    <p>You don't need the perfect person. You just need someone safe enough to start with.</p>
+    <p>${t.safeEnough}</p>
   `;
 
 });
 
 });
 
-/* REST */
+/* =========================
+REST
+========================= */
 
 restButton.addEventListener("click", function () {
 
 showContent(
-"🛌 Give Myself Permission to Rest",
-"Rest is allowed. You don't have to earn the right to take a break.",
+t.restTitle,
+t.restText,
 `
-<p>For the next few minutes, you don't have to accomplish anything.</p>
+<p>${t.restIntro}</p>
 
   <ul>
-    <li>Get somewhere comfortable</li>
-    <li>Put down anything that can wait</li>
-    <li>Take a few slow breaths</li>
-    <li>Close your eyes if that feels comfortable</li>
-    <li>Give yourself permission to simply be</li>
+    <li>${t.comfortablePlace}</li>
+    <li>${t.wait}</li>
+    <li>${t.slowBreaths}</li>
+    <li>${t.closeEyes}</li>
+    <li>${t.simplyBe}</li>
   </ul>
 
-  <p><strong>Nothing needs to be solved right now.</strong></p>
+  <p><strong>${t.nothing}</strong></p>
 `
 
 );
 
 });
 
-/* BACK TO MY RESET */
+/* =========================
+BACK TO MY RESET
+========================= */
 
 closeContentButton.addEventListener("click", function () {
 
 resetContent.style.display = "none";
+
 resetOptions.style.display = "block";
 
 });
-  
-  </script></body>
+
+</script></body>
 </html>
