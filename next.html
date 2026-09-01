@@ -1,39 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset</title>
   <link rel="stylesheet" href="style.css">
-</head>
+</head><body><header>
+  <div class="logo">LifeReset</div> <div class="tagline" id="tagline">
+    You don't have to figure everything out alone.
+  </div>
+</header><main><section class="welcome-card"> <h1 id="sharingHeading">
+    Thank you for sharing. 💙
+  </h1> <p id="sharingText">
+    I'm listening. You don't have to have all the answers right now.
+  </p> <h2 id="importantQuestion">
+    What feels most important to you right now?
+  </h2> <button id="overwhelmedButton">
+    I'm feeling overwhelmed
+  </button> <button id="aloneButton">
+    I feel alone
+  </button> <button id="difficultDayButton">
+    I'm having a difficult day
+  </button> <button id="listenButton">
+    I just need someone to listen
+  </button></section></main><script>
 
-<body>
+/* =========================
+   TRANSLATIONS
+========================= */
 
-  <header>
-    <div class="logo">LifeReset</div>
-    <div class="tagline">You don't have to figure everything out alone.</div>
-  </header>
+const translations = {
 
-  <main>
-    <section class="welcome-card">
-      <h1>Thank you for sharing. 💙</h1>
+  en: {
+    tagline: "You don't have to figure everything out alone.",
+    heading: "Thank you for sharing. 💙",
+    text: "I'm listening. You don't have to have all the answers right now.",
+    question: "What feels most important to you right now?",
 
-      <p>
-        I'm listening. You don't have to have all the answers right now.
-      </p>
+    overwhelmed: "I'm feeling overwhelmed",
+    alone: "I feel alone",
+    difficultDay: "I'm having a difficult day",
+    listen: "I just need someone to listen"
+  },
 
-      <h2>What feels most important to you right now?</h2>
+  es: {
+    tagline: "No tienes que resolverlo todo por tu cuenta.",
+    heading: "Gracias por compartirlo. 💙",
+    text: "Te estoy escuchando. No tienes que tener todas las respuestas ahora mismo.",
+    question: "¿Qué sientes que es más importante para ti en este momento?",
 
-      <button id="overwhelmedButton">I'm feeling overwhelmed</button>
-      <button>I feel alone</button>
-      <button>I'm having a difficult day</button>
-      <button>I just need someone to listen</button>
-    </section>
-  </main>
-<script>
-  document.getElementById("overwhelmedButton").addEventListener("click", function() {
+    overwhelmed: "Me siento abrumado/a",
+    alone: "Me siento solo/a",
+    difficultDay: "Estoy teniendo un día difícil",
+    listen: "Solo necesito que alguien me escuche"
+  },
+
+  fr: {
+    tagline: "Tu n'as pas à tout comprendre seul(e).",
+    heading: "Merci de l'avoir partagé. 💙",
+    text: "Je t'écoute. Tu n'as pas besoin d'avoir toutes les réponses maintenant.",
+    question: "Qu'est-ce qui te semble le plus important en ce moment ?",
+
+    overwhelmed: "Je me sens dépassé(e)",
+    alone: "Je me sens seul(e)",
+    difficultDay: "Je passe une journée difficile",
+    listen: "J'ai simplement besoin que quelqu'un m'écoute"
+  },
+
+  ht: {
+    tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+    heading: "Mèsi paske ou pataje sa avè m. 💙",
+    text: "Mwen ap koute ou. Ou pa bezwen gen tout repons yo kounye a.",
+    question: "Kisa ki sanble pi enpòtan pou ou kounye a?",
+
+    overwhelmed: "Mwen santi tout bagay twòp pou mwen",
+    alone: "Mwen santi mwen poukont mwen",
+    difficultDay: "Mwen ap pase yon jounen difisil",
+    listen: "Mwen jis bezwen yon moun koute mwen"
+  }
+
+};
+
+
+/* =========================
+   GET SAVED LANGUAGE
+========================= */
+
+const language =
+  localStorage.getItem("lifeResetLanguage") || "en";
+
+const t =
+  translations[language] || translations.en;
+
+document.documentElement.lang = language;
+
+
+/* =========================
+   TRANSLATE PAGE
+========================= */
+
+document.getElementById("tagline").textContent =
+  t.tagline;
+
+document.getElementById("sharingHeading").textContent =
+  t.heading;
+
+document.getElementById("sharingText").textContent =
+  t.text;
+
+document.getElementById("importantQuestion").textContent =
+  t.question;
+
+document.getElementById("overwhelmedButton").textContent =
+  t.overwhelmed;
+
+document.getElementById("aloneButton").textContent =
+  t.alone;
+
+document.getElementById("difficultDayButton").textContent =
+  t.difficultDay;
+
+document.getElementById("listenButton").textContent =
+  t.listen;
+
+
+/* =========================
+   OVERWHELMED BUTTON
+========================= */
+
+document
+  .getElementById("overwhelmedButton")
+  .addEventListener("click", function() {
+
     window.location.href = "checking.html";
+
   });
-</script>
-</body>
+
+</script></body>
 </html>
+
+      
