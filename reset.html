@@ -30,6 +30,9 @@
     <button class="choiceButton" data-choice="support">I need support</button>
     <button class="choiceButton" data-choice="plan">Help me make a plan</button>
 
+    <button id="backResetButton">
+     Back to Check-In
+</button>
   </div>
 
 </section>
@@ -44,6 +47,7 @@
         resetIntro: "You don't have to fix everything today. Let's focus on one small step that can help you feel a little better.",
         resetButton: "Show Me My Reset",
         choicesTitle: "What would help you right now?",
+        backReset: "Back to Check-In",
 
         calm: "Calm me down",
         motivation: "Give me motivation",
@@ -107,6 +111,7 @@
         resetIntro: "No tienes que solucionar todo hoy. Concentrémonos en un pequeño paso que pueda ayudarte a sentirte un poco mejor.",
         resetButton: "Muéstrame mi reinicio",
         choicesTitle: "¿Qué te ayudaría en este momento?",
+        backReset: "Volver al check-in",
 
         calm: "Ayúdame a calmarme",
         motivation: "Dame motivación",
@@ -170,6 +175,7 @@
         resetIntro: "Tu n'as pas besoin de tout régler aujourd'hui. Concentrons-nous sur une petite étape qui pourrait t'aider à te sentir un peu mieux.",
         resetButton: "Montre-moi mon reset",
         choicesTitle: "Qu'est-ce qui pourrait t'aider maintenant ?",
+        backReset: "Retour au check-in",
 
         calm: "Aide-moi à me calmer",
         motivation: "Donne-moi de la motivation",
@@ -233,6 +239,7 @@
         resetIntro: "Ou pa bezwen rezoud tout bagay jodi a. Ann konsantre sou yon ti etap ki ka ede w santi w yon ti jan pi byen.",
         resetButton: "Montre m reset mwen an",
         choicesTitle: "Kisa ki ta ede w kounye a?",
+        backReset: "Retounen nan kesyon sou jan ou santi w la",
 
         calm: "Ede m kalme m",
         motivation: "Ban m motivasyon",
@@ -336,7 +343,16 @@
     const resetMessage = document.getElementById("resetMessage");
     const nextChoices = document.getElementById("nextChoices");
 
+    const backResetButton =
+   document.getElementById("backResetButton");
 
+   backResetButton.textContent = t.backReset;
+
+   backResetButton.addEventListener("click", function() {
+
+   window.location.href = "index.html";
+
+});
     resetButton.addEventListener("click", function() {
 
       const feeling = localStorage.getItem("lifeResetFeeling");
