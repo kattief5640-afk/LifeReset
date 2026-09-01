@@ -4,330 +4,593 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Happy Reset</title>
   <link rel="stylesheet" href="style.css">
-</head><body> <header>
-    <div class="logo">LifeReset</div>
-    <div class="tagline">You don't have to figure everything out alone.</div>
-  </header> <main><section class="welcome-card">
-
-  <h1>😊 Here's Your Reset</h1>
-
-  <p>
+</head><body><header>
+  <div class="logo">LifeReset</div>
+  <div class="tagline" id="tagline">
+    You don't have to figure everything out alone.
+  </div>
+</header><main><section class="welcome-card"> <h1 id="happyResetHeading">😊 Here's Your Reset</h1> <p id="happyIntro">
     You're in a good place right now. Let's enjoy this moment
     and carry some of that positive feeling forward.
-  </p>
+  </p> <h2 id="happyQuestion">What would feel good right now?</h2> <div class="reset-options"><button id="celebrateButton">
+  🎉 Celebrate This Moment
+</button>
 
-  <h2>What would feel good right now?</h2>
+<button id="saveFeelingButton">
+  📝 Save This Feeling
+</button>
 
-  <div class="reset-options">
+<button id="buildOnItButton">
+  💪 Build On It
+</button>
 
-    <button id="celebrateButton">
-      🎉 Celebrate This Moment
-    </button>
+<button id="connectButton">
+  ❤️ Connect With Someone
+</button>
 
-    <button id="saveFeelingButton">
-      📝 Save This Feeling
-    </button>
+<button id="enjoyButton">
+  🌿 Just Enjoy It
+</button>
 
-    <button id="buildOnItButton">
-      💪 Build On It
-    </button>
+  </div> <div id="happyContent" style="display: none;"><h2 id="happyTitle"></h2>
 
-    <button id="connectButton">
-      ❤️ Connect With Someone
-    </button>
+<p id="happyText"></p>
 
-    <button id="enjoyButton">
-      🌿 Just Enjoy It
-    </button>
+<div id="happyArea"></div>
 
-  </div>
+<button id="happyBackButton">
+  Back to My Reset
+</button>
 
-  <div id="happyContent" style="display: none;">
+  </div></section></main><script>
 
-    <h2 id="happyTitle"></h2>
+/* =========================
+   TRANSLATIONS
+========================= */
 
-    <p id="happyText"></p>
+const translations = {
 
-    <div id="happyArea"></div>
+  en: {
 
-    <button id="happyBackButton">
-      Back to My Reset
-    </button>
+    tagline: "You don't have to figure everything out alone.",
 
-  </div>
+    heading: "😊 Here's Your Reset",
 
-</section>
+    intro: "You're in a good place right now. Let's enjoy this moment and carry some of that positive feeling forward.",
 
-  </main> <script>
+    question: "What would feel good right now?",
 
-    const celebrateButton =
-      document.getElementById("celebrateButton");
+    celebrate: "🎉 Celebrate This Moment",
+    saveFeeling: "📝 Save This Feeling",
+    build: "💪 Build On It",
+    connect: "❤️ Connect With Someone",
+    enjoy: "🌿 Just Enjoy It",
 
-    const saveFeelingButton =
-      document.getElementById("saveFeelingButton");
+    back: "Back to My Reset",
 
-    const buildOnItButton =
-      document.getElementById("buildOnItButton");
+    celebrateTitle: "🎉 Celebrate This Moment",
+    celebrateText: "You don't need a reason to appreciate a good moment.",
+    celebrateP1: "Take a moment and notice what is going well.",
+    celebrateP2: "What made today feel good?",
+    celebratePlaceholder: "I'm feeling good because...",
+    saveReflection: "Save My Reflection",
+    reflectionEmpty: "Write a few words about what made this moment feel good.",
+    reflectionSaved: "Your reflection has been saved. 🌱",
 
-    const connectButton =
-      document.getElementById("connectButton");
+    saveTitle: "📝 Save This Feeling",
+    saveText: "Keep a reminder of how you're feeling right now.",
+    savePlaceholder: "What do you want to remember about today?",
+    saveButton: "Save This Feeling",
+    saveEmpty: "Write something you'd like to remember.",
+    saved: "Saved. You can come back to this reminder later. 💛",
 
-    const enjoyButton =
-      document.getElementById("enjoyButton");
+    feelingWritten: "You wrote:",
+    feelingFallback: "You can write down what feels good right now.",
 
-    const resetOptions =
-      document.querySelector(".reset-options");
+    buildTitle: "💪 Build On It",
+    buildText: "Choose one small thing that can keep the good energy going.",
+    walk: "Take a short walk",
+    creative: "Do something creative",
+    music: "Listen to music you love",
+    goal: "Work toward one small goal",
+    kindness: "Do something kind for yourself",
+    buildEnd: "You don't have to make the moment bigger. Just let it continue.",
 
-    const happyContent =
-      document.getElementById("happyContent");
+    connectTitle: "❤️ Connect With Someone",
+    connectText: "Good moments can feel even better when they're shared.",
+    connectP1: "Think of someone you'd enjoy connecting with today.",
+    connectP2: "You could send:",
+    connectMessage: "\"I'm having a really good day. I wanted to share that with you.\"",
+    connectEnd: "A simple message can brighten someone else's day too.",
 
-    const happyTitle =
-      document.getElementById("happyTitle");
+    enjoyTitle: "🌿 Just Enjoy It",
+    enjoyText: "You don't have to accomplish anything right now.",
+    enjoyP1: "Take a slow breath and notice this moment.",
+    enjoyP2: "Notice something you can see, something you can hear, and something that makes you feel grateful.",
+    enjoyEnd: "It's okay to simply enjoy feeling good."
 
-    const happyText =
-      document.getElementById("happyText");
+  },
 
-    const happyArea =
-      document.getElementById("happyArea");
+  es: {
 
-    const happyBackButton =
-      document.getElementById("happyBackButton");
+    tagline: "No tienes que resolverlo todo por tu cuenta.",
+
+    heading: "😊 Aquí está tu reinicio",
+
+    intro: "Estás en un buen momento ahora mismo. Disfrutemos este momento y llevemos parte de esa energía positiva contigo.",
+
+    question: "¿Qué te haría sentir bien ahora?",
+
+    celebrate: "🎉 Celebra este momento",
+    saveFeeling: "📝 Guarda este sentimiento",
+    build: "💪 Sigue avanzando",
+    connect: "❤️ Conecta con alguien",
+    enjoy: "🌿 Simplemente disfrútalo",
+
+    back: "Volver a mi reinicio",
+
+    celebrateTitle: "🎉 Celebra este momento",
+    celebrateText: "No necesitas una razón para apreciar un buen momento.",
+    celebrateP1: "Tómate un momento para notar lo que está saliendo bien.",
+    celebrateP2: "¿Qué hizo que hoy se sintiera bien?",
+    celebratePlaceholder: "Me siento bien porque...",
+    saveReflection: "Guardar mi reflexión",
+    reflectionEmpty: "Escribe unas palabras sobre lo que hizo que este momento se sintiera bien.",
+    reflectionSaved: "Tu reflexión ha sido guardada. 🌱",
+
+    saveTitle: "📝 Guarda este sentimiento",
+    saveText: "Guarda un recordatorio de cómo te sientes ahora.",
+    savePlaceholder: "¿Qué quieres recordar de hoy?",
+    saveButton: "Guardar este sentimiento",
+    saveEmpty: "Escribe algo que quieras recordar.",
+    saved: "Guardado. Puedes volver a este recordatorio más tarde. 💛",
+
+    feelingWritten: "Escribiste:",
+    feelingFallback: "Puedes escribir lo que te hace sentir bien ahora.",
+
+    buildTitle: "💪 Sigue avanzando",
+    buildText: "Elige una pequeña cosa que pueda mantener esa buena energía.",
+    walk: "Da una caminata corta",
+    creative: "Haz algo creativo",
+    music: "Escucha música que te guste",
+    goal: "Trabaja en una pequeña meta",
+    kindness: "Haz algo amable por ti",
+    buildEnd: "No tienes que hacer que el momento sea más grande. Simplemente deja que continúe.",
+
+    connectTitle: "❤️ Conecta con alguien",
+    connectText: "Los buenos momentos pueden sentirse aún mejor cuando se comparten.",
+    connectP1: "Piensa en alguien con quien te gustaría conectar hoy.",
+    connectP2: "Podrías enviar:",
+    connectMessage: "\"Estoy teniendo un día muy bueno. Quería compartirlo contigo.\"",
+    connectEnd: "Un mensaje sencillo también puede alegrarle el día a otra persona.",
+
+    enjoyTitle: "🌿 Simplemente disfrútalo",
+    enjoyText: "No tienes que lograr nada ahora mismo.",
+    enjoyP1: "Respira lentamente y disfruta este momento.",
+    enjoyP2: "Observa algo que puedas ver, algo que puedas escuchar y algo que te haga sentir agradecido.",
+    enjoyEnd: "Está bien simplemente disfrutar de sentirte bien."
+
+  },
+
+  fr: {
+
+    tagline: "Tu n'as pas à tout comprendre seul(e).",
+
+    heading: "😊 Voici ton reset",
+
+    intro: "Tu vas bien en ce moment. Profitons de cet instant et gardons une partie de cette énergie positive.",
+
+    question: "Qu'est-ce qui te ferait du bien maintenant ?",
+
+    celebrate: "🎉 Célébrer ce moment",
+    saveFeeling: "📝 Enregistrer ce sentiment",
+    build: "💪 Continuer sur cette lancée",
+    connect: "❤️ Se connecter avec quelqu'un",
+    enjoy: "🌿 Profiter simplement",
+
+    back: "Retour à mon reset",
+
+    celebrateTitle: "🎉 Célébrer ce moment",
+    celebrateText: "Tu n'as pas besoin d'une raison pour apprécier un bon moment.",
+    celebrateP1: "Prends un moment pour remarquer ce qui va bien.",
+    celebrateP2: "Qu'est-ce qui a rendu ta journée agréable ?",
+    celebratePlaceholder: "Je me sens bien parce que...",
+    saveReflection: "Enregistrer ma réflexion",
+    reflectionEmpty: "Écris quelques mots sur ce qui a rendu ce moment agréable.",
+    reflectionSaved: "Ta réflexion a été enregistrée. 🌱",
+
+    saveTitle: "📝 Enregistrer ce sentiment",
+    saveText: "Garde un rappel de ce que tu ressens maintenant.",
+    savePlaceholder: "Que veux-tu retenir d'aujourd'hui ?",
+    saveButton: "Enregistrer ce sentiment",
+    saveEmpty: "Écris quelque chose dont tu aimerais te souvenir.",
+    saved: "Enregistré. Tu pourras revenir à ce rappel plus tard. 💛",
+
+    feelingWritten: "Tu as écrit :",
+    feelingFallback: "Tu peux écrire ce qui te fait du bien maintenant.",
+
+    buildTitle: "💪 Continuer sur cette lancée",
+    buildText: "Choisis une petite chose qui peut garder cette bonne énergie.",
+    walk: "Fais une petite promenade",
+    creative: "Fais quelque chose de créatif",
+    music: "Écoute une musique que tu aimes",
+    goal: "Avance vers un petit objectif",
+    kindness: "Fais quelque chose de gentil pour toi",
+    buildEnd: "Tu n'as pas besoin de rendre ce moment plus grand. Laisse-le simplement continuer.",
+
+    connectTitle: "❤️ Se connecter avec quelqu'un",
+    connectText: "Les bons moments peuvent être encore meilleurs lorsqu'ils sont partagés.",
+    connectP1: "Pense à quelqu'un avec qui tu aimerais échanger aujourd'hui.",
+    connectP2: "Tu pourrais envoyer :",
+    connectMessage: "\"Je passe une très bonne journée. Je voulais partager ça avec toi.\"",
+    connectEnd: "Un simple message peut aussi égayer la journée de quelqu'un d'autre.",
+
+    enjoyTitle: "🌿 Profiter simplement",
+    enjoyText: "Tu n'as rien à accomplir pour le moment.",
+    enjoyP1: "Respire lentement et remarque ce moment.",
+    enjoyP2: "Remarque quelque chose que tu peux voir, quelque chose que tu peux entendre et quelque chose qui te rend reconnaissant(e).",
+    enjoyEnd: "Tu as le droit de simplement profiter du fait de te sentir bien."
+
+  },
+
+  ht: {
+
+    tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+
+    heading: "😊 Men reset ou an",
+
+    intro: "Ou nan yon bon moman kounye a. Ann jwi moman sa a epi ann pote kèk nan bon enèji sa a avèk nou.",
+
+    question: "Kisa ki ta fè w santi w byen kounye a?",
+
+    celebrate: "🎉 Selebre moman sa a",
+    saveFeeling: "📝 Sove santiman sa a",
+    build: "💪 Kontinye sou bon enèji a",
+    connect: "❤️ Konekte ak yon moun",
+    enjoy: "🌿 Jis jwi moman an",
+
+    back: "Retounen nan reset mwen an",
+
+    celebrateTitle: "🎉 Selebre moman sa a",
+    celebrateText: "Ou pa bezwen yon rezon pou apresye yon bon moman.",
+    celebrateP1: "Pran yon ti moman pou remake sa k ap mache byen.",
+    celebrateP2: "Kisa ki fè jodi a santi l byen?",
+    celebratePlaceholder: "Mwen santi m byen paske...",
+    saveReflection: "Sove refleksyon mwen",
+    reflectionEmpty: "Ekri kèk mo sou sa ki fè moman sa a santi l byen.",
+    reflectionSaved: "Refleksyon ou an sove. 🌱",
+
+    saveTitle: "📝 Sove santiman sa a",
+    saveText: "Kenbe yon rapèl sou jan ou santi w kounye a.",
+    savePlaceholder: "Kisa ou vle sonje sou jodi a?",
+    saveButton: "Sove santiman sa a",
+    saveEmpty: "Ekri yon bagay ou ta renmen sonje.",
+    saved: "Li sove. Ou ka retounen nan rapèl sa a pita. 💛",
+
+    feelingWritten: "Ou te ekri:",
+    feelingFallback: "Ou ka ekri sa ki fè w santi w byen kounye a.",
+
+    buildTitle: "💪 Kontinye sou bon enèji a",
+    buildText: "Chwazi yon ti bagay ki ka ede bon enèji a kontinye.",
+    walk: "Fè yon ti mache",
+    creative: "Fè yon bagay kreyatif",
+    music: "Koute mizik ou renmen",
+    goal: "Travay sou yon ti objektif",
+    kindness: "Fè yon bagay ki janti pou tèt ou",
+    buildEnd: "Ou pa bezwen fè moman an pi gwo. Jis kite l kontinye.",
+
+    connectTitle: "❤️ Konekte ak yon moun",
+    connectText: "Bon moman yo ka santi yo pi byen toujou lè ou pataje yo.",
+    connectP1: "Panse ak yon moun ou ta renmen pale oswa konekte avèk li jodi a.",
+    connectP2: "Ou ta ka voye:",
+    connectMessage: "\"Mwen pase yon bèl jounen. Mwen te vle pataje sa avèk ou.\"",
+    connectEnd: "Yon ti mesaj senp kapab fè yon lòt moun santi yo byen tou.",
+
+    enjoyTitle: "🌿 Jis jwi moman an",
+    enjoyText: "Ou pa bezwen fè anyen kounye a.",
+    enjoyP1: "Pran yon souf dousman epi remake moman sa a.",
+    enjoyP2: "Remake yon bagay ou ka wè, yon bagay ou ka tande, ak yon bagay ki fè w santi w rekonesan.",
+    enjoyEnd: "Li nòmal pou w jis jwi lefèt ke ou santi w byen."
+
+  }
+
+};
 
 
-    function showHappyContent(title, text, content) {
+/* =========================
+   LANGUAGE
+========================= */
 
-      resetOptions.style.display = "none";
+const language =
+  localStorage.getItem("lifeResetLanguage") || "en";
 
-      happyContent.style.display = "block";
+const t = translations[language] || translations.en;
 
-      happyTitle.textContent = title;
-
-      happyText.textContent = text;
-
-      happyArea.innerHTML = content;
-
-    }
+document.documentElement.lang = language;
 
 
-    /* CELEBRATE */
+/* =========================
+   MAIN PAGE TEXT
+========================= */
 
-    celebrateButton.addEventListener("click", function () {
+document.getElementById("tagline").textContent = t.tagline;
+document.getElementById("happyResetHeading").textContent = t.heading;
+document.getElementById("happyIntro").textContent = t.intro;
+document.getElementById("happyQuestion").textContent = t.question;
 
-      showHappyContent(
-        "🎉 Celebrate This Moment",
-        "You don't need a reason to appreciate a good moment.",
-        `
-          <p>
-            Take a moment and notice what is going well.
-          </p>
+document.getElementById("celebrateButton").textContent = t.celebrate;
+document.getElementById("saveFeelingButton").textContent = t.saveFeeling;
+document.getElementById("buildOnItButton").textContent = t.build;
+document.getElementById("connectButton").textContent = t.connect;
+document.getElementById("enjoyButton").textContent = t.enjoy;
 
-          <p>
-            What made today feel good?
-          </p>
+document.getElementById("happyBackButton").textContent = t.back;
 
-          <textarea
-            id="celebrationInput"
-            rows="6"
-            placeholder="I'm feeling good because..."
-          ></textarea> <button id="saveCelebrationButton">
-        Save My Reflection
-      </button>
 
-      <p id="celebrationMessage"></p>
+/* =========================
+   ELEMENTS
+========================= */
+
+const celebrateButton =
+  document.getElementById("celebrateButton");
+
+const saveFeelingButton =
+  document.getElementById("saveFeelingButton");
+
+const buildOnItButton =
+  document.getElementById("buildOnItButton");
+
+const connectButton =
+  document.getElementById("connectButton");
+
+const enjoyButton =
+  document.getElementById("enjoyButton");
+
+const resetOptions =
+  document.querySelector(".reset-options");
+
+const happyContent =
+  document.getElementById("happyContent");
+
+const happyTitle =
+  document.getElementById("happyTitle");
+
+const happyText =
+  document.getElementById("happyText");
+
+const happyArea =
+  document.getElementById("happyArea");
+
+const happyBackButton =
+  document.getElementById("happyBackButton");
+
+
+function showHappyContent(title, text, content) {
+
+  resetOptions.style.display = "none";
+
+  happyContent.style.display = "block";
+
+  happyTitle.textContent = title;
+
+  happyText.textContent = text;
+
+  happyArea.innerHTML = content;
+
+}
+
+
+/* =========================
+   CELEBRATE
+========================= */
+
+celebrateButton.addEventListener("click", function () {
+
+  showHappyContent(
+    t.celebrateTitle,
+    t.celebrateText,
     `
+      <p>${t.celebrateP1}</p>
+
+      <p>${t.celebrateP2}</p>
+
+      <textarea
+        id="celebrationInput"
+        rows="6"
+        placeholder="${t.celebratePlaceholder}"
+      ></textarea> <button id="saveCelebrationButton">
+    ${t.saveReflection}
+  </button>
+
+  <p id="celebrationMessage"></p>
+`
+
+);
+
+document.getElementById("saveCelebrationButton")
+.addEventListener("click", function () {
+
+  const input =
+    document.getElementById("celebrationInput");
+
+  const message =
+    document.getElementById("celebrationMessage");
+
+  const reflection =
+    input.value.trim();
+
+  if (reflection === "") {
+
+    message.textContent =
+      t.reflectionEmpty;
+
+    return;
+  }
+
+  localStorage.setItem(
+    "lifeResetCelebration",
+    reflection
   );
 
-
-  document.getElementById("saveCelebrationButton")
-    .addEventListener("click", function () {
-
-      const input =
-        document.getElementById("celebrationInput");
-
-      const message =
-        document.getElementById("celebrationMessage");
-
-      const reflection =
-        input.value.trim();
-
-      if (reflection === "") {
-
-        message.textContent =
-          "Write a few words about what made this moment feel good.";
-
-        return;
-      }
-
-      localStorage.setItem(
-        "lifeResetCelebration",
-        reflection
-      );
-
-      message.textContent =
-        "Your reflection has been saved. 🌱";
-
-    });
+  message.textContent =
+    t.reflectionSaved;
 
 });
 
+});
 
-/* SAVE THIS FEELING */
+/* =========================
+SAVE THIS FEELING
+========================= */
 
 saveFeelingButton.addEventListener("click", function () {
 
-  const feeling =
-    localStorage.getItem("lifeResetFeeling");
+const feeling =
+localStorage.getItem("lifeResetFeeling");
 
-  showHappyContent(
-    "📝 Save This Feeling",
-    "Keep a reminder of how you're feeling right now.",
-    `
-      <p>
-        ${feeling ? "You wrote: <strong>" + feeling + "</strong>" : "You can write down what feels good right now."}
-      </p>
+showHappyContent(
+t.saveTitle,
+t.saveText,
+`
+<p>
+${
+feeling
+? t.feelingWritten + " <strong>" + feeling + "</strong>"
+: t.feelingFallback
+}
+</p>
 
-      <textarea
-        id="savedFeelingInput"
-        rows="6"
-        placeholder="What do you want to remember about today?"
-      ></textarea>
+  <textarea
+    id="savedFeelingInput"
+    rows="6"
+    placeholder="${t.savePlaceholder}"
+  ></textarea>
 
-      <button id="saveFeelingNoteButton">
-        Save This Feeling
-      </button>
+  <button id="saveFeelingNoteButton">
+    ${t.saveButton}
+  </button>
 
-      <p id="savedFeelingMessage"></p>
-    `
+  <p id="savedFeelingMessage"></p>
+`
+
+);
+
+document.getElementById("saveFeelingNoteButton")
+.addEventListener("click", function () {
+
+  const input =
+    document.getElementById("savedFeelingInput");
+
+  const message =
+    document.getElementById("savedFeelingMessage");
+
+  const note =
+    input.value.trim();
+
+  if (note === "") {
+
+    message.textContent =
+      t.saveEmpty;
+
+    return;
+  }
+
+  localStorage.setItem(
+    "lifeResetHappyNote",
+    note
   );
 
-
-  document.getElementById("saveFeelingNoteButton")
-    .addEventListener("click", function () {
-
-      const input =
-        document.getElementById("savedFeelingInput");
-
-      const message =
-        document.getElementById("savedFeelingMessage");
-
-      const note =
-        input.value.trim();
-
-      if (note === "") {
-
-        message.textContent =
-          "Write something you'd like to remember.";
-
-        return;
-      }
-
-      localStorage.setItem(
-        "lifeResetHappyNote",
-        note
-      );
-
-      message.textContent =
-        "Saved. You can come back to this reminder later. 💛";
-
-    });
+  message.textContent =
+    t.saved;
 
 });
 
+});
 
-/* BUILD ON IT */
+/* =========================
+BUILD ON IT
+========================= */
 
 buildOnItButton.addEventListener("click", function () {
 
-  showHappyContent(
-    "💪 Build On It",
-    "Choose one small thing that can keep the good energy going.",
-    `
-      <ul>
-        <li>Take a short walk</li>
-        <li>Do something creative</li>
-        <li>Listen to music you love</li>
-        <li>Work toward one small goal</li>
-        <li>Do something kind for yourself</li>
-      </ul>
+showHappyContent(
+t.buildTitle,
+t.buildText,
+`
+<ul>
+<li>${t.walk}</li>
+<li>${t.creative}</li>
+<li>${t.music}</li>
+<li>${t.goal}</li>
+<li>${t.kindness}</li>
+</ul>
 
-      <p>
-        You don't have to make the moment bigger. Just let it continue.
-      </p>
-    `
-  );
+  <p>${t.buildEnd}</p>
+`
+
+);
 
 });
 
-
-/* CONNECT */
+/* =========================
+CONNECT
+========================= */
 
 connectButton.addEventListener("click", function () {
 
-  showHappyContent(
-    "❤️ Connect With Someone",
-    "Good moments can feel even better when they're shared.",
-    `
-      <p>
-        Think of someone you'd enjoy connecting with today.
-      </p>
+showHappyContent(
+t.connectTitle,
+t.connectText,
+`
+<p>${t.connectP1}</p>
 
-      <p>
-        You could send:
-      </p>
+  <p>${t.connectP2}</p>
 
-      <p>
-        <strong>
-          "I'm having a really good day. I wanted to share that with you."
-        </strong>
-      </p>
+  <p>
+    <strong>${t.connectMessage}</strong>
+  </p>
 
-      <p>
-        A simple message can brighten someone else's day too.
-      </p>
-    `
-  );
+  <p>${t.connectEnd}</p>
+`
+
+);
 
 });
 
-
-/* JUST ENJOY IT */
+/* =========================
+JUST ENJOY IT
+========================= */
 
 enjoyButton.addEventListener("click", function () {
 
-  showHappyContent(
-    "🌿 Just Enjoy It",
-    "You don't have to accomplish anything right now.",
-    `
-      <p>
-        Take a slow breath and notice this moment.
-      </p>
+showHappyContent(
+t.enjoyTitle,
+t.enjoyText,
+`
+<p>${t.enjoyP1}</p>
 
-      <p>
-        Notice something you can see, something you can hear,
-        and something that makes you feel grateful.
-      </p>
+  <p>${t.enjoyP2}</p>
 
-      <p>
-        <strong>
-          It's okay to simply enjoy feeling good.
-        </strong>
-      </p>
-    `
-  );
+  <p>
+    <strong>${t.enjoyEnd}</strong>
+  </p>
+`
+
+);
 
 });
 
-
-/* BACK */
+/* =========================
+BACK TO RESET
+========================= */
 
 happyBackButton.addEventListener("click", function () {
 
-  happyContent.style.display = "none";
+happyContent.style.display = "none";
 
-  resetOptions.style.display = "block";
+resetOptions.style.display = "block";
 
 });
 
-  </script></body>
+</script></body>
 </html>
-
