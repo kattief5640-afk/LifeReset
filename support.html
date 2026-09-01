@@ -1,147 +1,273 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Support</title>
   <link rel="stylesheet" href="style.css">
-</head>
+</head><body><header>
+  <div class="logo">LifeReset</div> <div class="tagline" id="tagline">
+    You don't have to figure everything out alone.
+  </div>
+</header><main><section class="welcome-card"> <h1 id="supportHeading">
+    I'm glad you told me.
+  </h1> <p id="supportIntro">
+    You don't have to figure everything out right now.
+    Let's slow down and focus on what you need in this moment.
+  </p> <h3 id="supportQuestion">
+    What would feel most helpful?
+  </h3> <button class="supportButton" id="pauseButton">
+    I need a moment
+  </button> <button class="supportButton" id="talkButton">
+    I want to talk to someone
+  </button> <button class="supportButton" id="adultButton">
+    I need a trusted adult
+  </button> <button class="supportButton" id="unsafeButton">
+    I don't feel safe
+  </button> <div id="supportMessage"></div></section></main><script>
 
-<body>
+/* =========================
+   TRANSLATIONS
+========================= */
 
-  <header>
-    <div class="logo">LifeReset</div>
-    <div class="tagline">
-      You don't have to figure everything out alone.
-    </div>
-  </header>
+const translations = {
 
-  <main>
+  en: {
+    tagline: "You don't have to figure everything out alone.",
+    heading: "I'm glad you told me.",
+    intro: "You don't have to figure everything out right now. Let's slow down and focus on what you need in this moment.",
+    question: "What would feel most helpful?",
 
-    <section class="welcome-card">
+    pause: "I need a moment",
+    talk: "I want to talk to someone",
+    adult: "I need a trusted adult",
+    unsafe: "I don't feel safe",
 
-      <h1>I'm glad you told me.</h1>
+    pauseTitle: "It's okay to pause. 🌱",
+    pauseText1: "Put everything else down for a moment.",
+    pauseText2: "Take one slow breath and notice where you are. You don't have to solve the whole situation right now.",
+
+    talkTitle: "You don't have to carry it alone.",
+    talkText1: "Think of one person you feel comfortable talking to.",
+    talkText2: "You can keep the message simple:",
+    talkExample: "“I'm having a hard time right now. Can you talk with me?”",
+
+    adultTitle: "Find someone safe to tell.",
+    adultText1: "If you're a teenager or young person, think about a trusted adult you feel safe with.",
+    adultText2: "This could be a parent or guardian, teacher, counselor, coach, relative, or another trusted adult.",
+    adultText3: "You don't have to explain everything at once. You can simply say:",
+    adultExample: "“I don't feel okay and I need someone to stay with me.”"
+  },
+
+  es: {
+    tagline: "No tienes que resolverlo todo por tu cuenta.",
+    heading: "Me alegra que me lo hayas contado.",
+    intro: "No tienes que resolverlo todo ahora mismo. Vamos a bajar el ritmo y concentrarnos en lo que necesitas en este momento.",
+    question: "¿Qué te ayudaría más?",
+
+    pause: "Necesito un momento",
+    talk: "Quiero hablar con alguien",
+    adult: "Necesito un adulto de confianza",
+    unsafe: "No me siento seguro/a",
+
+    pauseTitle: "Está bien hacer una pausa. 🌱",
+    pauseText1: "Deja todo lo demás por un momento.",
+    pauseText2: "Respira lentamente y presta atención a dónde estás. No tienes que resolver toda la situación ahora mismo.",
+
+    talkTitle: "No tienes que llevarlo todo a solas.",
+    talkText1: "Piensa en una persona con quien te sientas cómodo/a hablando.",
+    talkText2: "Puedes mantener el mensaje sencillo:",
+    talkExample: "“Estoy pasando por un momento difícil. ¿Puedes hablar conmigo?”",
+
+    adultTitle: "Busca a alguien seguro a quien contárselo.",
+    adultText1: "Si eres adolescente o joven, piensa en un adulto de confianza con quien te sientas seguro/a.",
+    adultText2: "Puede ser un padre, madre o tutor, maestro/a, consejero/a, entrenador/a, familiar u otro adulto de confianza.",
+    adultText3: "No tienes que explicarlo todo de una vez. Puedes simplemente decir:",
+    adultExample: "“No me siento bien y necesito que alguien se quede conmigo.”"
+  },
+
+  fr: {
+    tagline: "Tu n'as pas à tout comprendre seul(e).",
+    heading: "Je suis content(e) que tu me l'aies dit.",
+    intro: "Tu n'as pas besoin de tout comprendre maintenant. Ralentissons et concentrons-nous sur ce dont tu as besoin en ce moment.",
+    question: "Qu'est-ce qui t'aiderait le plus ?",
+
+    pause: "J'ai besoin d'un moment",
+    talk: "Je veux parler à quelqu'un",
+    adult: "J'ai besoin d'un adulte de confiance",
+    unsafe: "Je ne me sens pas en sécurité",
+
+    pauseTitle: "Tu as le droit de faire une pause. 🌱",
+    pauseText1: "Mets tout le reste de côté pendant un moment.",
+    pauseText2: "Prends une respiration lente et remarque où tu te trouves. Tu n'as pas besoin de résoudre toute la situation maintenant.",
+
+    talkTitle: "Tu n'as pas à porter tout cela seul(e).",
+    talkText1: "Pense à une personne avec qui tu te sens à l'aise de parler.",
+    talkText2: "Tu peux garder le message simple :",
+    talkExample: "« Je traverse un moment difficile. Est-ce que tu peux parler avec moi ? »",
+
+    adultTitle: "Trouve quelqu'un à qui tu peux en parler en sécurité.",
+    adultText1: "Si tu es adolescent(e) ou jeune, pense à un adulte de confiance avec qui tu te sens en sécurité.",
+    adultText2: "Cela peut être un parent ou tuteur, un enseignant, un conseiller, un entraîneur, un membre de ta famille ou un autre adulte de confiance.",
+    adultText3: "Tu n'as pas besoin de tout expliquer d'un coup. Tu peux simplement dire :",
+    adultExample: "« Je ne vais pas bien et j'ai besoin que quelqu'un reste avec moi. »"
+  },
+
+  ht: {
+    tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+    heading: "Mwen kontan ou te di m sa.",
+    intro: "Ou pa oblije konprann oswa rezoud tout bagay kounye a. Ann ralanti epi konsantre sou sa ou bezwen nan moman sa a.",
+    question: "Kisa ki ta ede w pi plis?",
+
+    pause: "Mwen bezwen yon ti moman",
+    talk: "Mwen vle pale ak yon moun",
+    adult: "Mwen bezwen yon granmoun mwen fè konfyans",
+    unsafe: "Mwen pa santi mwen an sekirite",
+
+    pauseTitle: "Li nòmal pou pran yon poz. 🌱",
+    pauseText1: "Mete tout lòt bagay sou kote pou yon ti moman.",
+    pauseText2: "Pran yon souf dousman epi remake kote ou ye a. Ou pa bezwen rezoud tout sitiyasyon an kounye a.",
+
+    talkTitle: "Ou pa bezwen pote tout bagay sa yo poukont ou.",
+    talkText1: "Panse ak yon moun ou santi ou alèz pou pale avèk li.",
+    talkText2: "Ou ka kenbe mesaj la senp:",
+    talkExample: "“Mwen ap pase yon moman difisil kounye a. Èske ou ka pale avè m?”",
+
+    adultTitle: "Jwenn yon moun ki an sekirite pou pale avèk li.",
+    adultText1: "Si ou se yon adolesan oswa yon jèn moun, panse ak yon granmoun ou fè konfyans epi ou santi ou an sekirite avèk li.",
+    adultText2: "Sa ka yon paran oswa responsab, yon pwofesè, konseye, antrenè, fanmi, oswa yon lòt granmoun ou fè konfyans.",
+    adultText3: "Ou pa bezwen eksplike tout bagay yon sèl kou. Ou ka jis di:",
+    adultExample: "“Mwen pa santi mwen byen e mwen bezwen yon moun rete avè m.”"
+  }
+
+};
+
+
+/* =========================
+   GET SAVED LANGUAGE
+========================= */
+
+const language =
+  localStorage.getItem("lifeResetLanguage") || "en";
+
+const t =
+  translations[language] || translations.en;
+
+document.documentElement.lang = language;
+
+
+/* =========================
+   TRANSLATE PAGE
+========================= */
+
+document.getElementById("tagline").textContent =
+  t.tagline;
+
+document.getElementById("supportHeading").textContent =
+  t.heading;
+
+document.getElementById("supportIntro").textContent =
+  t.intro;
+
+document.getElementById("supportQuestion").textContent =
+  t.question;
+
+document.getElementById("pauseButton").textContent =
+  t.pause;
+
+document.getElementById("talkButton").textContent =
+  t.talk;
+
+document.getElementById("adultButton").textContent =
+  t.adult;
+
+document.getElementById("unsafeButton").textContent =
+  t.unsafe;
+
+
+/* =========================
+   SUPPORT MESSAGE
+========================= */
+
+const supportMessage =
+  document.getElementById("supportMessage");
+
+
+/* PAUSE */
+
+document
+  .getElementById("pauseButton")
+  .addEventListener("click", function () {
+
+    supportMessage.innerHTML = `
+
+      <h3>${t.pauseTitle}</h3>
+
+      <p>${t.pauseText1}</p>
+
+      <p>${t.pauseText2}</p>
+
+    `;
+
+  });
+
+
+/* TALK */
+
+document
+  .getElementById("talkButton")
+  .addEventListener("click", function () {
+
+    supportMessage.innerHTML = `
+
+      <h3>${t.talkTitle}</h3>
+
+      <p>${t.talkText1}</p>
+
+      <p>${t.talkText2}</p>
 
       <p>
-        You don't have to figure everything out right now.
-        Let's slow down and focus on what you need in this moment.
+        <strong>${t.talkExample}</strong>
       </p>
 
-      <h3>What would feel most helpful?</h3>
+    `;
 
-      <button class="supportButton" id="pauseButton">
-        I need a moment
-      </button>
-
-      <button class="supportButton" id="talkButton">
-        I want to talk to someone
-      </button>
-
-      <button class="supportButton" id="adultButton">
-        I need a trusted adult
-      </button>
-
-      <button class="supportButton" id="unsafeButton">
-        I don't feel safe
-      </button>
-
-      <div id="supportMessage"></div>
-
-    </section>
-
-  </main>
-
-  <script>
-
-    const supportMessage =
-      document.getElementById("supportMessage");
-
-    document
-      .getElementById("pauseButton")
-      .addEventListener("click", function () {
-
-        supportMessage.innerHTML = `
-          <h3>It's okay to pause. 🌱</h3>
-
-          <p>
-            Put everything else down for a moment.
-          </p>
-
-          <p>
-            Take one slow breath and notice where you are.
-            You don't have to solve the whole situation right now.
-          </p>
-        `;
-
-      });
+  });
 
 
-    document
-      .getElementById("talkButton")
-      .addEventListener("click", function () {
+/* TRUSTED ADULT */
 
-        supportMessage.innerHTML = `
-          <h3>You don't have to carry it alone.</h3>
+document
+  .getElementById("adultButton")
+  .addEventListener("click", function () {
 
-          <p>
-            Think of one person you feel comfortable talking to.
-          </p>
+    supportMessage.innerHTML = `
 
-          <p>
-            You can keep the message simple:
-          </p>
+      <h3>${t.adultTitle}</h3>
 
-          <p>
-            <strong>
-              "I'm having a hard time right now. Can you talk with me?"
-            </strong>
-          </p>
-        `;
+      <p>${t.adultText1}</p>
 
-      });
+      <p>${t.adultText2}</p>
 
+      <p>${t.adultText3}</p>
 
-    document
-      .getElementById("adultButton")
-      .addEventListener("click", function () {
+      <p>
+        <strong>${t.adultExample}</strong>
+      </p>
 
-        supportMessage.innerHTML = `
-          <h3>Find someone safe to tell.</h3>
+    `;
 
-          <p>
-            If you're a teenager or young person,
-            think about a trusted adult you feel safe with.
-          </p>
-
-          <p>
-            This could be a parent or guardian, teacher,
-            counselor, coach, relative, or another trusted adult.
-          </p>
-
-          <p>
-            You don't have to explain everything at once.
-            You can simply say:
-          </p>
-
-          <p>
-            <strong>
-              "I don't feel okay and I need someone to stay with me."
-            </strong>
-          </p>
-        `;
-
-      });
+  });
 
 
-    document
-      .getElementById("unsafeButton")
-      .addEventListener("click", function () {
+/* UNSAFE */
 
-        window.location.href = "safety.html";
+document
+  .getElementById("unsafeButton")
+  .addEventListener("click", function () {
 
-      });
+    window.location.href = "safety.html";
 
-  </script>
+  });
 
-</body>
+</script></body>
 </html>
