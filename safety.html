@@ -1,102 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Safety</title>
   <link rel="stylesheet" href="style.css">
-</head>
+</head><body><header>
+  <div class="logo">LifeReset</div>
+  <div class="tagline" id="tagline">
+    You don't have to figure everything out alone.
+  </div>
+</header><main><section class="welcome-card"> <h1 id="safetyHeading">I'm glad you told me.</h1> <p id="safetyIntro">
+    What you're feeling matters, and you don't have to handle
+    this moment by yourself.
+  </p> <div id="safetyMessage"><h3 id="dangerHeading">
+  If you may hurt yourself or someone else
+</h3>
 
-<body>
+<p id="dangerText">
+  Please move away from anything you could use to hurt yourself
+  or another person, and get near someone you trust if you can.
+</p>
 
-  <header>
-    <div class="logo">LifeReset</div>
-    <div class="tagline">
-      You don't have to figure everything out alone.
-    </div>
-  </header>
+<p id="emergencyText">
+  If you are in immediate danger, call <strong>911</strong>
+  or go to the nearest emergency department.
+</p>
 
-  <main>
+<p id="crisisText">
+  In the United States, you can also call or text
+  <strong>988</strong> to reach the Suicide & Crisis Lifeline.
+</p>
 
-    <section class="welcome-card">
+<a href="tel:988">
+  <button type="button" id="call988Button">
+    Call 988
+  </button>
+</a>
 
-      <h1>I'm glad you told me.</h1>
+<a href="sms:988">
+  <button type="button" id="text988Button">
+    Text 988
+  </button>
+</a>
 
-      <p>
-        What you're feeling matters, and you don't have to handle
-        this moment by yourself.
-      </p>
+<button type="button" id="trustedPersonButton">
+  Reach Someone I Trust
+</button>
 
-      <div id="safetyMessage">
+<div id="trustedPersonMessage"></div>
 
-        <h3>If you may hurt yourself or someone else</h3>
+  </div></section></main><script>
 
-        <p>
-          Please move away from anything you could use to hurt yourself
-          or another person, and get near someone you trust if you can.
-        </p>
+/* =========================
+   TRANSLATIONS
+========================= */
 
-        <p>
-          If you are in immediate danger, call <strong>911</strong>
-          or go to the nearest emergency department.
-        </p>
+const translations = {
 
-        <p>
-          In the United States, you can also call or text
-          <strong>988</strong> to reach the Suicide & Crisis Lifeline.
-        </p>
+  en: {
+    tagline: "You don't have to figure everything out alone.",
+    heading: "I'm glad you told me.",
+    intro: "What you're feeling matters, and you don't have to handle this moment by yourself.",
+    dangerHeading: "If you may hurt yourself or someone else",
+    dangerText: "Please move away from anything you could use to hurt yourself or another person, and get near someone you trust if you can.",
+    emergencyText: "If you are in immediate danger, call 911 or go to the nearest emergency department.",
+    crisisText: "In the United States, you can also call or text 988 to reach the Suicide & Crisis Lifeline.",
+    call988: "Call 988",
+    text988: "Text 988",
+    trusted: "Reach Someone I Trust",
+    trustedHeading: "You don't have to explain everything.",
+    trustedText: "Think of one person you feel safe with.",
+    trustedTell: "You can simply tell them:",
+    trustedExample: "“I'm having a really hard time. Can you stay with me?”"
+  },
 
-        <a href="tel:988">
-          <button type="button">Call 988</button>
-        </a>
+  es: {
+    tagline: "No tienes que resolverlo todo por tu cuenta.",
+    heading: "Me alegra que me lo hayas contado.",
+    intro: "Lo que sientes importa y no tienes que afrontar este momento a solas.",
+    dangerHeading: "Si crees que podrías hacerte daño o hacer daño a otra persona",
+    dangerText: "Aléjate de cualquier cosa que puedas usar para hacerte daño o hacer daño a otra persona y acércate a alguien de confianza si puedes.",
+    emergencyText: "Si estás en peligro inmediato, llama al 911 o ve al departamento de emergencias más cercano.",
+    crisisText: "En Estados Unidos, también puedes llamar o enviar un mensaje de texto al 988 para comunicarte con la Línea de Prevención del Suicidio y Crisis.",
+    call988: "Llamar al 988",
+    text988: "Enviar mensaje al 988",
+    trusted: "Contactar a alguien de confianza",
+    trustedHeading: "No tienes que explicarlo todo.",
+    trustedText: "Piensa en una persona con quien te sientas seguro.",
+    trustedTell: "Puedes simplemente decirle:",
+    trustedExample: "“Estoy pasando por un momento muy difícil. ¿Puedes quedarte conmigo?”"
+  },
 
-        <a href="sms:988">
-          <button type="button">Text 988</button>
-        </a>
+  fr: {
+    tagline: "Tu n'as pas à tout comprendre seul(e).",
+    heading: "Je suis content(e) que tu me l'aies dit.",
+    intro: "Ce que tu ressens compte et tu n'as pas à traverser ce moment seul(e).",
+    dangerHeading: "Si tu risques de te faire du mal ou de faire du mal à quelqu'un",
+    dangerText: "Éloigne-toi de tout objet que tu pourrais utiliser pour te faire du mal ou faire du mal à quelqu'un et rapproche-toi d'une personne de confiance si tu le peux.",
+    emergencyText: "Si tu es en danger immédiat, appelle le 911 ou rends-toi au service des urgences le plus proche.",
+    crisisText: "Aux États-Unis, tu peux également appeler ou envoyer un SMS au 988 pour joindre la ligne d'aide en cas de crise et de pensées suicidaires.",
+    call988: "Appeler le 988",
+    text988: "Envoyer un SMS au 988",
+    trusted: "Contacter quelqu'un en qui j'ai confiance",
+    trustedHeading: "Tu n'as pas besoin de tout expliquer.",
+    trustedText: "Pense à une personne avec qui tu te sens en sécurité.",
+    trustedTell: "Tu peux simplement lui dire :",
+    trustedExample: "« Je traverse un moment très difficile. Peux-tu rester avec moi ? »"
+  },
 
-        <button type="button" id="trustedPersonButton">
-          Reach Someone I Trust
-        </button>
+  ht: {
+    tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+    heading: "Mwen kontan ou te di m sa.",
+    intro: "Sa w ap santi a enpòtan, epi ou pa bezwen fè fas ak moman sa a poukont ou.",
+    dangerHeading: "Si ou panse ou ka fè tèt ou oswa yon lòt moun mal",
+    dangerText: "Tanpri ale lwen nenpòt bagay ou ta ka itilize pou fè tèt ou oswa yon lòt moun mal, epi pwoche bò kote yon moun ou fè konfyans si ou kapab.",
+    emergencyText: "Si ou an danje imedya, rele 911 oswa ale nan depatman ijans ki pi pre a.",
+    crisisText: "Ozetazini, ou kapab rele oswa voye yon mesaj tèks nan 988 pou kontakte liy sipò pou swisid ak kriz.",
+    call988: "Rele 988",
+    text988: "Voye mesaj 988",
+    trusted: "Kontakte yon moun mwen fè konfyans",
+    trustedHeading: "Ou pa bezwen eksplike tout bagay.",
+    trustedText: "Panse ak yon moun ou santi ou an sekirite avèk li.",
+    trustedTell: "Ou ka jis di moun nan:",
+    trustedExample: "“Mwen ap pase yon moman ki vrèman difisil. Èske ou ka rete avè m?”"
+  }
 
-        <div id="trustedPersonMessage"></div>
+};
 
-      </div>
 
-    </section>
+/* =========================
+   GET LANGUAGE
+========================= */
 
-  </main>
+const language =
+  localStorage.getItem("lifeResetLanguage") || "en";
 
-  <script>
+const t =
+  translations[language] || translations.en;
 
-    const trustedPersonButton =
-      document.getElementById("trustedPersonButton");
+document.documentElement.lang = language;
 
-    const trustedPersonMessage =
-      document.getElementById("trustedPersonMessage");
 
-    trustedPersonButton.addEventListener("click", function () {
+/* =========================
+   TRANSLATE PAGE
+========================= */
 
-      trustedPersonMessage.innerHTML = `
-        <h3>You don't have to explain everything.</h3>
+document.getElementById("tagline").textContent = t.tagline;
 
-        <p>
-          Think of one person you feel safe with.
-        </p>
+document.getElementById("safetyHeading").textContent = t.heading;
 
-        <p>
-          You can simply tell them:
-        </p>
+document.getElementById("safetyIntro").textContent = t.intro;
 
-        <p>
-          <strong>
-            "I'm having a really hard time. Can you stay with me?"
-          </strong>
-        </p>
-      `;
+document.getElementById("dangerHeading").textContent =
+  t.dangerHeading;
 
-    });
+document.getElementById("dangerText").textContent =
+  t.dangerText;
 
-  </script>
+document.getElementById("emergencyText").innerHTML =
+  language === "en"
+    ? "If you are in immediate danger, call <strong>911</strong> or go to the nearest emergency department."
+    : language === "es"
+    ? "Si estás en peligro inmediato, llama al <strong>911</strong> o ve al departamento de emergencias más cercano."
+    : language === "fr"
+    ? "Si tu es en danger immédiat, appelle le <strong>911</strong> ou rends-toi au service des urgences le plus proche."
+    : "Si ou an danje imedya, rele <strong>911</strong> oswa ale nan depatman ijans ki pi pre a.";
 
-</body>
+document.getElementById("crisisText").innerHTML =
+  language === "en"
+    ? "In the United States, you can also call or text <strong>988</strong> to reach the Suicide & Crisis Lifeline."
+    : language === "es"
+    ? "En Estados Unidos, también puedes llamar o enviar un mensaje de texto al <strong>988</strong> para comunicarte con la Línea de Prevención del Suicidio y Crisis."
+    : language === "fr"
+    ? "Aux États-Unis, tu peux également appeler ou envoyer un SMS au <strong>988</strong> pour joindre la ligne d'aide en cas de crise et de pensées suicidaires."
+    : "Ozetazini, ou kapab rele oswa voye yon mesaj tèks nan <strong>988</strong> pou kontakte liy sipò pou swisid ak kriz.";
+
+document.getElementById("call988Button").textContent =
+  t.call988;
+
+document.getElementById("text988Button").textContent =
+  t.text988;
+
+document.getElementById("trustedPersonButton").textContent =
+  t.trusted;
+
+
+/* =========================
+   TRUSTED PERSON
+========================= */
+
+const trustedPersonButton =
+  document.getElementById("trustedPersonButton");
+
+const trustedPersonMessage =
+  document.getElementById("trustedPersonMessage");
+
+
+trustedPersonButton.addEventListener("click", function () {
+
+  trustedPersonMessage.innerHTML = `
+
+    <h3>${t.trustedHeading}</h3>
+
+    <p>${t.trustedText}</p>
+
+    <p>${t.trustedTell}</p>
+
+    <p>
+      <strong>${t.trustedExample}</strong>
+    </p>
+
+  `;
+
+});
+
+</script></body>
 </html>
+
