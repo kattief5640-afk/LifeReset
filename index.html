@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset</title>
   <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <header>
+</head><body> <header>
     <div class="logo">LifeReset</div>
-    <div class="tagline">You don't have to figure everything out alone.</div>
-  </header>
+    <div class="tagline" id="tagline">
+      You don't have to figure everything out alone.
+    </div>
+  </header> <main><!-- SETUP -->
+<section id="setupSection" class="welcome-card">
 
-  <main>
-    <section id="setupSection" class="welcome-card">
+  <h1 id="welcomeTitle">Welcome to LifeReset 🌱</h1>
 
-  <h1>Welcome to LifeReset 🌱</h1>
-
-  <p>What would you like me to call you?</p>
+  <p id="nameQuestion">What would you like me to call you?</p>
 
   <input
     id="nameInput"
@@ -27,7 +23,7 @@
     autocomplete="given-name"
   >
 
-  <p>Choose your language:</p>
+  <p id="languageQuestion">Choose your language:</p>
 
   <select id="languageSelect">
     <option value="en">English</option>
@@ -39,30 +35,186 @@
   <button id="saveSetupButton">Continue</button>
 
 </section>
+
+
+<!-- WELCOME -->
 <section id="welcomeSection" class="welcome-card" style="display: none;">
 
-      <p>
-        Whatever you're carrying today, you don't have to hide it here.
-        Take a breath. Tell us what's on your mind.
-      </p>
+  <p id="welcomeMessage">
+    Whatever you're carrying today, you don't have to hide it here.
+    Take a breath. Tell us what's on your mind.
+  </p>
 
-      <button id="beginButton">Let's begin</button>
-    </section>
-    <section id="checkin" style="display: none;">
-      <h2>I'm glad you're here.</h2>
-      <p>You can take your time. Tell me how you're really doing today.</p>
+  <button id="beginButton">Let's begin</button>
 
-      <textarea id="feelingInput" placeholder="Write what's on your mind..."></textarea>
+</section>
 
-      <button id="continueButton">Continue</button>
-    </section>
-    <section id="reset" style="display:none">
-  <h2>Let's take your next step</h2>
-  <p>You don't have to fix everything today. Let's focus on one small step that can help you feel a little better.</p>
+
+<!-- CHECK-IN -->
+<section id="checkin" style="display: none;">
+
+  <h2 id="checkinTitle">I'm glad you're here.</h2>
+
+  <p id="checkinMessage">
+    You can take your time. Tell me how you're really doing today.
+  </p>
+
+  <textarea
+    id="feelingInput"
+    placeholder="Write what's on your mind..."
+  ></textarea>
+
+  <button id="continueButton">Continue</button>
+
+</section>
+
+
+<!-- RESET -->
+<section id="reset" style="display: none;">
+
+  <h2 id="resetTitle">Let's take your next step</h2>
+
+  <p id="resetMessage">
+    You don't have to fix everything today.
+    Let's focus on one small step that can help you feel a little better.
+  </p>
 
   <button id="resetButton">Show Me My Reset</button>
+
 </section>
-  </main>
-  <script src="app.js"></script>
-</body>
+
+  </main> <script src="app.js"></script> <script>
+
+    /*
+      LIFE RESET LANGUAGE SYSTEM
+      This will translate the first page.
+    */
+
+    const translations = {
+
+      en: {
+        tagline: "You don't have to figure everything out alone.",
+        welcomeTitle: "Welcome to LifeReset 🌱",
+        nameQuestion: "What would you like me to call you?",
+        namePlaceholder: "Your name or nickname",
+        languageQuestion: "Choose your language:",
+        continueButton: "Continue",
+        welcomeMessage: "Whatever you're carrying today, you don't have to hide it here. Take a breath. Tell us what's on your mind.",
+        beginButton: "Let's begin",
+        checkinTitle: "I'm glad you're here.",
+        checkinMessage: "You can take your time. Tell me how you're really doing today.",
+        feelingPlaceholder: "Write what's on your mind...",
+        resetTitle: "Let's take your next step",
+        resetMessage: "You don't have to fix everything today. Let's focus on one small step that can help you feel a little better.",
+        resetButton: "Show Me My Reset"
+      },
+
+      es: {
+        tagline: "No tienes que resolverlo todo por tu cuenta.",
+        welcomeTitle: "Bienvenido a LifeReset 🌱",
+        nameQuestion: "¿Cómo te gustaría que te llamara?",
+        namePlaceholder: "Tu nombre o apodo",
+        languageQuestion: "Elige tu idioma:",
+        continueButton: "Continuar",
+        welcomeMessage: "No tienes que esconder aquí todo lo que llevas contigo. Respira. Cuéntanos qué tienes en mente.",
+        beginButton: "Comencemos",
+        checkinTitle: "Me alegra que estés aquí.",
+        checkinMessage: "Tómate tu tiempo. Cuéntame cómo te sientes realmente hoy.",
+        feelingPlaceholder: "Escribe lo que tienes en mente...",
+        resetTitle: "Demos tu siguiente paso",
+        resetMessage: "No tienes que solucionar todo hoy. Concentrémonos en un pequeño paso que pueda ayudarte a sentirte un poco mejor.",
+        resetButton: "Muéstrame mi reinicio"
+      },
+
+      fr: {
+        tagline: "Tu n'as pas à tout comprendre seul(e).",
+        welcomeTitle: "Bienvenue sur LifeReset 🌱",
+        nameQuestion: "Comment aimerais-tu que je t'appelle ?",
+        namePlaceholder: "Ton nom ou ton surnom",
+        languageQuestion: "Choisis ta langue :",
+        continueButton: "Continuer",
+        welcomeMessage: "Tu n'as pas besoin de cacher ici tout ce que tu portes. Respire. Dis-nous ce que tu as en tête.",
+        beginButton: "Commençons",
+        checkinTitle: "Je suis heureux(se) que tu sois ici.",
+        checkinMessage: "Prends ton temps. Dis-moi comment tu vas vraiment aujourd'hui.",
+        feelingPlaceholder: "Écris ce que tu as en tête...",
+        resetTitle: "Passons à ta prochaine étape",
+        resetMessage: "Tu n'as pas besoin de tout régler aujourd'hui. Concentrons-nous sur une petite étape qui pourrait t'aider à te sentir un peu mieux.",
+        resetButton: "Montre-moi mon reset"
+      },
+
+      ht: {
+        tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+        welcomeTitle: "Byenveni nan LifeReset 🌱",
+        nameQuestion: "Kijan ou ta renmen mwen rele ou?",
+        namePlaceholder: "Non ou oswa ti non ou",
+        languageQuestion: "Chwazi lang ou:",
+        continueButton: "Kontinye",
+        welcomeMessage: "Kèlkeswa sa w ap pote jodi a, ou pa bezwen kache l isit la. Pran yon souf. Di nou sa ki nan tèt ou.",
+        beginButton: "Ann kòmanse",
+        checkinTitle: "Mwen kontan ou la.",
+        checkinMessage: "Pran tan ou. Di mwen kijan ou santi w toutbon jodi a.",
+        feelingPlaceholder: "Ekri sa ki nan tèt ou...",
+        resetTitle: "Ann pran pwochen etap ou a",
+        resetMessage: "Ou pa bezwen rezoud tout bagay jodi a. Ann konsantre sou yon ti etap ki ka ede w santi w yon ti jan pi byen.",
+        resetButton: "Montre m reset mwen an"
+      }
+
+    };
+
+
+    function applyLanguage(language) {
+
+      const t = translations[language] || translations.en;
+
+      document.getElementById("tagline").textContent = t.tagline;
+      document.getElementById("welcomeTitle").textContent = t.welcomeTitle;
+      document.getElementById("nameQuestion").textContent = t.nameQuestion;
+      document.getElementById("nameInput").placeholder = t.namePlaceholder;
+      document.getElementById("languageQuestion").textContent = t.languageQuestion;
+
+      document.getElementById("saveSetupButton").textContent = t.continueButton;
+      document.getElementById("welcomeMessage").textContent = t.welcomeMessage;
+      document.getElementById("beginButton").textContent = t.beginButton;
+
+      document.getElementById("checkinTitle").textContent = t.checkinTitle;
+      document.getElementById("checkinMessage").textContent = t.checkinMessage;
+      document.getElementById("feelingInput").placeholder = t.feelingPlaceholder;
+      document.getElementById("continueButton").textContent = t.continueButton;
+
+      document.getElementById("resetTitle").textContent = t.resetTitle;
+      document.getElementById("resetMessage").textContent = t.resetMessage;
+      document.getElementById("resetButton").textContent = t.resetButton;
+
+      document.documentElement.lang = language;
+    }
+
+
+    languageSelect.addEventListener("change", function () {
+
+      const selectedLanguage = this.value;
+
+      localStorage.setItem(
+        "lifeResetLanguage",
+        selectedLanguage
+      );
+
+      applyLanguage(selectedLanguage);
+
+    });
+
+
+    const savedLanguage =
+      localStorage.getItem("lifeResetLanguage") || "en";
+
+    languageSelect.value = savedLanguage;
+
+    applyLanguage(savedLanguage);
+
+  </script></body>
 </html>
+
+  
+
+
+    
