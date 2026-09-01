@@ -1,240 +1,570 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset - Your Reset</title>
   <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  <header>
+</head><body> <header>
     <div class="logo">LifeReset</div>
-    <div class="tagline">You don't have to figure everything out alone.</div>
-  </header>
+    <div class="tagline" id="tagline">
+      You don't have to figure everything out alone.
+    </div>
+  </header> <main>
+    <section class="welcome-card"> <h1 id="resetTitle">Let's take your next step.</h1>
 
-  <main>
-    <section class="welcome-card">
+  <p id="resetIntro">
+    You don't have to fix everything today.
+    Let's focus on one small step that can help you feel a little better.
+  </p>
 
-      <h1>Let's take your next step.</h1>
+  <button id="resetButton">Show Me My Reset</button>
 
-      <p id="resetIntro">
-        You don't have to fix everything today.
-        Let's focus on one small step that can help you feel a little better.
-      </p>
+  <div id="resetMessage"></div>
 
-      <button id="resetButton">Show Me My Reset</button>
+  <div id="nextChoices" style="display: none;">
 
-      <div id="resetMessage"></div>
+    <h3 id="choicesTitle">What would help you right now?</h3>
 
-      <div id="nextChoices" style="display: none;">
+    <button class="choiceButton" data-choice="calm">Calm me down</button>
+    <button class="choiceButton" data-choice="motivation">Give me motivation</button>
+    <button class="choiceButton" data-choice="support">I need support</button>
+    <button class="choiceButton" data-choice="plan">Help me make a plan</button>
 
-        <h3>What would help you right now?</h3>
+  </div>
 
-        <button class="choiceButton">Calm me down</button>
-        <button class="choiceButton">Give me motivation</button>
-        <button class="choiceButton">I need support</button>
-        <button class="choiceButton">Help me make a plan</button>
+</section>
 
-      </div>
+  </main> <script>
 
-    </section>
-  </main>
+    const translations = {
 
-  <script>
-   const resetButton = document.getElementById("resetButton");
-   const resetMessage = document.getElementById("resetMessage");
-   const nextChoices = document.getElementById("nextChoices");
+      en: {
+        tagline: "You don't have to figure everything out alone.",
+        resetTitle: "Let's take your next step.",
+        resetIntro: "You don't have to fix everything today. Let's focus on one small step that can help you feel a little better.",
+        resetButton: "Show Me My Reset",
+        choicesTitle: "What would help you right now?",
 
-resetButton.addEventListener("click", function () {
+        calm: "Calm me down",
+        motivation: "Give me motivation",
+        support: "I need support",
+        plan: "Help me make a plan",
 
-  const feeling = localStorage.getItem("lifeResetFeeling");
-  const text = feeling ? feeling.toLowerCase() : "";
+        tiredTitle: "Rest & Recharge",
+        tiredText: "It sounds like your energy is low today.",
+        tiredReset: "Give yourself 10 quiet minutes. Sit somewhere comfortable, breathe slowly, and allow yourself to pause without feeling guilty.",
 
-  let message = "";
+        overwhelmedTitle: "Pause & Simplify",
+        overwhelmedText: "You don't have to handle everything at once.",
+        overwhelmedReset: "Choose just one thing that needs your attention right now. Everything else can wait.",
 
-  if (text.includes("tired") || text.includes("exhausted")) {
+        sadTitle: "Be Gentle With Yourself",
+        sadText: "You don't have to pretend you're okay when you're having a hard day.",
+        sadReset: "Take a few slow breaths and do one comforting thing for yourself today.",
 
-    message = `
-      <h2>Rest & Recharge</h2>
-      <p>It sounds like your energy is low today.</p>
-      <p><strong>Your small reset:</strong> Give yourself 10 quiet minutes. Sit somewhere comfortable, breathe slowly, and allow yourself to pause without feeling guilty.</p>
-    `;
+        angryTitle: "Pause & Release",
+        angryText: "You don't have to react while everything still feels intense.",
+        angryReset: "Step away for a few minutes, breathe deeply, and give yourself space before deciding what to do next.",
 
-  } else if (text.includes("overwhelmed") || text.includes("too much")) {
+        stressTitle: "Ground Yourself",
+        stressText: "Let's bring your attention back to this moment.",
+        stressReset: "Take five slow breaths and notice what you can see and hear around you.",
 
-    message = `
-      <h2>Pause & Simplify</h2>
-      <p>You don't have to handle everything at once.</p>
-      <p><strong>Your small reset:</strong> Choose just one thing that needs your attention right now. Everything else can wait.</p>
-    `;
+        defaultTitle: "Here's Your Reset",
+        defaultText: "Whatever you're carrying today, you don't have to solve everything right now.",
+        defaultReset: "Take one slow breath and choose one small thing you can do for yourself today.",
 
-  } else if (text.includes("sad") || text.includes("lonely")) {
+        calmTitle: "Let's slow things down.",
+        calmText: "When you're ready, we'll take three slow breaths together.",
+        ready: "Ready",
+        startBreathing: "Start Breathing Exercise",
 
-    message = `
-      <h2>Be Gentle With Yourself</h2>
-      <p>You don't have to pretend you're okay when you're having a hard day.</p>
-      <p><strong>Your small reset:</strong> Take a few slow breaths and do one comforting thing for yourself today.</p>
-    `;
+        breatheIn: "Breathe in slowly...",
+        hold: "Hold...",
+        breatheOut: "Breathe out slowly...",
 
-  } else if (text.includes("angry") || text.includes("mad")) {
+        completeTitle: "You did it. 🌱",
+        completeText: "You just completed three slow breaths.",
+        completeNotice: "Take a moment and notice how you feel.",
 
-    message = `
-      <h2>Pause & Release</h2>
-      <p>You don't have to react while everything still feels intense.</p>
-      <p><strong>Your small reset:</strong> Step away for a few minutes, breathe deeply, and give yourself space before deciding what to do next.</p>
-    `;
+        motivationTitle: "One small step is enough.",
+        motivationText: "You don't have to finish everything today.",
+        motivationReset: "Choose one thing you can start in the next 10 minutes.",
 
-  } else if (text.includes("stress") || text.includes("stressed")) {
+        supportTitle: "You don't have to carry everything alone.",
+        supportText: "Think about someone you trust.",
+        supportReset: "If you're comfortable, reach out and simply say, \"I could use someone to talk to.\"",
 
-    message = `
-      <h2>Ground Yourself</h2>
-      <p>Let's bring your attention back to this moment.</p>
-      <p><strong>Your small reset:</strong> Take five slow breaths and notice what you can see and hear around you.</p>
-    `;
+        planTitle: "Let's make it simple.",
+        step1: "Choose one thing that needs your attention.",
+        step2: "Decide the smallest action you can take.",
+        step3: "Give yourself permission to stop after that step."
+      },
 
-  } else {
+      es: {
+        tagline: "No tienes que resolverlo todo por tu cuenta.",
+        resetTitle: "Demos tu siguiente paso.",
+        resetIntro: "No tienes que solucionar todo hoy. Concentrémonos en un pequeño paso que pueda ayudarte a sentirte un poco mejor.",
+        resetButton: "Muéstrame mi reinicio",
+        choicesTitle: "¿Qué te ayudaría en este momento?",
 
-    message = `
-      <h2>Here's Your Reset</h2>
-      <p>Whatever you're carrying today, you don't have to solve everything right now.</p>
-      <p><strong>Your small reset:</strong> Take one slow breath and choose one small thing you can do for yourself today.</p>
-    `;
-  }
+        calm: "Ayúdame a calmarme",
+        motivation: "Dame motivación",
+        support: "Necesito apoyo",
+        plan: "Ayúdame a hacer un plan",
 
-  resetMessage.innerHTML = message;
-  resetButton.style.display = "none";
-  nextChoices.style.display = "block";
-});
+        tiredTitle: "Descansa y recarga energías",
+        tiredText: "Parece que hoy tienes poca energía.",
+        tiredReset: "Date 10 minutos de tranquilidad. Siéntate en un lugar cómodo, respira lentamente y permítete hacer una pausa sin sentirte culpable.",
+
+        overwhelmedTitle: "Haz una pausa y simplifica",
+        overwhelmedText: "No tienes que ocuparte de todo al mismo tiempo.",
+        overwhelmedReset: "Elige solo una cosa que necesite tu atención ahora. Todo lo demás puede esperar.",
+
+        sadTitle: "Sé amable contigo",
+        sadText: "No tienes que fingir que estás bien cuando estás pasando por un día difícil.",
+        sadReset: "Respira lentamente unas cuantas veces y haz hoy algo que te haga sentir bien.",
+
+        angryTitle: "Haz una pausa y libera",
+        angryText: "No tienes que reaccionar mientras todo se siente tan intenso.",
+        angryReset: "Aléjate unos minutos, respira profundamente y date espacio antes de decidir qué hacer.",
+
+        stressTitle: "Vuelve al presente",
+        stressText: "Vamos a traer tu atención de nuevo a este momento.",
+        stressReset: "Respira lentamente cinco veces y observa lo que puedes ver y escuchar a tu alrededor.",
+
+        defaultTitle: "Aquí está tu reinicio",
+        defaultText: "Sea lo que sea que estés llevando hoy, no tienes que resolverlo todo ahora.",
+        defaultReset: "Respira lentamente una vez y elige una pequeña cosa que puedas hacer por ti hoy.",
+
+        calmTitle: "Vamos a bajar el ritmo.",
+        calmText: "Cuando estés listo, haremos tres respiraciones lentas juntos.",
+        ready: "Listo",
+        startBreathing: "Comenzar ejercicio de respiración",
+
+        breatheIn: "Inhala lentamente...",
+        hold: "Mantén la respiración...",
+        breatheOut: "Exhala lentamente...",
+
+        completeTitle: "Lo hiciste. 🌱",
+        completeText: "Acabas de completar tres respiraciones lentas.",
+        completeNotice: "Tómate un momento y observa cómo te sientes.",
+
+        motivationTitle: "Un pequeño paso es suficiente.",
+        motivationText: "No tienes que terminar todo hoy.",
+        motivationReset: "Elige una cosa que puedas comenzar en los próximos 10 minutos.",
+
+        supportTitle: "No tienes que llevarlo todo por tu cuenta.",
+        supportText: "Piensa en alguien en quien confíes.",
+        supportReset: "Si te sientes cómodo, comunícate con esa persona y simplemente di: \"Podría necesitar alguien con quien hablar.\"",
+
+        planTitle: "Hagámoslo sencillo.",
+        step1: "Elige una cosa que necesite tu atención.",
+        step2: "Decide cuál es la acción más pequeña que puedes realizar.",
+        step3: "Date permiso para detenerte después de ese paso."
+      },
+
+      fr: {
+        tagline: "Tu n'as pas à tout comprendre seul(e).",
+        resetTitle: "Passons à ta prochaine étape.",
+        resetIntro: "Tu n'as pas besoin de tout régler aujourd'hui. Concentrons-nous sur une petite étape qui pourrait t'aider à te sentir un peu mieux.",
+        resetButton: "Montre-moi mon reset",
+        choicesTitle: "Qu'est-ce qui pourrait t'aider maintenant ?",
+
+        calm: "Aide-moi à me calmer",
+        motivation: "Donne-moi de la motivation",
+        support: "J'ai besoin de soutien",
+        plan: "Aide-moi à faire un plan",
+
+        tiredTitle: "Repose-toi et recharge tes batteries",
+        tiredText: "On dirait que ton énergie est faible aujourd'hui.",
+        tiredReset: "Accorde-toi 10 minutes de calme. Assieds-toi confortablement, respire lentement et permets-toi de faire une pause sans culpabiliser.",
+
+        overwhelmedTitle: "Fais une pause et simplifie",
+        overwhelmedText: "Tu n'as pas besoin de tout gérer en même temps.",
+        overwhelmedReset: "Choisis une seule chose qui a besoin de ton attention maintenant. Tout le reste peut attendre.",
+
+        sadTitle: "Sois doux(ce) avec toi-même",
+        sadText: "Tu n'as pas besoin de faire semblant d'aller bien lorsque tu traverses une journée difficile.",
+        sadReset: "Prends quelques respirations lentes et fais aujourd'hui quelque chose qui te réconforte.",
+
+        angryTitle: "Fais une pause et relâche",
+        angryText: "Tu n'as pas besoin de réagir pendant que tout semble encore très intense.",
+        angryReset: "Éloigne-toi pendant quelques minutes, respire profondément et donne-toi de l'espace avant de décider quoi faire.",
+
+        stressTitle: "Reviens au moment présent",
+        stressText: "Ramène doucement ton attention à ce moment.",
+        stressReset: "Prends cinq respirations lentes et remarque ce que tu peux voir et entendre autour de toi.",
+
+        defaultTitle: "Voici ton reset",
+        defaultText: "Quoi que tu portes aujourd'hui, tu n'as pas besoin de tout résoudre maintenant.",
+        defaultReset: "Prends une respiration lente et choisis une petite chose que tu peux faire pour toi aujourd'hui.",
+
+        calmTitle: "Ralentissons un peu.",
+        calmText: "Quand tu seras prêt(e), nous prendrons trois respirations lentes ensemble.",
+        ready: "Prêt(e)",
+        startBreathing: "Commencer l'exercice de respiration",
+
+        breatheIn: "Inspire lentement...",
+        hold: "Retiens...",
+        breatheOut: "Expire lentement...",
+
+        completeTitle: "Tu l'as fait. 🌱",
+        completeText: "Tu viens de terminer trois respirations lentes.",
+        completeNotice: "Prends un moment pour remarquer comment tu te sens.",
+
+        motivationTitle: "Un petit pas suffit.",
+        motivationText: "Tu n'as pas besoin de tout terminer aujourd'hui.",
+        motivationReset: "Choisis une chose que tu peux commencer dans les 10 prochaines minutes.",
+
+        supportTitle: "Tu n'as pas à tout porter seul(e).",
+        supportText: "Pense à quelqu'un en qui tu as confiance.",
+        supportReset: "Si tu te sens à l'aise, contacte cette personne et dis simplement : \"J'aurais besoin de quelqu'un à qui parler.\"",
+
+        planTitle: "Simplifions les choses.",
+        step1: "Choisis une chose qui a besoin de ton attention.",
+        step2: "Décide de la plus petite action que tu peux faire.",
+        step3: "Donne-toi la permission de t'arrêter après cette étape."
+      },
+
+      ht: {
+        tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+        resetTitle: "Ann pran pwochen etap ou a.",
+        resetIntro: "Ou pa bezwen rezoud tout bagay jodi a. Ann konsantre sou yon ti etap ki ka ede w santi w yon ti jan pi byen.",
+        resetButton: "Montre m reset mwen an",
+        choicesTitle: "Kisa ki ta ede w kounye a?",
+
+        calm: "Ede m kalme m",
+        motivation: "Ban m motivasyon",
+        support: "Mwen bezwen sipò",
+        plan: "Ede m fè yon plan",
+
+        tiredTitle: "Repoze epi reprann fòs",
+        tiredText: "Li sanble enèji ou ba jodi a.",
+        tiredReset: "Bay tèt ou 10 minit trankil. Chita yon kote ki konfòtab, respire dousman, epi pèmèt tèt ou fè yon poz san w pa santi w koupab.",
+
+        overwhelmedTitle: "Fè yon poz epi senplifye",
+        overwhelmedText: "Ou pa bezwen jere tout bagay an menm tan.",
+        overwhelmedReset: "Chwazi yon sèl bagay ki bezwen atansyon ou kounye a. Tout lòt bagay ka tann.",
+
+        sadTitle: "Pran swen tèt ou avèk dousè",
+        sadText: "Ou pa bezwen fè kòmsi ou anfòm lè w ap pase yon jou ki difisil.",
+        sadReset: "Pran kèk souf dousman epi fè yon bagay ki ka rekonfòte w jodi a.",
+
+        angryTitle: "Fè yon poz epi lage tansyon an",
+        angryText: "Ou pa bezwen reyaji pandan emosyon yo toujou fò.",
+        angryReset: "Pran kèk minit lwen sitiyasyon an, respire fon, epi bay tèt ou espas anvan ou deside sa pou w fè.",
+
+        stressTitle: "Retounen nan moman an",
+        stressText: "Ann pote atansyon ou tounen nan moman sa a.",
+        stressReset: "Pran senk souf dousman epi remake sa ou ka wè ak sa ou ka tande bò kote w.",
+
+        defaultTitle: "Men reset ou an",
+        defaultText: "Kèlkeswa sa w ap pote jodi a, ou pa bezwen rezoud tout bagay kounye a.",
+        defaultReset: "Pran yon souf dousman epi chwazi yon ti bagay ou ka fè pou tèt ou jodi a.",
+
+        calmTitle: "Ann ralanti yon ti jan.",
+        calmText: "Lè ou pare, n ap pran twa souf dousman ansanm.",
+        ready: "Pare",
+        startBreathing: "Kòmanse egzèsis respirasyon an",
+
+        breatheIn: "Respire antre dousman...",
+        hold: "Kenbe...",
+        breatheOut: "Respire soti dousman...",
+
+        completeTitle: "Ou fè li. 🌱",
+        completeText: "Ou fèk fini twa souf dousman.",
+        completeNotice: "Pran yon ti moman pou remake kijan ou santi w.",
+
+        motivationTitle: "Yon ti etap ase.",
+        motivationText: "Ou pa bezwen fini tout bagay jodi a.",
+        motivationReset: "Chwazi yon bagay ou ka kòmanse nan pwochen 10 minit yo.",
+
+        supportTitle: "Ou pa bezwen pote tout bagay poukont ou.",
+        supportText: "Panse ak yon moun ou fè konfyans.",
+        supportReset: "Si ou santi w alèz, kontakte moun sa a epi di tou senpleman: \"Mwen ta renmen gen yon moun pou m pale avèk li.\"",
+
+        planTitle: "Ann fè li senp.",
+        step1: "Chwazi yon bagay ki bezwen atansyon ou.",
+        step2: "Deside ki pi piti aksyon ou ka pran.",
+        step3: "Bay tèt ou pèmisyon pou w kanpe apre etap sa a."
+      }
+
+    };
 
 
-const choiceButtons = document.querySelectorAll(".choiceButton");
+    const language =
+      localStorage.getItem("lifeResetLanguage") || "en";
 
-choiceButtons.forEach(function (button) {
+    const t = translations[language] || translations.en;
 
-  button.addEventListener("click", function () {
+    document.documentElement.lang = language;
 
-    const choice = button.textContent;
-
-    if (choice === "Calm me down") {
-
-      nextChoices.innerHTML = `
-        <h3>Let's slow things down.</h3>
-
-        <p>When you're ready, we'll take three slow breaths together.</p>
-
-        <div id="breathingTimer" style="font-size: 40px; margin: 20px 0;">
-          Ready
-        </div>
-
-        <button id="startBreathing">Start Breathing Exercise</button>
-      `;
-
-      const startBreathing = document.getElementById("startBreathing");
-      const breathingTimer = document.getElementById("breathingTimer");
-
-      startBreathing.addEventListener("click", function () {
-
-        startBreathing.style.display = "none";
-
-        let step = 0;
-        let round = 1;
-        let seconds = 0;
-
-        const breathingSteps = [
-          { text: "Breathe in slowly...", time: 4 },
-          { text: "Hold...", time: 2 },
-          { text: "Breathe out slowly...", time: 6 }
-        ];
-
-        function runBreathingStep() {
-
-          if (step >= breathingSteps.length) {
-
-  if (round < 3) {
-    round++;
-    step = 0;
-    runBreathingStep();
-    return;
-  }
-
-  nextChoices.innerHTML = `
-    <h3>You did it. 🌱</h3>
-    <p>You just completed three slow breaths.</p>
-    <p>Take a moment and notice how you feel.</p>
-  `;
-
-  return;
-}
+    document.getElementById("tagline").textContent = t.tagline;
+    document.getElementById("resetTitle").textContent = t.resetTitle;
+    document.getElementById("resetIntro").textContent = t.resetIntro;
+    document.getElementById("resetButton").textContent = t.resetButton;
+    document.getElementById("choicesTitle").textContent = t.choicesTitle;
 
 
-          const currentStep = breathingSteps[step];
-          seconds = currentStep.time;
+    const choiceButtons = document.querySelectorAll(".choiceButton");
 
-          breathingTimer.innerHTML =
-            currentStep.text + "<br>" + seconds;
+    choiceButtons.forEach(function(button) {
 
-          const timer = setInterval(function () {
+      const choice = button.dataset.choice;
 
-            seconds--;
+      if (choice === "calm") {
+        button.textContent = t.calm;
+      }
 
-            if (seconds > 0) {
+      if (choice === "motivation") {
+        button.textContent = t.motivation;
+      }
+
+      if (choice === "support") {
+        button.textContent = t.support;
+      }
+
+      if (choice === "plan") {
+        button.textContent = t.plan;
+      }
+
+    });
+
+
+    const resetButton = document.getElementById("resetButton");
+    const resetMessage = document.getElementById("resetMessage");
+    const nextChoices = document.getElementById("nextChoices");
+
+
+    resetButton.addEventListener("click", function() {
+
+      const feeling = localStorage.getItem("lifeResetFeeling");
+      const text = feeling ? feeling.toLowerCase() : "";
+
+      let message = "";
+
+      if (text.includes("tired") || text.includes("exhausted")) {
+
+        message = `
+          <h2>${t.tiredTitle}</h2>
+          <p>${t.tiredText}</p>
+          <p><strong>Your small reset:</strong> ${t.tiredReset}</p>
+        `;
+
+      } else if (text.includes("overwhelmed") || text.includes("too much")) {
+
+        message = `
+          <h2>${t.overwhelmedTitle}</h2>
+          <p>${t.overwhelmedText}</p>
+          <p><strong>Your small reset:</strong> ${t.overwhelmedReset}</p>
+        `;
+
+      } else if (text.includes("sad") || text.includes("lonely")) {
+
+        message = `
+          <h2>${t.sadTitle}</h2>
+          <p>${t.sadText}</p>
+          <p><strong>Your small reset:</strong> ${t.sadReset}</p>
+        `;
+
+      } else if (text.includes("angry") || text.includes("mad")) {
+
+        message = `
+          <h2>${t.angryTitle}</h2>
+          <p>${t.angryText}</p>
+          <p><strong>Your small reset:</strong> ${t.angryReset}</p>
+        `;
+
+      } else if (text.includes("stress") || text.includes("stressed")) {
+
+        message = `
+          <h2>${t.stressTitle}</h2>
+          <p>${t.stressText}</p>
+          <p><strong>Your small reset:</strong> ${t.stressReset}</p>
+        `;
+
+      } else {
+
+        message = `
+          <h2>${t.defaultTitle}</h2>
+          <p>${t.defaultText}</p>
+          <p><strong>Your small reset:</strong> ${t.defaultReset}</p>
+        `;
+      }
+
+      resetMessage.innerHTML = message;
+
+      resetButton.style.display = "none";
+      nextChoices.style.display = "block";
+
+    });
+
+
+    choiceButtons.forEach(function(button) {
+
+      button.addEventListener("click", function() {
+
+        const choice = button.dataset.choice;
+
+
+        if (choice === "calm") {
+
+          nextChoices.innerHTML = `
+            <h3>${t.calmTitle}</h3>
+
+            <p>${t.calmText}</p>
+
+            <div id="breathingTimer" style="font-size: 40px; margin: 20px 0;">
+              ${t.ready}
+            </div>
+
+            <button id="startBreathing">${t.startBreathing}</button>
+          `;
+
+
+          const startBreathing =
+            document.getElementById("startBreathing");
+
+          const breathingTimer =
+            document.getElementById("breathingTimer");
+
+
+          startBreathing.addEventListener("click", function() {
+
+            startBreathing.style.display = "none";
+
+            let step = 0;
+            let round = 1;
+            let seconds = 0;
+
+            const breathingSteps = [
+              { text: t.breatheIn, time: 4 },
+              { text: t.hold, time: 2 },
+              { text: t.breatheOut, time: 6 }
+            ];
+
+
+            function runBreathingStep() {
+
+              if (step >= breathingSteps.length) {
+
+                if (round < 3) {
+
+                  round++;
+                  step = 0;
+
+                  runBreathingStep();
+
+                  return;
+                }
+
+
+                nextChoices.innerHTML = `
+                  <h3>${t.completeTitle}</h3>
+                  <p>${t.completeText}</p>
+                  <p>${t.completeNotice}</p>
+                `;
+
+                return;
+              }
+
+
+              const currentStep =
+                breathingSteps[step];
+
+              seconds = currentStep.time;
+
+
               breathingTimer.innerHTML =
                 currentStep.text + "<br>" + seconds;
-            } else {
-              clearInterval(timer);
-              step++;
-              runBreathingStep();
+
+
+              const timer = setInterval(function() {
+
+                seconds--;
+
+                if (seconds > 0) {
+
+                  breathingTimer.innerHTML =
+                    currentStep.text + "<br>" + seconds;
+
+                } else {
+
+                  clearInterval(timer);
+
+                  step++;
+
+                  runBreathingStep();
+
+                }
+
+              }, 1000);
+
             }
 
-          }, 1000);
+
+            runBreathingStep();
+
+          });
+
+
+        } else if (choice === "motivation") {
+
+          nextChoices.innerHTML = `
+            <h3>${t.motivationTitle}</h3>
+            <p>${t.motivationText}</p>
+            <p>${t.motivationReset}</p>
+          `;
+
+
+        } else if (choice === "support") {
+
+          nextChoices.innerHTML = `
+            <h3>${t.supportTitle}</h3>
+            <p>${t.supportText}</p>
+            <p>${t.supportReset}</p>
+          `;
+
+
+        } else if (choice === "plan") {
+
+          nextChoices.innerHTML = `
+            <h3>${t.planTitle}</h3>
+
+            <p><strong>Step 1:</strong> ${t.step1}</p>
+
+            <p><strong>Step 2:</strong> ${t.step2}</p>
+
+            <p><strong>Step 3:</strong> ${t.step3}</p>
+          `;
+
         }
 
-        runBreathingStep();
       });
 
-    } else if (choice === "Give me motivation") {
+    });
 
-      nextChoices.innerHTML = `
-        <h3>One small step is enough.</h3>
-        <p>You don't have to finish everything today.</p>
-        <p>Choose one thing you can start in the next 10 minutes.</p>
-      `;
-
-    } else if (choice === "I need support") {
-
-      nextChoices.innerHTML = `
-        <h3>You don't have to carry everything alone.</h3>
-        <p>Think about someone you trust.</p>
-        <p>If you're comfortable, reach out and simply say, "I could use someone to talk to."</p>
-      `;
-
-    } else if (choice === "Help me make a plan") {
-
-      nextChoices.innerHTML = `
-        <h3>Let's make it simple.</h3>
-        <p><strong>Step 1:</strong> Choose one thing that needs your attention.</p>
-        <p><strong>Step 2:</strong> Decide the smallest action you can take.</p>
-        <p><strong>Step 3:</strong> Give yourself permission to stop after that step.</p>
-      `;
-    }
-
-  });
-
-}); 
-  </script>
-
-</body>
+  </script></body>
 </html>
 
 
       
+      
+  
+  
 
-   
-        
+  
+
 
         
+      
+  
+
+
+         
+
+    
 
      
 
