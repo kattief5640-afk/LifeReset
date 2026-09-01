@@ -3,6 +3,34 @@ const nameInput = document.getElementById("nameInput");
 const languageSelect = document.getElementById("languageSelect");
 const saveSetupButton = document.getElementById("saveSetupButton");
 const welcomeSection = document.getElementById("welcomeSection");
+/* =========================
+RETURN TO CHECK-IN
+========================= */
+
+const returnToCheckin =
+  localStorage.getItem("lifeResetReturnToCheckin");
+
+const checkinSection =
+  document.getElementById("checkin");
+
+if (returnToCheckin === "true") {
+
+  if (setupSection) {
+    setupSection.style.display = "none";
+  }
+
+  if (welcomeSection) {
+    welcomeSection.style.display = "none";
+  }
+
+  if (checkinSection) {
+    checkinSection.style.display = "block";
+  }
+
+  localStorage.removeItem("lifeResetReturnToCheckin");
+
+}
+
 
 const translations = {
 
