@@ -6,35 +6,48 @@ const welcomeSection = document.getElementById("welcomeSection");
 
 const translations = {
 
-en: {
-nameRequired: "Please enter a name or nickname.",
-ready: "You're ready, {name}. 🌱",
-begin: "Let's begin",
-emptyFeeling: "You can take your time. Share something when you're ready."
-},
+  en: {
+    nameRequired: "Please enter a name or nickname.",
+    ready: "You're ready, {name}. 🌱",
+    begin: "Let's begin",
+    emptyFeeling: "You can take your time. Share something when you're ready.",
+    checkinTitle: "I'm glad you're here.",
+    checkinMessage: "You can take your time. Tell me how you're really doing today.",
+    feelingPlaceholder: "Write what's on your mind..."
+  },
 
-es: {
-nameRequired: "Por favor, escribe un nombre o apodo.",
-ready: "Estás listo/a, {name}. 🌱",
-begin: "Comencemos",
-emptyFeeling: "Tómate tu tiempo. Comparte algo cuando estés listo/a."
-},
+  es: {
+    nameRequired: "Por favor, escribe un nombre o apodo.",
+    ready: "Estás listo/a, {name}. 🌱",
+    begin: "Comencemos",
+    emptyFeeling: "Tómate tu tiempo. Comparte algo cuando estés listo/a.",
+    checkinTitle: "Me alegra que estés aquí.",
+    checkinMessage: "Tómate tu tiempo. Cuéntame cómo te sientes realmente hoy.",
+    feelingPlaceholder: "Escribe lo que tienes en mente..."
+  },
 
-fr: {
-nameRequired: "Veuillez entrer un nom ou un surnom.",
-ready: "Tu es prêt(e), {name}. 🌱",
-begin: "Commençons",
-emptyFeeling: "Prends ton temps. Partage quelque chose quand tu es prêt(e)."
-},
+  fr: {
+    nameRequired: "Veuillez entrer un nom ou un surnom.",
+    ready: "Tu es prêt(e), {name}. 🌱",
+    begin: "Commençons",
+    emptyFeeling: "Prends ton temps. Partage quelque chose quand tu es prêt(e).",
+    checkinTitle: "Je suis heureux(se) que tu sois ici.",
+    checkinMessage: "Prends ton temps. Dis-moi comment tu vas vraiment aujourd'hui.",
+    feelingPlaceholder: "Écris ce que tu as en tête..."
+  },
 
-ht: {
-nameRequired: "Tanpri antre yon non oswa yon ti non.",
-ready: "Ou pare, {name}. 🌱",
-begin: "Ann kòmanse",
-emptyFeeling: "Pran tan ou. Pataje yon bagay lè ou pare."
-}
+  ht: {
+    nameRequired: "Tanpri antre yon non oswa yon ti non.",
+    ready: "Ou pare, {name}. 🌱",
+    begin: "Ann kòmanse",
+    emptyFeeling: "Pran tan ou. Pataje yon bagay lè ou pare.",
+    checkinTitle: "Mwen kontan ou la.",
+    checkinMessage: "Pran tan ou. Di mwen kijan ou santi w toutbon jodi a.",
+    feelingPlaceholder: "Ekri sa ki nan tèt ou..."
+  }
 
 };
+
 
 /* =========================
 GET LANGUAGE
