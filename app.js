@@ -186,14 +186,24 @@ document.getElementById("feelingInput");
 
 if (beginButton) {
 
-beginButton.addEventListener("click", function () {
+  beginButton.addEventListener("click", function () {
 
-  welcomeSection.style.display = "none";
-  checkinSection.style.display = "block";
+    const language = getLanguage();
+    const t = translations[language] || translations.en;
 
-  applyCheckinLanguage();
+    welcomeSection.style.display = "none";
+    checkinSection.style.display = "block";
 
-});
+    document.getElementById("checkinTitle").textContent =
+      t.checkinTitle;
+
+    document.getElementById("checkinMessage").textContent =
+      t.checkinMessage;
+
+    document.getElementById("feelingInput").placeholder =
+      t.feelingPlaceholder;
+
+  });
 
 }
 
