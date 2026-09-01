@@ -17,7 +17,10 @@
     Let's focus on one small step that can help you feel a little better.
   </p>
 
-  <button id="resetButton">Show Me My Reset</button>
+  <button id="backResetButton">
+  Back to Check-In
+  </button>
+
 
   <div id="resetMessage"></div>
 
@@ -342,6 +345,26 @@
     const resetButton = document.getElementById("resetButton");
     const resetMessage = document.getElementById("resetMessage");
     const nextChoices = document.getElementById("nextChoices");
+    const backResetButton =
+  document.getElementById("backResetButton");
+
+if (backResetButton) {
+
+  backResetButton.textContent = t.backReset;
+
+  backResetButton.addEventListener("click", function () {
+
+    localStorage.setItem(
+      "lifeResetReturnToCheckin",
+      "true"
+    );
+
+    window.location.href = "index.html";
+
+  });
+
+}
+
 
     const backResetButton =
    document.getElementById("backResetButton");
