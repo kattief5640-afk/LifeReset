@@ -578,6 +578,83 @@ else {
 }
 
 
+/* =========================
+   MICROPHONE VOICE INPUT
+========================= */
+
+const micButton = document.getElementById("micButton");
+
+if (micButton && feelingInput) {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+
+    micButton.style.display = "none";
+
+  } else {
+
+    const recognition = new SpeechRecognition();
+
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    micButton.addEventListener("click", function () {
+
+      const language = getLanguage();
+
+      if (language === "es") {
+        recognition.lang = "es-ES";
+      }
+      else if (language === "fr") {
+        recognition.lang = "fr-FR";
+      }
+      else if (language === "ht") {
+        recognition.lang = "ht-HT";
+      }
+      else {
+        recognition.lang = "en-US";
+      }
+
+      recognition.start();
+
+      micButton.textContent = "🔴";
+
+    });
+
+    recognition.onresult = function (event) {
+
+      const spokenText =
+        event.results[0][0].transcript;
+
+      feelingInput.value =
+        feelingInput.value
+          ? feelingInput.value + " " + spokenText
+          : spokenText;
+
+      micButton.textContent = "🎙️";
+
+    };
+
+    recognition.onerror = function () {
+
+      micButton.textContent = "🎙️";
+
+    };
+
+    recognition.onend = function () {
+
+      micButton.textContent = "🎙️";
+
+    };
+
+  }
+
+}
+
+
 
   
   
