@@ -350,3 +350,52 @@ button:active {
     font-size: 16px;
   }
 }
+
+/* =========================================
+   FEELINGS BOX + MICROPHONE
+   ========================================= */
+
+.feeling-box {
+  position: relative;
+  width: 100%;
+}
+
+.feeling-box textarea {
+  padding-right: 58px;
+  margin-top: 8px;
+}
+
+#micButton {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  width: 42px;
+  min-height: 42px;
+  height: 42px;
+
+  margin: 0;
+  padding: 0;
+
+  border-radius: 50%;
+
+  background: #d9f5ef;
+  color: #087f7b;
+
+  font-size: 20px;
+
+  box-shadow: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#micButton:hover {
+  background: #c5eee6;
+  opacity: 1;
+}
+
+#micButton:active {
+  transform: scale(0.94);
+}
