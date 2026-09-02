@@ -152,6 +152,7 @@ if (saveSetupButton) {
 saveSetupButton.addEventListener("click", function () {
 
 const name = nameInput.value.trim();
+console.log("Continue button clicked");
 const language = languageSelect.value;
 
 if (name === "") {
