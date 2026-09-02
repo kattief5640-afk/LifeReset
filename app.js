@@ -203,9 +203,6 @@ BEGIN
 const beginButton =
 document.getElementById("beginButton");
 
-const checkinSection =
-document.getElementById("checkin");
-
 const continueButton =
 document.getElementById("continueButton");
 
