@@ -206,6 +206,18 @@ localStorage.setItem("lifeResetLanguage", language);
 
 setupSection.style.display = "none";
 welcomeSection.style.display = "block";
+  
+document.getElementById("tagline").textContent =
+  translations[language].tagline;
+
+document.getElementById("welcomeTitle").textContent =
+  translations[language].welcomeTitle;
+
+document.getElementById("nameQuestion").textContent =
+  translations[language].nameQuestion;
+
+document.getElementById("languageQuestion").textContent =
+  translations[language].languageQuestion;
 
 const welcomeText =
   welcomeSection.querySelector("p");
