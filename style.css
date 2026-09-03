@@ -1,6 +1,7 @@
 /* =========================================
-   LIFERESET — CALM & INVITING DESIGN
-   ========================================= */
+   LIFERESET — MASTER STYLE
+   Calm mint + teal nature-inspired design
+========================================= */
 
 * {
   box-sizing: border-box;
@@ -8,352 +9,300 @@
 
 html {
   min-height: 100%;
-  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Arial, sans-serif;
-  color: #173f43;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #174f50;
 
-  /* Soft mint atmosphere */
   background:
     linear-gradient(
-      rgba(225, 250, 245, 0.78),
-      rgba(210, 244, 238, 0.88)
-    ),
-    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85")
-    center / cover fixed;
+      180deg,
+      #e9fbf7 0%,
+      #d7f3ef 45%,
+      #c9ebe8 100%
+    );
 
-  line-height: 1.6;
+  transition: background 0.5s ease;
+}
+
+/* =========================================
+   PAGE BACKGROUNDS
+========================================= */
+
+/* WELCOME */
+body.page-welcome {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 8%, transparent 30%),
+    linear-gradient(
+      180deg,
+      #eafbf7 0%,
+      #d8f4ef 45%,
+      #bfe5e3 100%
+    );
+}
+
+/* CHECK-IN */
+body.page-checkin {
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255,255,255,.75) 0 8%, transparent 28%),
+    linear-gradient(
+      180deg,
+      #e4faf4 0%,
+      #cdeee7 50%,
+      #b9e2df 100%
+    );
+}
+
+/* DOWN RESET */
+body.page-down {
+  background:
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,.8) 0 7%, transparent 27%),
+    linear-gradient(
+      180deg,
+      #e7f8f5 0%,
+      #d0ece9 48%,
+      #b8dfe0 100%
+    );
+}
+
+/* HAPPY RESET */
+body.page-happy {
+  background:
+    radial-gradient(circle at 75% 18%, rgba(255,255,255,.95) 0 9%, transparent 30%),
+    linear-gradient(
+      180deg,
+      #effcf7 0%,
+      #d9f4e7 45%,
+      #bde5dc 100%
+    );
+}
+
+/* REGULAR RESET */
+body.page-reset {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.85) 0 8%, transparent 28%),
+    linear-gradient(
+      180deg,
+      #e8faf7 0%,
+      #d2eeeb 45%,
+      #bddfdc 100%
+    );
+}
+
+/* SAFETY */
+body.page-safety {
+  background:
+    linear-gradient(
+      180deg,
+      #edfafa 0%,
+      #dcefed 50%,
+      #cde5e4 100%
+    );
 }
 
 /* =========================================
    HEADER
-   ========================================= */
+========================================= */
 
 header {
-  padding: 28px 20px 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 35px 20px 25px;
 }
 
 .logo {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  color: #087f7b;
+  letter-spacing: 1px;
+  color: #258f8d;
 }
 
 .tagline {
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 15px;
-  color: #38666a;
+  color: #568080;
 }
 
 /* =========================================
    MAIN
-   ========================================= */
+========================================= */
 
 main {
   width: 100%;
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 35px 20px 50px;
+  padding: 20px;
 }
 
 /* =========================================
-   WELCOME / MAIN CARDS
-   ========================================= */
+   CARDS
+========================================= */
 
-.welcome-card {
-  padding: 34px 28px;
+.welcome-card,
+section {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: 28px;
-
-  background: rgba(255, 255, 255, 0.90);
-
-  box-shadow:
-    0 20px 50px rgba(22, 104, 100, 0.15),
-    0 4px 12px rgba(22, 104, 100, 0.08);
-
-  text-align: center;
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: 35px 30px;
+  box-shadow: 0 15px 40px rgba(30, 100, 100, 0.12);
+  backdrop-filter: blur(8px);
 }
 
-.welcome-card h1 {
+h1,
+h2 {
   margin-top: 0;
-  margin-bottom: 14px;
-  font-size: 32px;
-  line-height: 1.3;
-  color: #126b69;
+  color: #287f80;
+  line-height: 1.25;
 }
 
-.welcome-card h2 {
-  margin-top: 28px;
-  color: #126b69;
+h1 {
+  font-size: 30px;
 }
 
-.welcome-card p {
-  margin: 0 0 20px;
-  font-size: 17px;
-  line-height: 1.7;
-  color: #456568;
-}
-
-/* =========================================
-   CHECK-IN
-   ========================================= */
-
-#checkin {
-  margin-top: 20px;
-  padding: 34px 28px;
-  border-radius: 28px;
-
-  background: rgba(255, 255, 255, 0.92);
-
-  box-shadow:
-    0 20px 50px rgba(22, 104, 100, 0.15),
-    0 4px 12px rgba(22, 104, 100, 0.08);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-#checkin h2 {
-  margin-top: 0;
-  margin-bottom: 12px;
+h2 {
   font-size: 27px;
-  color: #126b69;
 }
 
-#checkin p {
-  margin-bottom: 22px;
-  font-size: 17px;
-  color: #456568;
+h3 {
+  color: #327777;
+  margin-top: 25px;
+}
+
+p {
+  line-height: 1.7;
+  color: #507373;
 }
 
 /* =========================================
    INPUTS
-   ========================================= */
+========================================= */
 
-textarea,
 input,
+textarea,
 select {
   width: 100%;
-  padding: 15px 16px;
-  margin-top: 8px;
-
-  border: 1.5px solid #9bd9d1;
-  border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.92);
-  color: #173f43;
-
+  border: 1px solid #b9dcd8;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #245b5c;
   font-size: 16px;
-  font-family: inherit;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+  padding: 15px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-input,
-select {
-  min-height: 52px;
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #4db5ae;
+  box-shadow: 0 0 0 3px rgba(77, 181, 174, 0.15);
 }
 
 textarea {
-  min-height: 160px;
+  min-height: 150px;
   resize: vertical;
 }
 
-textarea::placeholder,
-input::placeholder {
-  color: #789497;
-}
-
-textarea:focus,
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #39aaa2;
-
-  background: white;
-
-  box-shadow:
-    0 0 0 4px rgba(57, 170, 162, 0.12);
+select {
+  cursor: pointer;
 }
 
 /* =========================================
    BUTTONS
-   ========================================= */
+========================================= */
 
 button {
   width: 100%;
-  min-height: 54px;
-
-  margin-top: 20px;
-  padding: 14px 22px;
+  min-height: 50px;
+  margin-top: 16px;
+  padding: 13px 18px;
 
   border: none;
-  border-radius: 18px;
+  border-radius: 15px;
 
   background: linear-gradient(
     135deg,
-    #159b94,
-    #087f7b
+    #35aaa4,
+    #258f8d
   );
 
   color: white;
-
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
 
   cursor: pointer;
 
-  box-shadow:
-    0 8px 18px rgba(8, 127, 123, 0.20);
+  box-shadow: 0 8px 18px rgba(37, 143, 141, 0.18);
 
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    opacity 0.18s ease;
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
 }
 
 button:hover {
-  opacity: 0.94;
-  box-shadow:
-    0 10px 22px rgba(8, 127, 123, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(37, 143, 141, 0.24);
 }
 
 button:active {
   transform: scale(0.98);
 }
 
-/* =========================================
-   RESET CONTENT
-   ========================================= */
-
-.reset-content {
-  margin-top: 24px;
-  padding: 24px;
-
-  border-radius: 22px;
-
-  background: rgba(240, 252, 249, 0.92);
-
-  border: 1px solid rgba(57, 170, 162, 0.15);
-}
-
-.reset-content h2 {
-  margin-top: 0;
-  color: #126b69;
-}
-
-.reset-content ul {
-  padding-left: 22px;
-}
-
-.reset-content li {
-  margin-bottom: 10px;
+button:focus-visible {
+  outline: 3px solid rgba(37, 143, 141, 0.3);
+  outline-offset: 3px;
 }
 
 /* =========================================
-   RESET OPTIONS
-   ========================================= */
+   CHOICE BUTTONS
+========================================= */
 
-.reset-options,
-.reach-out-options {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.choiceButton {
+  background: rgba(255, 255, 255, 0.92);
+  color: #287978;
+  border: 1px solid #b8dcd8;
+  box-shadow: none;
+}
+
+.choiceButton:hover {
+  background: #effaf8;
+  box-shadow: none;
+}
+
+/* =========================================
+   RESET MESSAGE
+========================================= */
+
+#resetMessage {
   margin-top: 20px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(226, 247, 243, 0.85);
+  color: #356c6c;
+  line-height: 1.7;
 }
 
 /* =========================================
-   BREATHING EXERCISE
-   ========================================= */
+   BACK BUTTON
+========================================= */
 
-#breathingTimer {
-  margin: 25px 0 10px;
-  font-size: 48px;
-  text-align: center;
-  color: #087f7b;
+#backResetButton {
+  background: transparent;
+  color: #368583;
+  border: 1px solid #9ecbc7;
+  box-shadow: none;
 }
 
-#breathingInstruction {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: #126b69;
-}
-
-#closeContentButton {
-  margin-top: 24px;
+#backResetButton:hover {
+  background: rgba(255, 255, 255, 0.65);
 }
 
 /* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 480px) {
-
-  body {
-    background-attachment: scroll;
-  }
-
-  header {
-    padding: 22px 15px 18px;
-  }
-
-  .logo {
-    font-size: 28px;
-  }
-
-  .tagline {
-    font-size: 14px;
-  }
-
-  main {
-    padding: 24px 14px 40px;
-  }
-
-  .welcome-card,
-  #checkin {
-    padding: 28px 20px;
-    border-radius: 24px;
-  }
-
-  .welcome-card h1 {
-    font-size: 27px;
-  }
-
-  #checkin h2 {
-    font-size: 24px;
-  }
-
-  .welcome-card p,
-  #checkin p {
-    font-size: 16px;
-  }
-
-  button {
-    min-height: 56px;
-    border-radius: 18px;
-    font-size: 16px;
-  }
-}
-
-/* =========================================
-   FEELINGS BOX + MICROPHONE
-   ========================================= */
+   MICROPHONE
+========================================= */
 
 .feeling-box {
   position: relative;
@@ -361,8 +310,7 @@ button:active {
 }
 
 .feeling-box textarea {
-  padding-right: 58px;
-  margin-top: 8px;
+  padding-right: 62px;
 }
 
 #micButton {
@@ -393,9 +341,52 @@ button:active {
 
 #micButton:hover {
   background: #c5eee6;
-  opacity: 1;
+  box-shadow: none;
 }
 
-#micButton:active {
-  transform: scale(0.94);
+/* =========================================
+   SAFETY CONTENT
+========================================= */
+
+body.page-safety .welcome-card,
+body.page-safety section {
+  border-top: 5px solid #5ba7a4;
+}
+
+body.page-safety h1,
+body.page-safety h2 {
+  color: #286f70;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  header {
+    padding: 25px 15px 15px;
+  }
+
+  .logo {
+    font-size: 29px;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  .welcome-card,
+  section {
+    padding: 28px 20px;
+    border-radius: 23px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
 }
