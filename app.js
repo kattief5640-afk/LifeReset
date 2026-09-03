@@ -31,17 +31,24 @@ if (returnToCheckin === "true") {
 
 }
 
-
-const translations = {
-
-  en: {
+en: {
     nameRequired: "Please enter a name or nickname.",
     ready: "You're ready, {name}. 🌱",
     begin: "Let's begin",
     emptyFeeling: "You can take your time. Share something when you're ready.",
+    tagline: "You don't have to figure everything out alone.",
+    welcomeTitle: "Welcome to LifeReset 🌱",
+    nameQuestion: "What would you like me to call you?",
+    namePlaceholder: "Your name or nickname",
+    languageQuestion: "Choose your language:",
+    continueButton: "Continue",
+    welcomeMessage: "Whatever you're carrying today, you don't have to hide it here. Take a breath. Tell us what's on your mind.",
     checkinTitle: "I'm glad you're here.",
     checkinMessage: "You can take your time. Tell me how you're really doing today.",
-    feelingPlaceholder: "Write what's on your mind..."
+    feelingPlaceholder: "Write what's on your mind...",
+    resetTitle: "Let's take your next step",
+    resetMessage: "You don't have to fix everything today. Let's focus on one small step that can help you feel a little better.",
+    resetButton: "Show Me My Reset"
   },
 
   es: {
@@ -49,9 +56,19 @@ const translations = {
     ready: "Estás listo/a, {name}. 🌱",
     begin: "Comencemos",
     emptyFeeling: "Tómate tu tiempo. Comparte algo cuando estés listo/a.",
+    tagline: "No tienes que resolverlo todo por tu cuenta.",
+    welcomeTitle: "Bienvenido a LifeReset 🌱",
+    nameQuestion: "¿Cómo te gustaría que te llamara?",
+    namePlaceholder: "Tu nombre o apodo",
+    languageQuestion: "Elige tu idioma:",
+    continueButton: "Continuar",
+    welcomeMessage: "No tienes que esconder aquí todo lo que llevas contigo. Respira. Cuéntanos qué tienes en mente.",
     checkinTitle: "Me alegra que estés aquí.",
     checkinMessage: "Tómate tu tiempo. Cuéntame cómo te sientes realmente hoy.",
-    feelingPlaceholder: "Escribe lo que tienes en mente..."
+    feelingPlaceholder: "Escribe lo que tienes en mente...",
+    resetTitle: "Demos tu siguiente paso",
+    resetMessage: "No tienes que solucionar todo hoy. Concentrémonos en un pequeño paso que pueda ayudarte a sentirte un poco mejor.",
+    resetButton: "Muéstrame mi reinicio"
   },
 
   fr: {
@@ -59,9 +76,19 @@ const translations = {
     ready: "Tu es prêt(e), {name}. 🌱",
     begin: "Commençons",
     emptyFeeling: "Prends ton temps. Partage quelque chose quand tu es prêt(e).",
+    tagline: "Tu n'as pas à tout comprendre seul(e).",
+    welcomeTitle: "Bienvenue sur LifeReset 🌱",
+    nameQuestion: "Comment aimerais-tu que je t'appelle ?",
+    namePlaceholder: "Ton nom ou ton surnom",
+    languageQuestion: "Choisis ta langue :",
+    continueButton: "Continuer",
+    welcomeMessage: "Tu n'as pas besoin de cacher ici tout ce que tu portes. Respire. Dis-nous ce que tu as en tête.",
     checkinTitle: "Je suis heureux(se) que tu sois ici.",
     checkinMessage: "Prends ton temps. Dis-moi comment tu vas vraiment aujourd'hui.",
-    feelingPlaceholder: "Écris ce que tu as en tête..."
+    feelingPlaceholder: "Écris ce que tu as en tête...",
+    resetTitle: "Passons à ta prochaine étape",
+    resetMessage: "Tu n'as pas besoin de tout régler aujourd'hui. Concentrons-nous sur une petite étape qui pourrait t'aider à te sentir un peu mieux.",
+    resetButton: "Montre-moi mon reset"
   },
 
   ht: {
@@ -69,12 +96,23 @@ const translations = {
     ready: "Ou pare, {name}. 🌱",
     begin: "Ann kòmanse",
     emptyFeeling: "Pran tan ou. Pataje yon bagay lè ou pare.",
+    tagline: "Ou pa oblije rezoud tout bagay poukont ou.",
+    welcomeTitle: "Byenveni nan LifeReset 🌱",
+    nameQuestion: "Kijan ou ta renmen mwen rele ou?",
+    namePlaceholder: "Non ou oswa ti non ou",
+    languageQuestion: "Chwazi lang ou:",
+    continueButton: "Kontinye",
+    welcomeMessage: "Kèlkeswa sa w ap pote jodi a, ou pa bezwen kache l isit la. Pran yon souf. Di nou sa ki nan tèt ou.",
     checkinTitle: "Mwen kontan ou la.",
     checkinMessage: "Pran tan ou. Di mwen kijan ou santi w toutbon jodi a.",
-    feelingPlaceholder: "Ekri sa ki nan tèt ou..."
+    feelingPlaceholder: "Ekri sa ki nan tèt ou...",
+    resetTitle: "Ann pran pwochen etap ou a",
+    resetMessage: "Ou pa bezwen rezoud tout bagay jodi a. Ann konsantre sou yon ti etap ki ka ede w santi w yon ti jan pi byen.",
+    resetButton: "Montre m reset mwen an"
   }
 
 };
+
 
 
 /* =========================
