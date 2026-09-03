@@ -1,111 +1,124 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeReset</title>
   <link rel="stylesheet" href="style.css">
-</head><body> <header>
+</head>
+
+<body>
+
+  <header>
     <div class="logo">LifeReset</div>
+
     <div class="tagline" id="tagline">
       You don't have to figure everything out alone.
     </div>
-  </header> <main><!-- SETUP -->
-<section id="setupSection" class="welcome-card">
+  </header>
 
-  <h1 id="welcomeTitle">Welcome to LifeReset 🌱</h1>
+  <main>
 
-  <p id="nameQuestion">What would you like me to call you?</p>
+    <!-- SETUP -->
+    <section id="setupSection" class="welcome-card">
 
-  <input
-    id="nameInput"
-    type="text"
-    placeholder="Your name or nickname"
-    autocomplete="given-name"
-  >
+      <h1 id="welcomeTitle">Welcome to LifeReset 🌱</h1>
 
-  <p id="languageQuestion">Choose your language:</p>
+      <p id="nameQuestion">What would you like me to call you?</p>
 
-  <select id="languageSelect">
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="ht">Kreyòl Ayisyen</option>
-  </select>
+      <input
+        id="nameInput"
+        type="text"
+        placeholder="Your name or nickname"
+        autocomplete="given-name"
+      >
 
-  <button id="saveSetupButton">Continue</button>
+      <p id="languageQuestion">Choose your language:</p>
 
-</section>
+      <select id="languageSelect">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ht">Kreyòl Ayisyen</option>
+      </select>
 
+      <button id="saveSetupButton" type="button">
+        Continue
+      </button>
 
-<!-- WELCOME -->
-<section id="welcomeSection" class="welcome-card" style="display: none;">
-
-  <p id="welcomeMessage">
-    Whatever you're carrying today, you don't have to hide it here.
-    Take a breath. Tell us what's on your mind.
-  </p>
-
-  <button id="beginButton">Let's begin</button>
-
-</section>
+    </section>
 
 
-<!-- CHECK-IN -->
-<section id="checkin" style="display: none;">
+    <!-- WELCOME -->
+    <section id="welcomeSection" class="welcome-card" style="display: none;">
 
-  <h2 id="checkinTitle">I'm glad you're here.</h2>
+      <p id="welcomeMessage">
+        Whatever you're carrying today, you don't have to hide it here.
+        Take a breath. Tell us what's on your mind.
+      </p>
 
-  <p id="checkinMessage">
-    You can take your time. Tell me how you're really doing today.
-  </p>
+      <button id="beginButton" type="button">
+        Let's begin
+      </button>
 
-  <div class="feeling-box">
-
-  <textarea
-    id="feelingInput"
-    placeholder="Write what's on your mind..."
-  ></textarea>
-
-  <button
-    id="micButton"
-    type="button"
-    aria-label="Use microphone"
-    title="Speak instead of typing"
-  >
-    🎙️
-  </button>
-
-</div>
-
-<button id="continueButton">Continue</button>
+    </section>
 
 
-</section>
+    <!-- CHECK-IN -->
+    <section id="checkin" style="display: none;">
+
+      <h2 id="checkinTitle">I'm glad you're here.</h2>
+
+      <p id="checkinMessage">
+        You can take your time. Tell me how you're really doing today.
+      </p>
+
+      <div class="feeling-box">
+
+        <textarea
+          id="feelingInput"
+          placeholder="Write what's on your mind..."
+        ></textarea>
+
+        <button
+          id="micButton"
+          type="button"
+          aria-label="Use microphone"
+          title="Speak instead of typing"
+        >
+          🎙️
+        </button>
+
+      </div>
+
+      <button id="continueButton" type="button">
+        Continue
+      </button>
+
+    </section>
 
 
-<!-- RESET -->
-<section id="reset" style="display: none;">
+    <!-- RESET -->
+    <section id="reset" style="display: none;">
 
-  <h2 id="resetTitle">Let's take your next step</h2>
+      <h2 id="resetTitle">Let's take your next step</h2>
 
-  <p id="resetMessage">
-    You don't have to fix everything today.
-    Let's focus on one small step that can help you feel a little better.
-  </p>
+      <p id="resetMessage">
+        You don't have to fix everything today.
+        Let's focus on one small step that can help you feel a little better.
+      </p>
 
-  <button id="resetButton">Show Me My Reset</button>
+      <button id="resetButton" type="button">
+        Show Me My Reset
+      </button>
 
-</section>
-
-  </main> 
-  <script>
+    </section>
 
   </main>
+
+  <!-- JavaScript -->
   <script src="app.js"></script>
-  </body>
-  </html>
 
-  
-
-
-    
+</body>
+</html>
